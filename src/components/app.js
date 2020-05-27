@@ -11,18 +11,17 @@ export class App extends Component {
     this.setState({show: true })
   }
 
-  // delHeader = () => {
-  //   this.setState({show: false});
-  // }
-
   render() {
     let game
+    let button
     if ( this.state.show) {
       game = <Game />
+    } else {
+      button = <button onClick={this.startGame}>Start</button>
     }
     return (
       <div>
-        <button onClick={this.startGame}>Start</button>
+        {button}
         {game}
       </div>
     )

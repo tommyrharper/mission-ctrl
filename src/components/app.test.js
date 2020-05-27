@@ -2,6 +2,7 @@ import React from 'react'
 import App from './app.js'
 import Game from './game.js'
 import { shallow } from 'enzyme'
+import { render } from "@testing-library/react"
 // import Adapter from 'enzyme-adapter-react-16.1'
 
 
@@ -11,14 +12,8 @@ it("renders without crashing", () => {
   shallow(<App />);
 });
 
-describe('Start button appears', () => {
-  xit('Start button is rendered', () => {
-    const wrapper = shallow(<App />)
-    const button = <button>Start</button>
-    expect(wrapper).toContainReact(button)
-  })
-
-  it('contains the game element', () => {
+describe('the start button', () => {
+  it('when clicked, contains the game element', () => {
     const wrapper = shallow(<App />)
     const game = <Game />
     const button = wrapper.find('button')
@@ -31,16 +26,12 @@ describe('Start button appears', () => {
     const game = <Game />
     expect(wrapper).not.toContainReact(game)
   })
+
+  it('disappears after it has been clicked', () => {
+    const wrapper = shallow(<App />)
+    // const { getByText } = render(<App />)
+    const button = wrapper.find('button')
+    button.simulate('click')
+    expect(wrapper.state().show).toEqual(true)
+  })
 })
-
-
-
-
-// describe('Test Button component', () => {
-//   it('Test click event', () => {
-//     const mockCallBack = jest.fn();
-//     const button = shallow((<Button onClick={mockCallBack}>Ok!</Button>));
-//     button.find('button').simulate('click');
-//     expect(mockCallBack.mock.calls.length).toEqual(1);
-//   });
-// });
