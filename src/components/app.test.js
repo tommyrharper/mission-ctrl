@@ -2,11 +2,6 @@ import React from 'react'
 import App from './app.js'
 import Game from './game.js'
 import { shallow } from 'enzyme'
-import { render } from "@testing-library/react"
-// import Adapter from 'enzyme-adapter-react-16.1'
-
-
-// configure({ adapter: new Adapter() });
 
 it("renders without crashing", () => {
   shallow(<App />);
@@ -29,9 +24,8 @@ describe('the start button', () => {
 
   it('disappears after it has been clicked', () => {
     const wrapper = shallow(<App />)
-    // const { getByText } = render(<App />)
     const button = wrapper.find('button')
     button.simulate('click')
     expect(wrapper.state().show).toEqual(true)
-  })
+  });
 })
