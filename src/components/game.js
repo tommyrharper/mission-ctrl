@@ -5,6 +5,7 @@ export class Game extends Component {
     return (
       <div>
         <p>Welcome to the Game</p>
+        <p>Copy</p>
       </div>
     )
   }
