@@ -5,18 +5,24 @@ export class Game extends Component {
     super()
       this.state = {
         level: 1,
-        warning: ""
+        warning: "",
+        numberFailures: 0
       }
   }
   correctAnswer = () => {
     let nextLevel = this.state.level + 1
     this.setState({
       level: nextLevel,
-      warning: ""
+      warning: "",
+      numberFailures: 0
     })
   }
   wrongAnswer = () => {
-    this.setState({warning: "Wrong"})
+    let numberFailures = this.state.numberFailures + 1
+    this.setState({
+      warning: "Wrong",
+      numberFailures: numberFailures
+    })
   }
   render() {
     let warning = this.state.warning
