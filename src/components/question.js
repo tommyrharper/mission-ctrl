@@ -15,8 +15,10 @@ export class Question extends Component {
 
   keyDownListener() {
     document.addEventListener('keydown', (e) => {
+      console.log('event listener triggered')
       e.preventDefault()
       if (!e.repeat) {
+        console.log("inside !e.repeat statement")
         const newKeys = [...this.state.currentKeys]
         newKeys.push(e.key)
         this.setState({
@@ -33,10 +35,12 @@ export class Question extends Component {
         }
       }
     })
+    
   }
 
   keyUpListener() {
     document.addEventListener('keyup', (e) => {
+      console.log("inside keyUpL event listener")
       this.setState({
         currentKeys: []
       })
@@ -44,8 +48,11 @@ export class Question extends Component {
   }
 
   render() {
+    console.log(this.state.currentKeys,'this.state.currentKeys')
     return (
+      <div>
       <h2>{this.props.shortcut.name}</h2>
+      </div>
     )
   }
 
