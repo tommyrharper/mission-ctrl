@@ -3,9 +3,9 @@ import App from './app.js'
 import Game from './game.js'
 import { shallow } from 'enzyme'
 
-it("renders without crashing", () => {
-  shallow(<App />);
-});
+it('renders without crashing', () => {
+  shallow(<App />)
+})
 
 describe('the start button', () => {
   it('when clicked, contains the game element', () => {
@@ -27,5 +27,5 @@ describe('the start button', () => {
     const button = wrapper.find('button')
     button.simulate('click')
     expect(wrapper.state().show).toEqual(true)
-  });
+  })
 })
