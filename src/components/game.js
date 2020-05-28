@@ -4,17 +4,22 @@ export class Game extends Component {
   constructor() {
     super()
       this.state = {
-        level: 1
+        level: 1,
+        warning: ""
       }
   }
   correctAnswer = () => {
     let nextLevel = this.state.level + 1
-    this.setState({level: nextLevel})
+    this.setState({
+      level: nextLevel,
+      warning: ""
+    })
   }
   wrongAnswer = () => {
-    alert("WRONG!")
+    this.setState({warning: "Wrong"})
   }
   render() {
+    let warning = this.state.warning
     let level
     switch (this.state.level) {
       case 1:
@@ -33,6 +38,7 @@ export class Game extends Component {
       <div>
         <p>Welcome to the Game</p>
         {level}
+        <p>{warning}</p>
         <button onClick={this.correctAnswer}>Correct answer</button>
         <button onClick={this.wrongAnswer}>Wrong answer</button>
       </div>
