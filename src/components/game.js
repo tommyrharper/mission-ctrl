@@ -38,7 +38,6 @@ export class Game extends Component {
         <p>Welcome to the Game</p>
         <p>Total Errors: {this.state.totalErrors}</p>
         <p>Total Correct: {this.state.totalCorrect}</p>
-        <p>Level: {this.state.level}</p>
         <Question 
           shortcut={this.state.shortcutSet[this.state.currentShortcut]}
           attempt={this.attempt}
