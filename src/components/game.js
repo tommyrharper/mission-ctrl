@@ -16,14 +16,18 @@ export class Game extends Component {
   }
   render() {
     let level
-    if (this.state.level === 1) {
-      level = <p>Copy</p>
-    } else if (this.state.level === 2) {
-      level = <p>Paste</p>
-    } else if (this.state.level === 3) {
-      level = <p>Cut</p>
-    } else {
-      level = <p>Game Complete</p>
+    switch (this.state.level) {
+      case 1:
+        level = <p>Copy</p>
+        break;
+      case 2:
+        level = <p>Paste</p>
+        break;
+      case 3:
+        level = <p>Cut</p>
+        break;
+      default:
+        level = <p>Game Complete</p>
     }
     return (
       <div>
