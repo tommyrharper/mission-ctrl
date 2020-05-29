@@ -8,7 +8,7 @@ export class GameComplete extends Component {
     return (
       <div>
         <p>Game Complete</p>
-        <p>Total Correct: {this.props.score}</p>
+        <p>Total Correct: {this.props.correct}</p>
         <p>Total Mistakes: {this.props.mistakes}</p>
       </div>
     )
