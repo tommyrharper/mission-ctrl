@@ -6,6 +6,11 @@ const app = express();
 
 app.use(express.json());
 
+//Import Routes
+const scoresRoute = require('./routes/scores');
+
+app.use('/scores', scoresRoute);
+
 // DB Connection
 mongoose
   .connect(
