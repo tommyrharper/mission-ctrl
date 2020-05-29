@@ -47,6 +47,7 @@ export class Question extends Component {
   render() {
     return (
       <div>
+        <p>Press the correct key combination</p>
       <h2>{this.props.shortcut.name}</h2>
       </div>
     )
