@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Question from './question'
+import GameComplete from './gameComplete'
 
 export class Game extends Component {
   constructor() {
@@ -14,8 +15,15 @@ export class Game extends Component {
         { name: "Undo", combo: ['Control', 'z'] },
         { name: "Paste", combo: ['Control', 'v'] },
       ],
-      currentShortcut: 0
+      currentShortcut: 0,
+      gameComplete: false
     }
+  }
+
+  componentDidMount = () => {
+    setTimeout(() => {
+      this.setState({gameComplete: true})
+    }, 2000);
   }
 
   attempt = (correct) => {
@@ -32,9 +40,13 @@ export class Game extends Component {
   }
 
   render() {
-
+    let gameCompleteComponent
+    if (this.state.gameComplete) {
+      gameCompleteComponent = <GameComplete />
+    }
     return (
       <div>
+        {gameCompleteComponent}
         <p>Welcome to the Game</p>
         <p>Total Errors: {this.state.totalErrors}</p>
         <p>Total Correct: {this.state.totalCorrect}</p>
