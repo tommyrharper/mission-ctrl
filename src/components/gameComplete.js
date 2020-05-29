@@ -12,6 +12,4 @@ export class GameComplete extends Component {
   }
 }
 
-
-
 export default GameComplete
