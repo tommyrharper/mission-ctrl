@@ -18,7 +18,7 @@ export class Game extends Component {
       ],
       currentShortcut: 0,
       gameComplete: false,
-      gameLength: 10000,
+      gameLength: 2000,
       failuresThisTurn: 0,
       score: 0
     }
