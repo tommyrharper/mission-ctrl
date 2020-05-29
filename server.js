@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+
 require("dotenv/config");
 
 const app = express();
@@ -7,18 +8,29 @@ const app = express();
 app.use(express.json());
 
 //Import Routes
-const scoresRoute = require('./routes/scores');
+const scoresRoute = require("./routes/scores");
 
-app.use('/scores', scoresRoute);
+app.use("/scores", scoresRoute);
 
 // DB Connection
-mongoose
-  .connect(
-    process.env.dbURI,
-    { useUnifiedTopology: true, useNewUrlParser: true },
-    () => console.log("connected to db")
-  )
-  .catch((error) => console.log(error));
+
+if (process.env.NODE_ENV === "test") {
+  mongoose
+    .connect(
+      process.env.DB_TEST_URI,
+      { useUnifiedTopology: true, useNewUrlParser: true },
+      () => console.log("connected to db")
+    )
+    .catch((error) => console.log(error));
+} else {
+  mongoose
+    .connect(
+      process.env.DB_URI,
+      { useUnifiedTopology: true, useNewUrlParser: true },
+      () => console.log("connected to db")
+    )
+    .catch((error) => console.log(error));
+}
 
 // Port assignment
 const port = process.env.PORT || 5000;

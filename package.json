@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
-    "test": "mocha --exit"
+    "test": "mocha  --exit"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^7.2.0",
+    "mongo-unit": "^2.0.1",
     "nodemon": "^2.0.4",
     "supertest": "^4.0.2"
   }
