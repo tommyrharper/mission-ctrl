@@ -16,14 +16,15 @@ export class Game extends Component {
         { name: "Paste", combo: ['Control', 'v'] },
       ],
       currentShortcut: 0,
-      gameComplete: false
+      gameComplete: false,
+      gameLength: 2000
     }
   }
 
   componentDidMount = () => {
     setTimeout(() => {
       this.setState({gameComplete: true})
-    }, 2000);
+    }, this.state.gameLength);
   }
 
   attempt = (correct) => {
