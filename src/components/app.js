@@ -5,11 +5,11 @@ import Scoreboard from "./scoreboard"
 export class App extends Component {
   constructor() {
     super();
-    this.state = { show: false };
+    this.state = { show: false }
   }
 
   startGame = () => {
-    this.setState({ show: true });
+    this.setState({ show: true })
   };
 
   render() {
@@ -17,9 +17,9 @@ export class App extends Component {
     let button
     let scoreboard
     if (this.state.show) {
-      game = <Game />;
+      game = <Game />
     } else {
-      button = <button onClick={this.startGame}>Start</button>;
+      button = <button onClick={this.startGame}>Start</button>
       scoreboard = <Scoreboard />
     }
     return (
