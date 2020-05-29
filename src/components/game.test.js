@@ -6,10 +6,10 @@ it('renders without crashing', () => {
   shallow(<Game />)
 })
 
-describe('the game', () => {
-  it('it asks for ctrl-c', () => {
-    const wrapper = shallow(<Game />)
-    const challenge = <p>Copy</p>
-    expect(wrapper).toContainReact(challenge)
-  })
+
+it('it welcomes the user', () => {
+  const wrapper = shallow(<Game />)
+  const welcome = <p>Welcome to the Game</p>
+  expect(wrapper).toContainReact(welcome)
 })
+
