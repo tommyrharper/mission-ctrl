@@ -9,7 +9,7 @@ it('renders without crashing', () => {
 
 it('it welcomes the user', () => {
   const wrapper = shallow(<Game />)
-  const welcome = <p>Welcome to the Game</p>
+  const welcome = <h1>Mission-Ctrl</h1>
   expect(wrapper).toContainReact(welcome)
 })
 
