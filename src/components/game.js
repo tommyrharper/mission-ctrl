@@ -42,8 +42,14 @@ export class Game extends Component {
 
   render() {
     let gameCompleteComponent
+    let questionComponent
     if (this.state.gameComplete) {
       gameCompleteComponent = <GameComplete />
+    } else {
+      questionComponent = <Question 
+                  shortcut={this.state.shortcutSet[this.state.currentShortcut]}
+                  attempt={this.attempt}
+                  />
     }
     return (
       <div>
@@ -51,10 +57,7 @@ export class Game extends Component {
         <p>Welcome to the Game</p>
         <p>Total Errors: {this.state.totalErrors}</p>
         <p>Total Correct: {this.state.totalCorrect}</p>
-        <Question 
-          shortcut={this.state.shortcutSet[this.state.currentShortcut]}
-          attempt={this.attempt}
-        />
+        {questionComponent}
       </div>
     )
   }
