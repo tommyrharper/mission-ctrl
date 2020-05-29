@@ -9,7 +9,7 @@ export class Score extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    if (props.numberOfFailures == 0) {
+    if (props.numberOfFailures === 0) {
       return {
         score: state.score + 5
       };
