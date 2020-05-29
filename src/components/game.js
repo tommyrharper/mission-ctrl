@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Question from './question'
 import GameComplete from './gameComplete'
+import Score from './score'
 
 export class Game extends Component {
   constructor() {
@@ -17,7 +18,9 @@ export class Game extends Component {
       ],
       currentShortcut: 0,
       gameComplete: false,
-      gameLength: 2000
+      gameLength: 10000,
+      failuresThisTurn: 0,
+      score: 0
     }
   }
 
@@ -27,15 +30,26 @@ export class Game extends Component {
     }, this.state.gameLength);
   }
 
+  // calculateScore = () => {
+  //   // <Scoring numberOfFailures={this.state.failuresThisTurn}/>
+  // }
+
+  // setScore = (extraPoints) => {
+  //   this.setState({score: this.state.score + extraPoints})
+  // }
+
   attempt = (correct) => {
     if (correct) {
+      // this.calculateScore()
       this.setState({
         totalCorrect: this.state.totalCorrect + 1,
-        currentShortcut: this.randomShortcut()
+        currentShortcut: this.randomShortcut(),
+        failuresThisTurn: 0
       })
     } else {
       this.setState({
-        totalErrors: this.state.totalErrors + 1
+        totalErrors: this.state.totalErrors + 1,
+        failuresThisTurn: this.state.failuresThisTurn + 1
       })
     }
   }
@@ -45,7 +59,7 @@ export class Game extends Component {
     let questionComponent
     if (this.state.gameComplete) {
       gameCompleteComponent = <GameComplete 
-                              score={this.state.totalCorrect}
+                              correct={this.state.totalCorrect}
                               mistakes={this.state.totalErrors}
                               />
     } else {
@@ -57,6 +71,7 @@ export class Game extends Component {
     return (
       <div>
         <h1>Mission-Ctrl</h1>
+        <Score numberOfFailures={this.state.failuresThisTurn}/>
         {gameCompleteComponent}
         {questionComponent}
       </div>
