@@ -30,17 +30,8 @@ export class Game extends Component {
     }, this.state.gameLength);
   }
 
-  // calculateScore = () => {
-  //   // <Scoring numberOfFailures={this.state.failuresThisTurn}/>
-  // }
-
-  // setScore = (extraPoints) => {
-  //   this.setState({score: this.state.score + extraPoints})
-  // }
-
   attempt = (correct) => {
     if (correct) {
-      // this.calculateScore()
       this.setState({
         totalCorrect: this.state.totalCorrect + 1,
         currentShortcut: this.randomShortcut(),
