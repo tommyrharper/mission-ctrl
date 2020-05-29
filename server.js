@@ -20,6 +20,10 @@ app.get('/', (req, res) => {
   res.send("Hello World")
 })
 
+app.post('/', (req, res) => {
+  res.send("You posted")
+})
+
 app.listen(port, () => console.log(`Server listening on port ${port}`))
 
 module.exports = app
