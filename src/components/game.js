@@ -43,9 +43,13 @@ export class Game extends Component {
   render() {
     let gameCompleteComponent
     let questionComponent
+    let mistakes
+    let score
     let welcomeMessage
     if (this.state.gameComplete) {
       gameCompleteComponent = <GameComplete />
+      mistakes = <p>Total Errors: {this.state.totalErrors}</p>
+      score = <p>Total Correct: {this.state.totalCorrect}</p>
     } else {
       welcomeMessage = <p>Welcome to the Game</p>
       questionComponent = <Question 
@@ -57,9 +61,9 @@ export class Game extends Component {
       <div>
         {gameCompleteComponent}
         {welcomeMessage}
-        <p>Total Errors: {this.state.totalErrors}</p>
-        <p>Total Correct: {this.state.totalCorrect}</p>
         {questionComponent}
+        {mistakes}
+        {score}
       </div>
     )
   }
