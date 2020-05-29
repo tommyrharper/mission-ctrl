@@ -1,7 +1,17 @@
 import React from 'react'
-import Scoreboard from './app.js'
+import Scoreboard from './scoreboard.js'
 import { shallow } from 'enzyme'
 
-it('renders without crashing', () => {
-  shallow(<Scoreboard />)
+describe('Scoreboard renders', () => {
+  it('renders without crashing', () => {
+    shallow(<Scoreboard />)
+  })
+
+  it('has a Scoreboard heading', () => {
+    const wrapper = shallow(<Scoreboard />)
+    const welcome = <h2>Scoreboard</h2>
+    expect(wrapper).toContainReact(welcome)
+  })
 })
+
+
