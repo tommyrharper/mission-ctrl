@@ -35,6 +35,15 @@ describe('the start button', () => {
     const scoreboard = <Scoreboard />
     expect(wrapper).toContainReact(scoreboard)
   })
+
+  it('Scoreboard disappears when the start button is clicked', () => {
+    const wrapper = shallow(<App />)
+    const scoreboard = <Scoreboard />
+    const button = wrapper.find('button')
+    button.simulate('click')
+    expect(wrapper).not.toContainReact(scoreboard)
+  })
+
 })
 
 
