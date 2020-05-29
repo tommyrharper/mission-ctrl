@@ -43,14 +43,12 @@ export class Game extends Component {
   render() {
     let gameCompleteComponent
     let questionComponent
-    let welcomeMessage
     if (this.state.gameComplete) {
       gameCompleteComponent = <GameComplete 
                               score={this.state.totalCorrect}
                               mistakes={this.state.totalErrors}
                               />
     } else {
-      welcomeMessage = <p>Welcome to the Game</p>
       questionComponent = <Question 
                   shortcut={this.state.shortcutSet[this.state.currentShortcut]}
                   attempt={this.attempt}
@@ -58,8 +56,8 @@ export class Game extends Component {
     }
     return (
       <div>
+        <h1>Mission-Ctrl</h1>
         {gameCompleteComponent}
-        {welcomeMessage}
         {questionComponent}
       </div>
     )
