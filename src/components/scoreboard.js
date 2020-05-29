@@ -4,7 +4,7 @@ export class Scoreboard extends Component {
   render() {
     return (
       <div>
-        <p>hello</p>
+        <h2>Scoreboard</h2>
       </div>
     )
   }
