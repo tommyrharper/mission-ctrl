@@ -13,7 +13,6 @@ describe('Scoreboard', () => {
     expect(wrapper).toContainReact(welcome)
   })
 
-
   it('Shows its scores name, date, score', () => {
     const wrapper = shallow(<Scoreboard />)
     const score = <li>Alex 29/05/20 10000</li>
@@ -25,10 +24,4 @@ describe('Scoreboard', () => {
     const scores = <ul><li>Graham 29/05/20 20000</li><li>Alex 29/05/20 10000</li></ul>
     expect(wrapper).toContainReact(scores)
   })
-
 })
-
-
-// {"name": "Alex", "date":"29/05/20", "score": 10000 
-// <li key={score.name}>{score.name} {score.date} {score.score}</li>)
-
