@@ -1,6 +1,7 @@
 import React from 'react'
 import App from './app.js'
 import Game from './game.js'
+import Scoreboard from './scoreboard.js'
 import { shallow } from 'enzyme'
 
 it('renders without crashing', () => {
@@ -28,4 +29,21 @@ describe('the start button', () => {
     button.simulate('click')
     expect(wrapper.state().show).toEqual(true)
   })
+
+  it('Scoreboard is on the start page', () => {
+    const wrapper = shallow(<App />)
+    const scoreboard = <Scoreboard />
+    expect(wrapper).toContainReact(scoreboard)
+  })
+
+  it('Scoreboard disappears when the start button is clicked', () => {
+    const wrapper = shallow(<App />)
+    const scoreboard = <Scoreboard />
+    const button = wrapper.find('button')
+    button.simulate('click')
+    expect(wrapper).not.toContainReact(scoreboard)
+  })
+
 })
+
+
