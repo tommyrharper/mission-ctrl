@@ -6,7 +6,7 @@ import Score from './score'
 export class Game extends Component {
   constructor() {
     super()
-    this.state = {
+    this.initialState = {
       level: 0,
       totalErrors: 0,
       totalCorrect: 0,
@@ -18,9 +18,11 @@ export class Game extends Component {
       ],
       currentShortcut: 0,
       gameComplete: false,
-      gameLength: 1000,
+      gameLength: 5000,
       failuresThisTurn: 0
+      // resetScore: false
     }
+    this.state = this.initialState
   }
 
   componentDidMount = () => {
@@ -49,7 +51,7 @@ export class Game extends Component {
   }
 
   tryAgain = () => {
-    this.setState({gameComplete: false})
+    this.setState(this.initialState)
     this.startGame()
   }
 
@@ -75,6 +77,7 @@ export class Game extends Component {
         totalFailures={this.state.totalErrors}
         failuresThisTurn={this.state.failuresThisTurn}
         numberOfCorrect={this.state.totalCorrect}
+        // resetScore={this.state.resetScore}
         />
         {gameCompleteComponent}
         {questionComponent}
