@@ -79,8 +79,12 @@ it('gives a score of 6, 3rd time correct, then 1st time correct', () => {
   expect(wrapper).toContainReact(<p>Score: 6</p>)
 })
 
-
-
-
-
-
+it('gives a score of 5, 4th time correct, then 1st time correct', () => {
+  const wrapper  = shallow (<Score totalFailures={0} failuresThisTurn={0} numberOfCorrect={0}/> )
+  wrapper.setProps({totalFailures: 1, failuresThisTurn: 1, numberOfCorrect: 0})
+  wrapper.setProps({totalFailures: 2, failuresThisTurn: 2, numberOfCorrect: 0})
+  wrapper.setProps({totalFailures: 3, failuresThisTurn: 3, numberOfCorrect: 0})
+  wrapper.setProps({totalFailures: 3, failuresThisTurn: 0, numberOfCorrect: 1})
+  wrapper.setProps({totalFailures: 3, failuresThisTurn: 0, numberOfCorrect: 2})
+  expect(wrapper).toContainReact(<p>Score: 5</p>)
+})
