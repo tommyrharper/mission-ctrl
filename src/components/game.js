@@ -18,7 +18,7 @@ export class Game extends Component {
       ],
       currentShortcut: 0,
       gameComplete: false,
-      gameLength: 2000,
+      gameLength: 10000,
       failuresThisTurn: 0,
       isAnswerCorrect: true
     }
@@ -60,9 +60,14 @@ export class Game extends Component {
     let gameCompleteComponent
     let questionComponent
     let feedback
+    let giveAnswer
+    if (this.state.isAnswerCorrect === false && this.state.gameComplete === false && this.state.failuresThisTurn > 2) {
+      giveAnswer = <p>The Answer is Ctrl-c</p>
+    }
     if (this.state.isAnswerCorrect === false && this.state.gameComplete === false) {
       feedback = <p>Try Again</p>
     }
+
     if (this.state.gameComplete) {
       gameCompleteComponent = <GameComplete 
                               correct={this.state.totalCorrect}
@@ -86,6 +91,7 @@ export class Game extends Component {
         {gameCompleteComponent}
         {questionComponent}
         {feedback}
+        {giveAnswer}
       </div>
     )
   }
