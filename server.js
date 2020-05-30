@@ -13,24 +13,16 @@ const scoresRoute = require("./routes/scores");
 app.use("/scores", scoresRoute);
 
 // DB Connection
+const dbAddress =
+  process.env.NODE_ENV === "test"
+    ? process.env.DB_TEST_URI
+    : process.env.DB_URI;
 
-if (process.env.NODE_ENV === "test") {
-  mongoose
-    .connect(
-      process.env.DB_TEST_URI,
-      { useUnifiedTopology: true, useNewUrlParser: true },
-      () => console.log("connected to db")
-    )
-    .catch((error) => console.log(error));
-} else {
-  mongoose
-    .connect(
-      process.env.DB_URI,
-      { useUnifiedTopology: true, useNewUrlParser: true },
-      () => console.log("connected to db")
-    )
-    .catch((error) => console.log(error));
-}
+mongoose
+  .connect(dbAddress, { useUnifiedTopology: true, useNewUrlParser: true }, () =>
+    console.log("connected to db")
+  )
+  .catch((error) => console.log(error));
 
 // Port assignment
 const port = process.env.PORT || 5000;
