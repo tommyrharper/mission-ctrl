@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Scoreboard from './scoreboard.js'
-import App from './app.js'
 
 export class GameComplete extends Component {
   constructor() {
