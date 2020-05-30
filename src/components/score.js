@@ -10,6 +10,15 @@ export class Score extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
+    // This resets the score when the game is restarted
+    if (props.resetScore) {
+      props.gameRestarted()
+      return {
+        failuresLastTurn: 0,
+        score: 0
+      }
+    }
+
     //This stores the failures of this turn in the state
     if (props.failuresThisTurn > 0){
       return{
