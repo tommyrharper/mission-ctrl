@@ -62,12 +62,11 @@ export class Game extends Component {
     let feedback
     let giveAnswer
     if (this.state.isAnswerCorrect === false && this.state.gameComplete === false && this.state.failuresThisTurn > 2) {
-      giveAnswer = <p>The Answer is Ctrl-c</p>
+      giveAnswer = <p>The Answer is {this.correctAnswer()}</p>
     }
     if (this.state.isAnswerCorrect === false && this.state.gameComplete === false) {
       feedback = <p>Try Again</p>
     }
-
     if (this.state.gameComplete) {
       gameCompleteComponent = <GameComplete 
                               correct={this.state.totalCorrect}
@@ -94,6 +93,11 @@ export class Game extends Component {
         {giveAnswer}
       </div>
     )
+  }
+
+  correctAnswer = () => {
+    const answer = this.state.shortcutSet[this.state.currentShortcut].combo.join(" ")
+    return answer
   }
 
   randomShortcut = () => {
