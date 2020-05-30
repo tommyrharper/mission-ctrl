@@ -41,29 +41,29 @@ describe("Server Testing Example", () => {
       });
   });
 
-  it("GET / return scores in decending order", async (done) => {
+  it("GET / return scores in decending order", async () => {
     const first = await request(app)
     .post("/scores")
     .send({ name: "Nigel", score: 100})
+
     const second = await request(app)
     .post("/scores")
     .send({ name: "Colin", score: 80})
+
     const third = await request(app)
     .post("/scores")
     .send({ name: "Derek", score: 90})
+    
     await Promise.all([first, second, third])
     .then(() => {
       return request(app)
       .get("/scores")
       .then((response) => {
-        console.log(response.body)
+
         expect(response.body[0].score).to.equal(100);
         expect(response.body[1].score).to.equal(90);
         expect(response.body[2].score).to.equal(80);
-        response()
-        // done();
-      })
-      .catch((error) => done(error))    
+      })   
     })
   });
 });
