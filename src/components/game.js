@@ -18,8 +18,9 @@ export class Game extends Component {
       ],
       currentShortcut: 0,
       gameComplete: false,
-      gameLength: 1000,
-      failuresThisTurn: 0
+      gameLength: 10000,
+      failuresThisTurn: 0,
+      isAnswerCorrect: true
     }
   }
 
@@ -38,12 +39,14 @@ export class Game extends Component {
       this.setState({
         totalCorrect: this.state.totalCorrect + 1,
         currentShortcut: this.randomShortcut(),
-        failuresThisTurn: 0
+        failuresThisTurn: 0,
+        isAnswerCorrect: true
       })
     } else {
       this.setState({
         totalErrors: this.state.totalErrors + 1,
-        failuresThisTurn: this.state.failuresThisTurn + 1
+        failuresThisTurn: this.state.failuresThisTurn + 1,
+        isAnswerCorrect: false
       })
     }
   }
@@ -56,6 +59,10 @@ export class Game extends Component {
   render() {
     let gameCompleteComponent
     let questionComponent
+    let feedback
+    if (this.state.isAnswerCorrect === false) {
+      feedback = <p>Try Again</p>
+    }
     if (this.state.gameComplete) {
       gameCompleteComponent = <GameComplete 
                               correct={this.state.totalCorrect}
@@ -78,6 +85,7 @@ export class Game extends Component {
         />
         {gameCompleteComponent}
         {questionComponent}
+        {feedback}
       </div>
     )
   }
