@@ -7,6 +7,9 @@ export class GameComplete extends Component {
         <p>Game Complete</p>
         <p>Total Correct: {this.props.correct}</p>
         <p>Total Mistakes: {this.props.mistakes}</p>
+        Name:
+        <input type="text"/>
+        <button>Submit score</button>
       </div>
     )
   }
