@@ -71,7 +71,11 @@ export class Game extends Component {
     return (
       <div>
         <h1>Mission-Ctrl</h1>
-        <Score numberOfFailures={this.state.failuresThisTurn}/>
+        <Score 
+        totalFailures={this.state.totalErrors}
+        failuresThisTurn={this.state.failuresThisTurn}
+        numberOfCorrect={this.state.totalCorrect}
+        />
         {gameCompleteComponent}
         {questionComponent}
       </div>
