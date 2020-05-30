@@ -12,11 +12,20 @@ it('gives a score of 0 on load', () => {
 })
 
 it('gives  a score of 5 when score straight away',() => {
-  const wrapper  = shallow (<Score totalFailures={0} failuresThisTurn={0} numberOfCorrect={1}/> )
+  const wrapper  = shallow (<Score totalFailures={0} failuresThisTurn={0} numberOfCorrect={0}/> )
+  wrapper.setProps({totalFailures: 0, failuresThisTurn: 0, numberOfCorrect: 1})
   expect(wrapper).toContainReact(<p>Score: 5</p>)
 })
 
 it('gives a score of 10 with two first time correct answers', () => {
-  const wrapper  = shallow (<Score totalFailures={0} failuresThisTurn={0} numberOfCorrect={2}/> )
+  const wrapper  = shallow (<Score totalFailures={0} failuresThisTurn={0} numberOfCorrect={0}/> )
+  wrapper.setProps({totalFailures: 0, failuresThisTurn: 0, numberOfCorrect: 1})
+  wrapper.setProps({totalFailures: 0, failuresThisTurn: 0, numberOfCorrect: 2})
   expect(wrapper).toContainReact(<p>Score: 10</p>)
+})
+
+it('gives  a score of 3 when correct second time away',() => {
+  const wrapper  = shallow (<Score totalFailures={0} failuresThisTurn={0} numberOfCorrect={0}/> )
+  wrapper.setProps({totalFailures: 0, failuresThisTurn: 1, numberOfCorrect: 1})
+  expect(wrapper).toContainReact(<p>Score: 3</p>)
 })
