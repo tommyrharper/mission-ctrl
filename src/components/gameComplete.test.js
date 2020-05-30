@@ -35,15 +35,3 @@ describe("Submit Score Button", () => {
     expect(wrapper).toContainReact(scoreboard)
   })
 })
-
-describe("Try again button", () => {
-  it('takes you back to the home page', () => {
-    const wrapper = shallow(<GameComplete />)
-    const button = wrapper.find('button')
-    const startScreen = <App />
-    button.simulate('click')
-    const button2 = wrapper.find('button')
-    button2.simulate('click')
-    expect(wrapper).toContainReact(startScreen)
-  })
-})
