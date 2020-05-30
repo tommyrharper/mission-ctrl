@@ -26,6 +26,12 @@ it('says mistakes',() => {
   expect(wrapper).toContainReact(mistakes)
 })
 
+it('says percentage accuracy',() => {
+  const wrapper = shallow(<GameComplete correct={7} mistakes={3} />)
+  const accuracy = <p>Accuracy: 70%</p>
+  expect(wrapper).toContainReact(accuracy)
+})
+
 describe("Submit Score Button", () => {
   it('after submit displays the scoreboard', () => {
     const wrapper = shallow(<GameComplete />)

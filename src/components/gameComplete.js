@@ -30,6 +30,10 @@ export class GameComplete extends Component {
         <p>Game Complete</p>
         <p>Total Correct: {this.props.correct}</p>
         <p>Total Mistakes: {this.props.mistakes}</p>
+        <p>Accuracy: {
+        (this.props.correct/(this.props.correct +this.props.mistakes))*100
+        }%
+        </p>
         {submitScore}
         {scoreBoard}
         {tryAgainButton}
