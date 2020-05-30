@@ -4,13 +4,26 @@ export class Score extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      score: 0
+      score: 0,
+      failuresLastTurn: 0
     }
   }
 
   static getDerivedStateFromProps(props, state) {
+    
+    if (props.failuresThisTurn > 0){
+      return{
+        failuresLastTurn: props.failuresThisTurn
+      }
+    }
 
-    if (props.failuresThisTurn === 1 && props.numberOfCorrect > 0) {
+    if (props.failuresThisTurn === 0 && state.failuresLastTurn === 2) {
+      return {
+        score: state.score + 1
+      };
+    }
+
+    if (props.failuresThisTurn === 0 && state.failuresLastTurn === 1) {
       return {
         score: state.score + 3
       };
