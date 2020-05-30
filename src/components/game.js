@@ -18,12 +18,16 @@ export class Game extends Component {
       ],
       currentShortcut: 0,
       gameComplete: false,
-      gameLength: 20000,
+      gameLength: 1000,
       failuresThisTurn: 0
     }
   }
 
   componentDidMount = () => {
+    this.startGame()
+  }
+
+  startGame = () => {
     setTimeout(() => {
       this.setState({gameComplete: true})
     }, this.state.gameLength);
@@ -44,6 +48,11 @@ export class Game extends Component {
     }
   }
 
+  tryAgain = () => {
+    this.setState({gameComplete: false})
+    this.startGame()
+  }
+
   render() {
     let gameCompleteComponent
     let questionComponent
@@ -51,6 +60,7 @@ export class Game extends Component {
       gameCompleteComponent = <GameComplete 
                               correct={this.state.totalCorrect}
                               mistakes={this.state.totalErrors}
+                              tryAgain={this.tryAgain}
                               />
     } else {
       questionComponent = <Question 
