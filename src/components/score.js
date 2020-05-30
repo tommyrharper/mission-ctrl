@@ -14,7 +14,7 @@ export class Score extends Component {
         score: state.score + 5
       };
     }
-    // // Return null to indicate no change to state.
+    // Return null to indicate no change to state.
     return null;
   }
 
