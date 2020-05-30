@@ -16,7 +16,7 @@ export class Score extends Component {
         failuresLastTurn: props.failuresThisTurn
       }
     }
-    if (props.failuresThisTurn === 0 && state.failuresLastTurn === 3) {
+    if (props.failuresThisTurn === 0 && state.failuresLastTurn >= 3) {
       return {
         score: state.score + 0
       };

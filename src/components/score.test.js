@@ -34,12 +34,22 @@ describe('single correct answer tests', () => {
     expect(wrapper).toContainReact(<p>Score: 1</p>)
   })
 
-  it('gives  a score of 0 when correct the fourth time',() => {
+  it('gives  a score of 0 when failing three times',() => {
     const wrapper  = shallow (<Score totalFailures={0} failuresThisTurn={0} numberOfCorrect={0}/> )
     wrapper.setProps({totalFailures: 1, failuresThisTurn: 1, numberOfCorrect: 0})
     wrapper.setProps({totalFailures: 2, failuresThisTurn: 2, numberOfCorrect: 0})
     wrapper.setProps({totalFailures: 3, failuresThisTurn: 3, numberOfCorrect: 0})
     wrapper.setProps({totalFailures: 3, failuresThisTurn: 0, numberOfCorrect: 1})
+    expect(wrapper).toContainReact(<p>Score: 0</p>)
+  })
+
+  it('gives  a score of 0 when failing four times',() => {
+    const wrapper  = shallow (<Score totalFailures={0} failuresThisTurn={0} numberOfCorrect={0}/> )
+    wrapper.setProps({totalFailures: 1, failuresThisTurn: 1, numberOfCorrect: 0})
+    wrapper.setProps({totalFailures: 2, failuresThisTurn: 2, numberOfCorrect: 0})
+    wrapper.setProps({totalFailures: 3, failuresThisTurn: 3, numberOfCorrect: 0})
+    wrapper.setProps({totalFailures: 4, failuresThisTurn: 4, numberOfCorrect: 0})
+    wrapper.setProps({totalFailures: 4, failuresThisTurn: 0, numberOfCorrect: 1})
     expect(wrapper).toContainReact(<p>Score: 0</p>)
   })
 
