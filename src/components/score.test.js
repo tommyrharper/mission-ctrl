@@ -108,3 +108,14 @@ it('gives a score of 14, 4th time correct, 1st time correct, 3rd, 2nd, 1st, 4th'
   wrapper.setProps({totalFailures: 9, failuresThisTurn: 0, numberOfCorrect: 6})
   expect(wrapper).toContainReact(<p>Score: 14</p>)
 })
+
+it('resets the score when a new game is started', () => {
+  let game = {
+    restart: function () {}
+  }
+  const wrapper  = shallow (<Score totalFailures={0} failuresThisTurn={0} numberOfCorrect={0} resetScore={false} gameRestarted={game.restart}/> )
+  wrapper.setProps({totalFailures: 0, failuresThisTurn: 0, numberOfCorrect: 1, resetScore: false})
+  wrapper.setProps({totalFailures: 0, failuresThisTurn: 0, numberOfCorrect: 1, resetScore: true})
+  expect(wrapper).toContainReact(<p>Score: 0</p>)
+})
+
