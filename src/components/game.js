@@ -19,8 +19,8 @@ export class Game extends Component {
       currentShortcut: 0,
       gameComplete: false,
       gameLength: 5000,
-      failuresThisTurn: 0
-      // resetScore: false
+      failuresThisTurn: 0,
+      resetScore: false
     }
     this.state = this.initialState
   }
@@ -31,7 +31,9 @@ export class Game extends Component {
 
   startGame = () => {
     setTimeout(() => {
-      this.setState({gameComplete: true})
+      this.setState({
+        gameComplete: true
+      })
     }, this.state.gameLength);
   }
 
@@ -52,7 +54,16 @@ export class Game extends Component {
 
   tryAgain = () => {
     this.setState(this.initialState)
+    this.setState({
+      resetScore: true
+    })
     this.startGame()
+  }
+
+  gameRestarted = () => {
+    this.setState({
+      resetScore: false
+    })
   }
 
   render() {
@@ -77,7 +88,8 @@ export class Game extends Component {
         totalFailures={this.state.totalErrors}
         failuresThisTurn={this.state.failuresThisTurn}
         numberOfCorrect={this.state.totalCorrect}
-        // resetScore={this.state.resetScore}
+        resetScore={this.state.resetScore}
+        gameRestarted={this.gameRestarted}
         />
         {gameCompleteComponent}
         {questionComponent}
