@@ -18,9 +18,8 @@ export class Game extends Component {
       ],
       currentShortcut: 0,
       gameComplete: false,
-      gameLength: 10000,
-      failuresThisTurn: 0,
-      score: 0
+      gameLength: 20000,
+      failuresThisTurn: 0
     }
   }
 
@@ -62,7 +61,11 @@ export class Game extends Component {
     return (
       <div>
         <h1>Mission-Ctrl</h1>
-        <Score numberOfFailures={this.state.failuresThisTurn}/>
+        <Score 
+        totalFailures={this.state.totalErrors}
+        failuresThisTurn={this.state.failuresThisTurn}
+        numberOfCorrect={this.state.totalCorrect}
+        />
         {gameCompleteComponent}
         {questionComponent}
       </div>
