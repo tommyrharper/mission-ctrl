@@ -27,7 +27,8 @@ export class Score extends Component {
     //correct 
     if (props.failuresThisTurn === 0 && state.failuresLastTurn === 2) {
       return {
-        score: state.score + 1
+        score: state.score + 1,
+        failuresLastTurn: props.failuresThisTurn
       };
     }
 
