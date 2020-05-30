@@ -9,30 +9,36 @@ const mongoose = require('mongoose');
 
 describe("Server Testing Example", () => {
 
-  afterEach(done => {
-    clearCollections = () => {
-      console.log(mongoose.collection.collections)
-      for (var collection in mongoose.collection.collections) {
-        mongoose.collection.collections[collection].remove(function() {});
-      }
-      return done();
-    }
+  // afterEach(done => {
+  //   clearCollections = () => {
+  //     console.log(mongoose.collection.collections)
+  //     for (var collection in mongoose.collection.collections) {
+  //       mongoose.collection.collections[collection].remove(function() {});
+  //     }
+  //     return done();
+  //   }
 
-    if (mongoose.connection.readyState === 0) {
-      console.log(mongoose.collection.collections)
-      mongoose.connect(process.env.DB_TEST_URI, function (err) {
-        if (err) throw err;
-        return clearCollections();
-      })
-    } else {
-      return clearCollections();
-    }
-  });
+  //   if (mongoose.connection.readyState === 0) {
+  //     console.log(mongoose.collection.collections)
+  //     mongoose.connect(process.env.DB_TEST_URI, function (err) {
+  //       if (err) throw err;
+  //       return clearCollections();
+  //     })
+  //   } else {
+  //     return clearCollections();
+  //   }
+  // });
   
   // afterEach(done => {
   //   mongoose.disconnect();
   //   return done();
   // });
+
+  before(function (done) {
+    mongoose.connection.dropDatabase(function() {
+      done()
+    })
+  })
 
   it("should return OK status", () => {
     return request(app)
@@ -56,7 +62,7 @@ describe("Server Testing Example", () => {
       .send({ name: "Harry", score: 100})
       .then((response) => {
         assert.equal(response.status, 200);
-        expect(response.body.name).toEqual("Harry");
+        expect(response.body.name).to.equal("Harry");
       });
   });
 });
