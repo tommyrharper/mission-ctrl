@@ -6,72 +6,37 @@ export class GameComplete extends Component {
   constructor() {
     super()
     this.state = {
-      scoreSubmitted: false,
-      tryAgain: false
+      scoreSubmitted: false
     }
   }
 
   showScoreboard = () => {
     this.setState({ scoreSubmitted: true})
   }
-  tryAgain = () => {
-    this.setState({ tryAgain: true })
-  }
-
-  resetShowScoreboard = () => {
-    this.setState({scoreSubmitted: false})
-  }
 
   render() {
-    let scoreboard
-    let scoreSummary
+    let scoreBoard
+    let submitScore
     let tryAgainButton
-    let app
-    if(this.state.tryAgain) {
-      app = <App/>
-      this.resetShowScoreboard()
-    }else if(this.state.scoreSubmitted) {
-      scoreboard = <Scoreboard />
-      tryAgainButton = <button onClick={this.tryAgain}>Try Again</button>
-    }else {
-      scoreSummary = <div>
-      <p>Game Complete</p>
-      <p>Total Correct: {this.props.correct}</p>
-      <p>Total Mistakes: {this.props.mistakes}</p>
-      Name:
-      <input type="text"/>
-      <button onClick={this.showScoreboard}>Submit score</button>
-    </div>
+    if (this.state.scoreSubmitted) {
+      scoreBoard = <Scoreboard />
+      tryAgainButton = <button onClick={this.props.tryAgain}>Try Again</button>
+    } else {
+      submitScore = <div>Name: <input type="text"/>
+          <button onClick={this.showScoreboard}>Submit score</button>
+        </div>
     }
     return (
-      <div>      
+      <div>
+        <p>Game Complete</p>
+        <p>Total Correct: {this.props.correct}</p>
+        <p>Total Mistakes: {this.props.mistakes}</p>
+        {submitScore}
+        {scoreBoard}
         {tryAgainButton}
-        {scoreboard}
-        {scoreSummary}
-        {app}
       </div>
     )
   }
 }
-
-// render() {
-//   let game
-//   let button
-//   let scoreboard
-//   if (this.state.show) {
-//     game = <Game />
-//   } else {
-//     button = <button onClick={this.startGame}>Start</button>
-//     scoreboard = <Scoreboard />
-//   }
-//   return (
-//     <div>
-//       {button}
-//       {game}
-//       {scoreboard}
-//     </div>
-//   );
-// }
-// }
 
 export default GameComplete
