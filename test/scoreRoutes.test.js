@@ -7,10 +7,13 @@ const expect = chai.expect;
 chai.use(sinonChai);
 
 const app = require("../server");
-const Score = require("../models/Score");
+const namespace = {
+  Score: require("../models/Score")
+}
+// const Score = require("../models/Score")
 
 describe("Score Routes", () => {
-  it("GET returns all scores", () => {
+  xit("GET returns all scores", () => {
     const data = [
       {
         _id: "5ed11261c9439b36a8341436",
@@ -41,23 +44,31 @@ describe("Score Routes", () => {
   });
 
   it('POST with correct data', () => {
-    const data = {
-      _id: "5ed22c319a146a4ad81453d6",
-      name: 'Pete',
-      score: 99,
-      date: "2020-05-30T09:49:37.375Z",
-      __v: 0
+    const stubInstance = {
+      save: function () {
+        return {
+          _id: "5ed22c319a146a4ad81453d6",
+          name: 'Nigel',
+          score: 99,
+          date: "2020-05-30T09:49:37.375Z",
+          __v: 0
+        }
+      }
     }
+
+    const classStub = sinon.stub(namespace, "Score");
+    classStub.returns(stubInstance)
 
     const stub = sinon.createStubInstance(Score)
     stub.save.returns(data)
+    console.log(stub.save())
 
     return request(app)
     .post("/scores")
-    .send({ name: "Pete", score: 99 })
+    .send({ name: "Nigel", score: 99 })
     .then((response) => {
       const body = response.body;
-      expect(body.name).to.equal("Pete")
+      expect(body.name).to.equal("Nigel")
       expect(body.score).to.equal(99)
     });
 
