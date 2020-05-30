@@ -22,7 +22,7 @@ export class Question extends Component {
         this.setState({
           currentKeys: newKeys
         })
-        console.log('newKeys', newKeys)
+        // console.log('newKeys', newKeys)
         if (newKeys.length === this.props.shortcut.combo.length) {
           if (this.compareArrays(newKeys, this.props.shortcut.combo)) {
             this.props.attempt(true)
