@@ -17,14 +17,14 @@ export class Score extends Component {
       }
     }
 
-    // when failites this turn = 0 then failures this turn needs to be rest once score has been updated
+// evaulating if correct 
     if (props.failuresThisTurn === 0 && state.failuresLastTurn >= 3) {
       return {
-        score: state.score + 0
+        score: state.score + 0,
+        failuresLastTurn: props.failuresThisTurn
       };
     }
 
-    //correct 
     if (props.failuresThisTurn === 0 && state.failuresLastTurn === 2) {
       return {
         score: state.score + 1,
@@ -41,7 +41,7 @@ export class Score extends Component {
     
     if (props.failuresThisTurn === 0 && props.numberOfCorrect > 0) {
       return {
-        score: state.score + 5
+        score: state.score + 5,
       };  
     }
 
