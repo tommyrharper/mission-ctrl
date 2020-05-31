@@ -10,13 +10,11 @@ export class Scoreboard extends Component {
   }
 
   componentDidMount() {
-    const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const url = "http://mission-ctrl-node.herokuapp.com/scores";
-    fetch(proxyurl + url)
+    fetch(url)
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result, 'result')
           this.setState({
             isLoaded: true,
             scores: result
