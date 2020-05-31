@@ -13,15 +13,14 @@ describe('Scoreboard', () => {
     expect(wrapper).toContainReact(welcome)
   })
 
-  it('Shows its scores name, date, score', () => {
+  it('It fetches the data from the api', () => {
+    const mockSuccessResponse = {}
+    const mockJsonPromise = Promise.resolve(mockSuccessResponse)
+    const mockFetchPromise = Promise.resolve({
+      json: () => mockJsonPromise
+    })
+    jest.spyOn(global, "fetch").mockImplementation(() => mockFetchPromise)
     const wrapper = shallow(<Scoreboard />)
-    const score = <li>Alex 29/05/20 10000</li>
-    expect(wrapper).toContainReact(score)
-  })
-
-  it('shows me scores from highest score to lowest score', () => {
-    const wrapper = shallow(<Scoreboard />)
-    const scores = <ul><li>Graham 29/05/20 20000</li><li>Alex 29/05/20 10000</li></ul>
-    expect(wrapper).toContainReact(scores)
+    expect(global.fetch).toHaveBeenCalledTimes(1)
   })
 })

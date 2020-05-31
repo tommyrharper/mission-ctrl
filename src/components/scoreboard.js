@@ -1,21 +1,38 @@
 import React, { Component } from "react";
+var moment = require('moment');
 
 export class Scoreboard extends Component {
   constructor() {
     super()
     this.state = {
-      scores: [{"name": "Alex", "date":"29/05/20", "score": 10000 }, {"name": "Graham", "date":"29/05/20", "score": 20000 }]
+      scores: []
     }
   }
 
+  componentDidMount() {
+    const url = "http://mission-ctrl-node.herokuapp.com/scores";
+    fetch(url)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoaded: true,
+            scores: result
+          });
+        },
+
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          })
+        }
+      )
+  }
+
   render() {
-    let unsortedScores = this.state.scores
-    let sortedScores = unsortedScores.sort(function (a, b) {
-    return b.score - a.score
-    })
-
-    const scoresPrint = sortedScores.map((score) => <li key={score.name}>{score.name} {score.date} {score.score}</li>)
-
+    const scores = this.state.scores
+    const scoresPrint = scores.map((score) => <li key={score.name}>{score.name} {moment(score.date).format('DD-M-Y')} {score.score}</li>)
     return (
       <div>
         <h2>Scoreboard</h2>
