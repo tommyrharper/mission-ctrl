@@ -1,35 +1,55 @@
-import React from 'react'
-import Scoreboard from './scoreboard.js'
-import { shallow } from 'enzyme'
+import React from "react";
+import { shallow } from "enzyme";
+import waitUntil from "async-wait-until";
 
-describe('Scoreboard', () => {
-  it('renders without crashing', () => {
-    shallow(<Scoreboard />)
-  })
+import Scoreboard from "./scoreboard.js";
 
-  it('has a Scoreboard heading', () => {
-    const wrapper = shallow(<Scoreboard />)
-    const welcome = <h2>Scoreboard</h2>
-    expect(wrapper).toContainReact(welcome)
-  })
+describe("Scoreboard", () => {
+  it("renders without crashing", () => {
+    shallow(<Scoreboard />);
+  });
 
-  it('It fetches the data from the api', () => {
-    const mockSuccessResponse = {}
-    const mockJsonPromise = Promise.resolve(mockSuccessResponse)
+  it("has a Scoreboard heading", () => {
+    const wrapper = shallow(<Scoreboard />);
+    const welcome = <h2>Scoreboard</h2>;
+    expect(wrapper).toContainReact(welcome);
+  });
+
+  it("fetch scores and render them", async () => {
+    const mockSuccessResponse = [
+      {
+        _id: "5ed22fecc72b923f7f701987",
+        name: "Dave",
+        score: 100,
+        date: "2020-05-30T10:05:32.082Z",
+        __v: 0,
+      },
+      {
+        _id: "5ed22fd8c72b923f7f701986",
+        name: "Jim",
+        score: 80,
+        date: "2020-05-30T10:05:12.924Z",
+        __v: 0,
+      },
+    ];
+
+    const mockJsonPromise = Promise.resolve(mockSuccessResponse);
     const mockFetchPromise = Promise.resolve({
-      json: () => mockJsonPromise
-    })
-    jest.spyOn(global, "fetch").mockImplementation(() => mockFetchPromise)
-    shallow(<Scoreboard />)
-    expect(global.fetch).toHaveBeenCalledTimes(1)
-  })
-
-  it('gives an error response if there is an error', () => {
-    const fetchPromise = fetch("http://misson-ctrl-node.herokuapp.com/scores");
-    fetchPromise.then(response => {
-      return response.json();}).then(scores => {
-      console.log(scores);
+      json: () => mockJsonPromise,
     });
-    expect(global.fetch).toHaveBeenCalledTimes(0)
-  })
-})
+
+    jest.spyOn(global, "fetch").mockImplementation(() => mockFetchPromise);
+
+    const wrapper = shallow(<Scoreboard />);
+
+    await waitUntil(() => wrapper.state("isLoaded") === true)
+
+    const score2 = <li>Jim 30/05/2020 80</li>
+    const score1 = <li>Dave 30/05/2020 100</li>
+
+    expect(wrapper).toContainReact(score1)
+    expect(wrapper).toContainReact(score2)
+    
+    global.fetch.mockClear();
+  });
+});
