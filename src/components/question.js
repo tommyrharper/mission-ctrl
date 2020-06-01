@@ -33,6 +33,7 @@ export class Question extends Component {
       if (newKeys.length === this.props.shortcut.combo.length) {
         if (this.compareArrays(newKeys, this.props.shortcut.combo)) {
           this.props.attempt(this.state.score, this.state.incorrectAttempts);
+          this.reset()
         } else {
           this.handleIncorrect();
         }
@@ -47,12 +48,20 @@ export class Question extends Component {
     });
   };
 
-  handleIncorrect() {
+  handleIncorrect = () => {
     let newScore = this.state.score - 2;
     if (newScore < 0) newScore = 0;
     this.setState({
       incorrectAttempts: this.state.incorrectAttempts + 1,
       score: newScore,
+    });
+  }
+
+  reset = () => {
+    this.setState({
+      currentKeys: [],
+      score: INITIAL_SCORE,
+      incorrectAttempts: 0
     });
   }
 
