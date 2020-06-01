@@ -120,17 +120,22 @@ it("mounting subscribes event listeners", () => {
   spy.mockClear()
 });
 
-// it("unmounting removes event listeners", () => {
-//   const mock = {
-//     attempt: function () {},
-//   };
-//   const mockShortcut = { name: "Copy", combo: ["c"] };
-//   const spy = jest.spyOn(document, "removeEventListener");
-//   const wrapper = mount(
-//     <Question shortcut={mockShortcut} attempt={mock.attempt} />
-//   );
-//   wrapper.unmount()
-//   expect(spy).toHaveBeenCalledTimes(2)
-//   spy.mockClear()
-// });
+it("unmounting removes event listeners", () => {
+  const mock = {
+    attempt: function () {},
+  };
+  const mockShortcut = { name: "Copy", combo: ["c"] };
+  const spy = jest.spyOn(document, "removeEventListener");
+  const wrapper = mount(
+    <Question shortcut={mockShortcut} attempt={mock.attempt} />
+  );
+  wrapper.unmount()
+  expect(spy).toHaveBeenCalledTimes(2)
+  spy.mockClear()
+});
 
+it('shows the required shortcut name', () => {
+  const mockShortcut = { name: "Copy", combo: ["c"] };
+  const wrapper = shallow(<Question shortcut={mockShortcut}/>)
+  expect(wrapper).toContainReact(<h2>Copy</h2>)
+})
