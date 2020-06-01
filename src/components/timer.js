@@ -9,6 +9,8 @@ export  class Timer extends Component {
     }
   }
 
+  
+
   render() {
     let seconds = <p>Time left: {this.state.seconds}</p>
     return (
