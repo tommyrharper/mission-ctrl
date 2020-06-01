@@ -7,4 +7,11 @@ it("renders without crashing, taking a shortcut combo as prop", () => {
   shallow(<QuestionFeedback combo={combo} />);
 });
 
+it("displays the passed combo", () => {
+  const combo = ["Control", "c"]
+  const wrapper = shallow(<QuestionFeedback combo={combo} />);
+  const phrase = <h2>Control + c</h2>
+  expect(wrapper).toContainReact(phrase);
+});
+
 
