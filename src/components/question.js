@@ -5,17 +5,19 @@ export class Question extends Component {
     super(props);
     this.state = {
       currentKeys: [],
+      score: 5,
+      incorrectAttempts: 0
     };
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("keydown", this.keyDown);
-    document.removeEventListener("keyup", this.keyUp);
   }
 
   componentDidMount() {
     document.addEventListener("keydown", this.keyDown);
     document.addEventListener("keyup", this.keyUp);
+    }
+
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.keyDown);
+    document.removeEventListener("keyup", this.keyUp);
   }
 
   keyDown = (e) => {
@@ -28,20 +30,20 @@ export class Question extends Component {
       });
       if (newKeys.length === this.props.shortcut.combo.length) {
         if (this.compareArrays(newKeys, this.props.shortcut.combo)) {
-          this.props.attempt(true);
+          this.props.attempt(this.state.score, this.state.incorrectAttempts);
         } else {
           this.props.attempt(false);
         }
       }
     }
-  }
+  };
 
   keyUp = (e) => {
     e.preventDefault();
-      this.setState({
-        currentKeys: [],
-      });
-  }
+    this.setState({
+      currentKeys: [],
+    });
+  };
 
   render() {
     return (
