@@ -28,7 +28,8 @@ it("counts down by seconds", () => {
 
 xit("timer ends at zero to call method", () => {
   const wrapper = shallow(<Timer />);
-  const timesUp = act(() => {
+  const timesUp = 
+  act(() => {
     jest.advanceTimersByTime(5000);
   });
   expect(timesUp).toHaveBeenCalled;
