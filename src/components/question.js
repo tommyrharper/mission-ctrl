@@ -32,7 +32,12 @@ export class Question extends Component {
         if (this.compareArrays(newKeys, this.props.shortcut.combo)) {
           this.props.attempt(this.state.score, this.state.incorrectAttempts);
         } else {
-          this.props.attempt(false);
+          const newScore = this.state.score - 2
+          if (newScore < 0) newScore = 0
+          this.setState({
+            incorrectAttempts: this.state.incorrectAttempts + 1,
+            score: newScore
+          })
         }
       }
     }
