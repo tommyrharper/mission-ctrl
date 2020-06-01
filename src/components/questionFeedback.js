@@ -3,9 +3,9 @@ import React, { Component } from 'react'
 export class QuestionFeedback extends Component {
   render() {
     return (
-      <div>
-        
-      </div>
+      <h2>
+        Control + c
+      </h2>
     )
   }
 }
