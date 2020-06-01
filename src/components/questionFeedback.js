@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+const ANSWER_THRESHOLD = 2
+
 export class QuestionFeedback extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +12,7 @@ export class QuestionFeedback extends Component {
   };
 
   render() {
-    if (this.props.incorrectAttempts > 2) {
+    if (this.props.incorrectAttempts > ANSWER_THRESHOLD) {
       return <h3>Try this: {this.joinCombo()}</h3>;
     }
     if (this.props.incorrectAttempts > 0) {
