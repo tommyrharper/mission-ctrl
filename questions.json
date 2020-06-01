@@ -1,0 +1,27 @@
+{ 
+  "macOS": {
+    "Copy": "['Meta', 'c']",
+    "Cut": "['Meta', 'x']", 
+    "Undo": "['Meta', 'z']", 
+    "Paste": "['Meta', 'v']", 
+    "Redo": "['Meta', 'Shift', 'z']", 
+    "Switch to screen left": "['Control', 'ArrowLeft']",
+    "Switch to screen right": "['Control', 'ArrowRight']",
+    "Save screenshot": "['Shift', 'Meta', '3']"
+  },
+  "vsCodeMacOS": {
+    "Create a HTML doc": "['Shift', '1', 'Tab']",
+    "Select all instances of a word": "['Meta', 'Shift', 'L']",
+    "indent code to right": "['Meta', ']']",
+    "indent code to left": "['Meta', '[']",
+    "Move the cursor up one line selecting both lines": "['Option', 'Meta', 'Up']",
+    "Duplicate line upwards": "['Shift', 'Option', 'Up']"
+  },
+  "windows": {
+    "Copy": "['Control', 'c']",
+    "Cut": "['Control', 'x']", 
+    "Undo": "['Control', 'z']", 
+    "Paste": "['Control', 'v']", 
+    "Redo": "['Control', 'y']"
+  }
+}
