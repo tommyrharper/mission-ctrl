@@ -12,7 +12,7 @@ export class Scoreboard extends Component {
   componentDidMount() {
     const url = "http://mission-ctrl-node.herokuapp.com/scores";
     fetch(url)
-      .then(res => res.json())
+      .then(result => result.json())
       .then(
         (result) => {
           this.setState({
