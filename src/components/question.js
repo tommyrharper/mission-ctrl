@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import QuestionFeedback from "./questionFeedback";
 
-const INITIAL_SCORE = 5
+const INITIAL_SCORE = 5;
 
 export class Question extends Component {
   constructor(props) {
@@ -8,14 +9,14 @@ export class Question extends Component {
     this.state = {
       currentKeys: [],
       score: INITIAL_SCORE,
-      incorrectAttempts: 0
+      incorrectAttempts: 0,
     };
   }
 
   componentDidMount() {
     document.addEventListener("keydown", this.keyDown);
     document.addEventListener("keyup", this.keyUp);
-    }
+  }
 
   componentWillUnmount() {
     document.removeEventListener("keydown", this.keyDown);
@@ -48,19 +49,22 @@ export class Question extends Component {
 
   handleIncorrect() {
     let newScore = this.state.score - 2;
-    if (newScore < 0)
-      newScore = 0;
+    if (newScore < 0) newScore = 0;
     this.setState({
       incorrectAttempts: this.state.incorrectAttempts + 1,
-      score: newScore
+      score: newScore,
     });
   }
 
   render() {
+    const { incorrectAttempts } = this.state;
+    const { combo } = this.props.shortcut;
+
     return (
       <div>
         <p>Press the correct key combination</p>
         <h2>{this.props.shortcut.name}</h2>
+        <QuestionFeedback incorrectAttempts={incorrectAttempts} combo={combo} />
       </div>
     );
   }
