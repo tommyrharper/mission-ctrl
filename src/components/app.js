@@ -6,30 +6,21 @@ export class App extends Component {
   constructor() {
     super();
     this.state = { 
-      show: false,
-      operatingSystem: "mac"
+      show: false
     }
+  }
+
+  componentDidMount = () => {
+    this.requestQuestions("mac")
   }
 
   startGame = () => {
     this.setState({ show: true })
   };
 
-  chooseWindows = () => {
-    this.requestQuestions()
-    this.setState({ operatingSystem: "windows" })
-  }
+  requestQuestions = (operatingSystem) => {
+    this.setState({ operatingSystem: operatingSystem })
 
-  chooseMac = () => {
-    this.requestQuestions()
-    this.setState({ operatingSystem: "mac" })
-  }
-
-  componentDidMount = () => {
-    this.requestQuestions()
-  }
-
-  requestQuestions = () => {
     fetch('../../questions.json', {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
@@ -46,11 +37,9 @@ export class App extends Component {
     let nameList
     let comboList
     if (this.state.operatingSystem === 'mac') {
-      console.log("props is  mac")
       nameList = Object.keys(questionsJson.mac)
       comboList = Object.values(questionsJson.mac)
     } else {
-      console.log("props is  windows")
       nameList = Object.keys(questionsJson.windows)
       comboList = Object.values(questionsJson.windows)
     }
@@ -66,7 +55,6 @@ export class App extends Component {
     this.setState({shortcutSet: shortcutSet})
   }
 
-
   render() {
     let game
     let button
@@ -77,9 +65,9 @@ export class App extends Component {
     } else {
       toggle = <div>
                 <p>Please select your operating system:</p>
-                <input type="radio" id="mac" name="OS" value="mac" onClick={this.chooseMac}/>
+                <input type="radio" id="mac" name="OS" value="mac" onClick={() => this.requestQuestions("mac")}/>
                 <label htmlFor="mac">Mac</label>
-                <input type="radio" id="windows" name="OS" value="windows" onClick={this.chooseWindows}/>
+                <input type="radio" id="windows" name="OS" value="windows" onClick={() => this.requestQuestions("windows")}/>
                 <label htmlFor="female">Windows</label>
                </div>
       button = <button onClick={this.startGame}>Start</button>
