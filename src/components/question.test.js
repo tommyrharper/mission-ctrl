@@ -57,7 +57,6 @@ it("one incorrect, then correct, calls attempt with score 3, incorrect 1", () =>
   instance.keyDown(mockKeyDown("x"));
   instance.keyUp(mockKeyUp);
   instance.keyDown(mockKeyDown("c"));
-  
 
   expect(mock.attempt).toBeCalledWith(3, 1);
 });
