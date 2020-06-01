@@ -17,7 +17,8 @@ export class QuestionFeedback extends Component {
     }
     if (this.props.incorrectAttempts > 0) {
       return <p>Try Again</p>
-    }    
+    }   
+    return null 
   }
 }
 
