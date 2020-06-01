@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class scoreSummary extends Component {
+export class ScoreSummary extends Component {
   constructor(props){
     super(props)
   }
@@ -19,5 +19,5 @@ export class scoreSummary extends Component {
   }
 }
 
-export default scoreSummary
+export default ScoreSummary
 
