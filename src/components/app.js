@@ -64,7 +64,6 @@ export class App extends Component {
       a += 1
     })
     this.setState({shortcutSet: shortcutSet})
-    // console.log(this.state.shortcutSet)
   }
 
 
@@ -84,7 +83,7 @@ export class App extends Component {
                 <label htmlFor="female">Windows</label>
                </div>
       button = <button onClick={this.startGame}>Start</button>
-      // scoreboard = <Scoreboard />
+      scoreboard = <Scoreboard />
     }
     return (
       <div>
