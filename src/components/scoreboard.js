@@ -5,6 +5,7 @@ export class Scoreboard extends Component {
   constructor() {
     super();
     this.state = {
+      isLoaded: false,
       scores: [],
     };
   }
@@ -15,7 +16,6 @@ export class Scoreboard extends Component {
       .then((result) => result.json())
       .then(
         (result) => {
-          console.log("result", result);
           this.setState({
             isLoaded: true,
             scores: result,
@@ -32,16 +32,27 @@ export class Scoreboard extends Component {
   }
 
   render() {
-    const scores = this.state.scores;
-    const scoresPrint = scores.map((score) => (
-      <li key={score._id}>
-        {score.name} {moment(score.date).format("DD/MM/Y")} {score.score}
-      </li>
-    ));
+    const { error, isLoaded, scores } = this.state;
+
+    let content;
+    if (error) {
+      content = <h3>Could not load scores</h3>;
+    } else if (!isLoaded) {
+      content = <h3>Loading...</h3>;
+    } else {
+      content = scores.map((score) => (
+        <ul>
+          <li key={score._id}>
+            {score.name} {moment(score.date).format("DD/MM/Y")} {score.score}
+          </li>
+        </ul>
+      ));
+    }
+
     return (
       <div>
         <h2>Scoreboard</h2>
-        <ul>{scoresPrint}</ul>
+        {content}
       </div>
     );
   }
