@@ -13,7 +13,7 @@ export class Game extends Component {
       shortcutSet: this.props.shortcutSet,
       currentShortcut: 0,
       gameComplete: false,
-      gameLength: 50000,
+      gameLength: 5000,
       failuresThisTurn: 0,
       resetScore: false
     }
