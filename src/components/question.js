@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import QuestionFeedback from "./questionFeedback";
 
-const INITIAL_SCORE = 5
+const INITIAL_SCORE = 5;
+const FEEDBACK_THRESHOLD = 3;
 
 export class Question extends Component {
   constructor(props) {
@@ -8,14 +10,15 @@ export class Question extends Component {
     this.state = {
       currentKeys: [],
       score: INITIAL_SCORE,
-      incorrectAttempts: 0
+      incorrectAttempts: 0,
+      renderFeedback: false,
     };
   }
 
   componentDidMount() {
     document.addEventListener("keydown", this.keyDown);
     document.addEventListener("keyup", this.keyUp);
-    }
+  }
 
   componentWillUnmount() {
     document.removeEventListener("keydown", this.keyDown);
@@ -48,19 +51,28 @@ export class Question extends Component {
 
   handleIncorrect() {
     let newScore = this.state.score - 2;
-    if (newScore < 0)
-      newScore = 0;
+    if (newScore < 0) newScore = 0;
     this.setState({
       incorrectAttempts: this.state.incorrectAttempts + 1,
-      score: newScore
+      score: newScore,
     });
+    if (this.state.incorrectAttempts + 1 >= FEEDBACK_THRESHOLD) {
+      this.setState({
+        renderFeedback: true,
+      });
+    }
   }
 
   render() {
+    const { renderFeedback } = this.state;
+    const { combo } = this.props.shortcut;
+    const feedback = renderFeedback ? <QuestionFeedback combo={combo} /> : null;
+
     return (
       <div>
         <p>Press the correct key combination</p>
         <h2>{this.props.shortcut.name}</h2>
+        {feedback}
       </div>
     );
   }
