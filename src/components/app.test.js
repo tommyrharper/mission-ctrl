@@ -11,7 +11,7 @@ it('renders without crashing', () => {
 describe('the start button', () => {
   it('when clicked, contains the game element', () => {
     const wrapper = shallow(<App />)
-    const game = <Game />
+    const game = <Game operatingSystem="mac"/>
     const button = wrapper.find('button')
     button.simulate('click')
     expect(wrapper).toContainReact(game)
@@ -19,7 +19,7 @@ describe('the start button', () => {
 
   it('does not contain the game element if button not clicked', () => {
     const wrapper = shallow(<App />)
-    const game = <Game />
+    const game = <Game operatingSystem="mac" />
     expect(wrapper).not.toContainReact(game)
   })
 
@@ -44,6 +44,29 @@ describe('the start button', () => {
     expect(wrapper).not.toContainReact(scoreboard)
   })
 
+})
+
+describe('Operating system toggle', () => {
+  it('Starts by default as mac', () => {
+    const wrapper = shallow(<App />)
+    expect(wrapper.state().operatingSystem).toEqual("mac")
+  })
+
+  it('Changes to windows when the toggle is clicked', () => {
+    const wrapper = shallow(<App />)
+    const windowsToggle = wrapper.find('#windows')
+    windowsToggle.simulate('click')
+    expect(wrapper.state().operatingSystem).toEqual("windows")
+  })
+
+  it('Starts by default as mac', () => {
+    const wrapper = shallow(<App />)
+    const windowsToggle = wrapper.find('#windows')
+    windowsToggle.simulate('click')
+    const macToggle = wrapper.find('#mac')
+    macToggle.simulate('click')
+    expect(wrapper.state().operatingSystem).toEqual("mac")
+  })
 })
 
 
