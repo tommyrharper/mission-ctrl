@@ -52,4 +52,20 @@ describe("Scoreboard", () => {
     
     global.fetch.mockClear();
   });
+
+  it('renders some error message if the fetch fails', async () => {
+    const mockFetchPromise = Promise.reject("Server Error");
+
+    jest.spyOn(global, "fetch").mockImplementation(() => mockFetchPromise);
+
+    const wrapper = shallow(<Scoreboard />);
+
+    await waitUntil(() => wrapper.state("isLoaded") === true)
+
+    const errorMessage = <h3>Could not load scores</h3>
+
+    expect(wrapper).toContainReact(errorMessage)
+    
+    global.fetch.mockClear();
+  });
 });
