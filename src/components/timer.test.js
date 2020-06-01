@@ -8,6 +8,7 @@ it('renders without crashing', () => {
 
 it('starting time renders length of game', ()=> {
   const wrapper = shallow(<Timer />)
-  const startTime = <p>5</p> 
+  // 5 
+  const startTime = <p>Time left: 5</p> 
   expect(wrapper).toContainReact(startTime)
 })
