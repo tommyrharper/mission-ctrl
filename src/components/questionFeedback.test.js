@@ -7,9 +7,17 @@ it("renders without crashing, taking a shortcut combo as prop", () => {
   shallow(<QuestionFeedback combo={combo} />);
 });
 
-it("displays the passed combo", () => {
+it("displays the path combo for 3 or more incorrect attempts", () => {
   const combo = ["Control", "c"]
-  const wrapper = shallow(<QuestionFeedback combo={combo} />);
+  const wrapper = shallow(<QuestionFeedback incorrectAttempts={3} combo={combo} />);
   const phrase = <h3>Try this: Control + c</h3>
   expect(wrapper).toContainReact(phrase);
 });
+
+it("informs the user they have given an incorrect answer", () => {
+  const combo = ["Control", "c"]
+  const wrapper = shallow(<QuestionFeedback incorrectAttempts={1} combo={combo}/>)
+  const wrongAnswer = <p>Try Again</p>
+  expect(wrapper).toContainReact(wrongAnswer)
+})
+
