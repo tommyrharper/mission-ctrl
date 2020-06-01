@@ -107,4 +107,30 @@ it("three incorrect, then correct, calls attempt with score 0, incorrect 3", () 
   expect(mock.attempt).toBeCalledWith(0, 3)
 })
 
+it("mounting subscribes event listeners", () => {
+  const mock = {
+    attempt: function () {},
+  };
+  const mockShortcut = { name: "Copy", combo: ["c"] };
+  const spy = jest.spyOn(document, "addEventListener");
+  const wrapper = mount(
+    <Question shortcut={mockShortcut} attempt={mock.attempt} />
+  );
+  expect(spy).toHaveBeenCalledTimes(2)
+  spy.mockClear()
+});
+
+// it("unmounting removes event listeners", () => {
+//   const mock = {
+//     attempt: function () {},
+//   };
+//   const mockShortcut = { name: "Copy", combo: ["c"] };
+//   const spy = jest.spyOn(document, "removeEventListener");
+//   const wrapper = mount(
+//     <Question shortcut={mockShortcut} attempt={mock.attempt} />
+//   );
+//   wrapper.unmount()
+//   expect(spy).toHaveBeenCalledTimes(2)
+//   spy.mockClear()
+// });
 
