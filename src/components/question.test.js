@@ -1,6 +1,7 @@
 import React from "react";
 import Question from "./question.js";
 import { shallow, mount } from "enzyme";
+import QuestionFeedback from "./questionFeedback.js";
 
 it("renders without crashing, taking a shortcut to render and attempt method prop", () => {
   let mockAttempt = {
@@ -209,3 +210,24 @@ it(".compareArrays compares arrays", () => {
   expect(instance.compareArrays(arr3, arr4)).toBe(true)
 });
 
+it('after 3 incorrect attempts it renders a QuestionFeedback', () => {
+  let mockAttempt = {
+    attempt: function () {},
+  };
+  const mockShortcut = { name: "Copy", combo: ["c"] };
+  
+  const wrapper = shallow(<Question shortcut={mockShortcut} attempt={mockAttempt.attempt} />);
+
+  expect(wrapper.find(QuestionFeedback)).toHaveLength(0);
+  
+  const instance = wrapper.instance();
+
+  instance.keyDown(mockKeyDown("y"));
+  instance.keyUp(mockKeyUp);
+  instance.keyDown(mockKeyDown("x"));
+  instance.keyUp(mockKeyUp);
+  instance.keyDown(mockKeyDown("z"));
+  instance.keyUp(mockKeyUp);
+
+  expect(wrapper.find(QuestionFeedback)).toHaveLength(1);
+});
