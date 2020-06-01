@@ -13,5 +13,3 @@ it("displays the passed combo", () => {
   const phrase = <h2>Control + c</h2>
   expect(wrapper).toContainReact(phrase);
 });
-
-
