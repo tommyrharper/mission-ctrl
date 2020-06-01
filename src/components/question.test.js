@@ -231,3 +231,4 @@ it('after 3 incorrect attempts it renders a QuestionFeedback', () => {
 
   expect(wrapper.find(QuestionFeedback)).toHaveLength(1);
 });
+

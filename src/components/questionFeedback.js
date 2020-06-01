@@ -10,7 +10,12 @@ export class QuestionFeedback extends Component {
   };
 
   render() {
-    return <h3>Try this: {this.joinCombo()}</h3>;
+    if (this.props.incorrectAttempts > 2) {
+      return <h3>Try this: {this.joinCombo()}</h3>;
+    }
+    if (this.props.incorrectAttempts > 0) {
+      return <p>Try Again</p>
+    }    
   }
 }
 
