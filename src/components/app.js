@@ -5,25 +5,45 @@ import Scoreboard from "./scoreboard"
 export class App extends Component {
   constructor() {
     super();
-    this.state = { show: false }
+    this.state = { 
+      show: false,
+      operatingSystem: "mac"
+    }
   }
 
   startGame = () => {
     this.setState({ show: true })
   };
 
+  chooseWindows = () => {
+    this.setState({ operatingSystem: "windows" })
+  }
+
+  chooseMac = () => {
+    this.setState({ operatingSystem: "mac" })
+  }
+
   render() {
     let game
     let button
     let scoreboard
+    let toggle
     if (this.state.show) {
-      game = <Game />
+      game = <Game operatingSystem={this.state.operatingSystem} />
     } else {
+      toggle = <div>
+                <p>Please select your operating system:</p>
+                <input type="radio" id="mac" name="OS" value="mac" onClick={this.chooseMac}/>
+                <label for="mac">Mac</label>
+                <input type="radio" id="windows" name="OS" value="windows" onClick={this.chooseWindows}/>
+                <label for="female">Windows</label>
+               </div>
       button = <button onClick={this.startGame}>Start</button>
       scoreboard = <Scoreboard />
     }
     return (
       <div>
+        {toggle}
         {button}
         {game}
         {scoreboard}
