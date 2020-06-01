@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import QuestionFeedback from "./questionFeedback";
 
 const INITIAL_SCORE = 5;
-const FEEDBACK_THRESHOLD = 3;
 
 export class Question extends Component {
   constructor(props) {
@@ -11,7 +10,6 @@ export class Question extends Component {
       currentKeys: [],
       score: INITIAL_SCORE,
       incorrectAttempts: 0,
-      renderFeedback: false,
     };
   }
 
@@ -56,11 +54,6 @@ export class Question extends Component {
       incorrectAttempts: this.state.incorrectAttempts + 1,
       score: newScore,
     });
-    if (this.state.incorrectAttempts + 1 >= FEEDBACK_THRESHOLD) {
-      this.setState({
-        renderFeedback: true,
-      });
-    }
   }
 
   render() {
