@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Question from './question'
 import GameComplete from './gameComplete'
 import Score from './score'
+// added for timer 
+import Timer from './timer'
 
 export class Game extends Component {
   constructor() {
@@ -93,6 +95,8 @@ export class Game extends Component {
         />
         {gameCompleteComponent}
         {questionComponent}
+        <Timer />
+        
       </div>
     )
   }
