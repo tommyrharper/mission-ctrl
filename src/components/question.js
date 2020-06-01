@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 
+const INITIAL_SCORE = 5
+
 export class Question extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentKeys: [],
-      score: 5,
+      score: INITIAL_SCORE,
       incorrectAttempts: 0
     };
   }
