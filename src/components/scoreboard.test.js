@@ -20,7 +20,16 @@ describe('Scoreboard', () => {
       json: () => mockJsonPromise
     })
     jest.spyOn(global, "fetch").mockImplementation(() => mockFetchPromise)
-    const wrapper = shallow(<Scoreboard />)
+    shallow(<Scoreboard />)
     expect(global.fetch).toHaveBeenCalledTimes(1)
+  })
+
+  it('gives an error response if there is an error', () => {
+    const fetchPromise = fetch("http://misson-ctrl-node.herokuapp.com/scores");
+    fetchPromise.then(response => {
+      return response.json();}).then(scores => {
+      console.log(scores);
+    });
+    expect(global.fetch).toHaveBeenCalledTimes(0)
   })
 })
