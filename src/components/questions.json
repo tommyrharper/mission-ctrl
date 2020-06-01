@@ -1,0 +1,8 @@
+{ 
+  "windows": {
+    "Copy": "['Control', 'c']",
+    "Cut": "['Control', 'x']", 
+    "Undo": "['Control', 'z']", 
+    "Paste": "['Control', 'v']"
+  }
+}
