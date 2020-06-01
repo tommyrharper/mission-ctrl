@@ -4,21 +4,16 @@ import GameComplete from './gameComplete'
 import Score from './score'
 
 export class Game extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.initialState = {
       level: 0,
       totalErrors: 0,
       totalCorrect: 0,
-      shortcutSet: [
-        { name: "Copy", combo: ['Control', 'c'] },
-        { name: "Cut", combo: ['Control', 'x'] },
-        { name: "Undo", combo: ['Control', 'z'] },
-        { name: "Paste", combo: ['Control', 'v'] },
-      ],
+      shortcutSet: this.props.shortcutSet,
       currentShortcut: 0,
       gameComplete: false,
-      gameLength: 5000,
+      gameLength: 50000,
       failuresThisTurn: 0,
       resetScore: false
     }
