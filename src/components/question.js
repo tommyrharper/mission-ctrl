@@ -64,15 +64,14 @@ export class Question extends Component {
   }
 
   render() {
-    const { renderFeedback } = this.state;
+    const { incorrectAttempts } = this.state;
     const { combo } = this.props.shortcut;
-    const feedback = renderFeedback ? <QuestionFeedback combo={combo} /> : null;
 
     return (
       <div>
         <p>Press the correct key combination</p>
         <h2>{this.props.shortcut.name}</h2>
-        {feedback}
+        <QuestionFeedback incorrectAttempts={incorrectAttempts} combo={combo} />
       </div>
     );
   }
