@@ -60,3 +60,25 @@ it("one incorrect, then correct, calls attempt with score 3, incorrect 1", () =>
 
   expect(mock.attempt).toBeCalledWith(3, 1);
 });
+
+it("two incorrect, then correct, calls attempt with score 1, incorrect 2", () => {
+  const mock = {
+    attempt: function() {},
+  }
+  jest.spyOn(mock, 'attempt')
+
+  const mockShortcut = { name: 'Copy', combo: ['c'] }
+
+  const wrapper = shallow(
+    <Question shortcut={mockShortcut} attempt={mock.attempt} />
+  )
+  const instance = wrapper.instance()
+
+  instance.keyDown(mockKeyDown('y'))
+  instance.keyUp(mockKeyUp)
+  instance.keyDown(mockKeyDown('x'))
+  instance.keyUp(mockKeyUp)
+  instance.keyDown(mockKeyDown('c'))
+
+  expect(mock.attempt).toBeCalledWith(1, 2)
+})
