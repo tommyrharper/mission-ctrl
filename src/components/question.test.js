@@ -193,3 +193,19 @@ it("shows the required shortcut name", () => {
   const wrapper = shallow(<Question shortcut={mockShortcut} />);
   expect(wrapper).toContainReact(<h2>Copy</h2>);
 });
+
+it(".compareArrays compares arrays", () => {
+  const mockShortcut = { name: "Copy", combo: ["c"] };
+  const wrapper = shallow(<Question shortcut={mockShortcut} />);
+  const instance = wrapper.instance()
+
+  const arr1 = [1,2]
+  const arr2 = [1,2, 3]
+  const arr3 = ["a","b", "c"]
+  const arr4 = ["a","b", "c"]
+
+  expect(instance.compareArrays(arr1, arr2)).toBe(false)
+  expect(instance.compareArrays(arr2, arr3)).toBe(false)
+  expect(instance.compareArrays(arr3, arr4)).toBe(true)
+});
+
