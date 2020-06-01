@@ -1,47 +1,50 @@
 import React, { Component } from "react";
-var moment = require('moment');
+var moment = require("moment");
 
 export class Scoreboard extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
-      scores: []
-    }
+      scores: [],
+    };
   }
 
   componentDidMount() {
     const url = "http://mission-ctrl-node.herokuapp.com/scores";
     fetch(url)
-      .then(result => result.json())
+      .then((result) => result.json())
       .then(
         (result) => {
+          console.log("result", result);
           this.setState({
             isLoaded: true,
-            scores: result
+            scores: result,
           });
         },
 
         (error) => {
           this.setState({
             isLoaded: true,
-            error
-          })
+            error,
+          });
         }
-      )
+      );
   }
 
   render() {
-    const scores = this.state.scores
-    const scoresPrint = scores.map((score) => <li key={score.name}>{score.name} {moment(score.date).format('DD-M-Y')} {score.score}</li>)
+    const scores = this.state.scores;
+    const scoresPrint = scores.map((score) => (
+      <li key={score._id}>
+        {score.name} {moment(score.date).format("DD/MM/Y")} {score.score}
+      </li>
+    ));
     return (
       <div>
         <h2>Scoreboard</h2>
-        <ul>
-          {scoresPrint}
-        </ul>
+        <ul>{scoresPrint}</ul>
       </div>
-    )
+    );
   }
 }
 
-export default Scoreboard
+export default Scoreboard;
