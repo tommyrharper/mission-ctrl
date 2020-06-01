@@ -23,8 +23,7 @@ export class Question extends Component {
   keyDown = (e) => {
     e.preventDefault();
     if (!e.repeat) {
-      const newKeys = [...this.state.currentKeys];
-      newKeys.push(e.key);
+      const newKeys = [...this.state.currentKeys, e.key];
       this.setState({
         currentKeys: newKeys,
       });
