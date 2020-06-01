@@ -4,5 +4,11 @@
     "Cut": "['Control', 'x']", 
     "Undo": "['Control', 'z']", 
     "Paste": "['Control', 'v']"
+  },
+  "mac": {
+    "Copy": "['Meta', 'c']",
+    "Cut": "['Meta', 'x']", 
+    "Undo": "['Meta', 'z']", 
+    "Paste": "['Meta', 'v']"
   }
 }
