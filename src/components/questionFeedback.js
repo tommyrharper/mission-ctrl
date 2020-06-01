@@ -3,10 +3,6 @@ import React, { Component } from "react";
 const ANSWER_THRESHOLD = 2
 
 export class QuestionFeedback extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   joinCombo = () => {
     return this.props.combo.join(" + ");
   };
