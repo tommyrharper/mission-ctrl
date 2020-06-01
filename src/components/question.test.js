@@ -133,6 +133,34 @@ it("four incorrect, then correct, calls attempt with score 0, incorrect 4", () =
   expect(mock.attempt).toBeCalledWith(0, 4);
 });
 
+it("repeat keydowns are not counted", () => {
+  const mockKeyDownRepeat = (key) => {
+    return {
+      preventDefault: function () {},
+      repeat: true,
+      key: key,
+    };
+  };
+
+  const mock = {
+    attempt: function () {},
+  };
+
+  const mockShortcut = { name: "Copy", combo: ["c"] };
+
+  const wrapper = shallow(
+    <Question shortcut={mockShortcut} attempt={mock.attempt} />
+  );
+  const instance = wrapper.instance();
+
+  instance.keyDown(mockKeyDown("y"));
+  instance.keyDown(mockKeyDownRepeat("y"));
+  instance.keyDown(mockKeyDownRepeat("y"));
+
+  expect(instance.state.currentKeys).toStrictEqual(['y'])
+});
+
+
 it("mounting subscribes event listeners", () => {
   const mock = {
     attempt: function () {},
