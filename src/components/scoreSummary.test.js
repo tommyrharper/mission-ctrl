@@ -1,7 +1,6 @@
 import React from 'react'
 import ScoreSummary from './scoreSummary.js'
 import { shallow } from 'enzyme'
-import Score from './score.js'
 
 describe('ScoreSummary', () => {
   it('renders without crashing',() => {
