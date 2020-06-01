@@ -63,49 +63,75 @@ it("one incorrect, then correct, calls attempt with score 3, incorrect 1", () =>
 
 it("two incorrect, then correct, calls attempt with score 1, incorrect 2", () => {
   const mock = {
-    attempt: function() {},
-  }
-  jest.spyOn(mock, 'attempt')
+    attempt: function () {},
+  };
+  jest.spyOn(mock, "attempt");
 
-  const mockShortcut = { name: 'Copy', combo: ['c'] }
+  const mockShortcut = { name: "Copy", combo: ["c"] };
 
   const wrapper = shallow(
     <Question shortcut={mockShortcut} attempt={mock.attempt} />
-  )
-  const instance = wrapper.instance()
+  );
+  const instance = wrapper.instance();
 
-  instance.keyDown(mockKeyDown('y'))
-  instance.keyUp(mockKeyUp)
-  instance.keyDown(mockKeyDown('x'))
-  instance.keyUp(mockKeyUp)
-  instance.keyDown(mockKeyDown('c'))
+  instance.keyDown(mockKeyDown("y"));
+  instance.keyUp(mockKeyUp);
+  instance.keyDown(mockKeyDown("x"));
+  instance.keyUp(mockKeyUp);
+  instance.keyDown(mockKeyDown("c"));
 
-  expect(mock.attempt).toBeCalledWith(1, 2)
-})
+  expect(mock.attempt).toBeCalledWith(1, 2);
+});
 
 it("three incorrect, then correct, calls attempt with score 0, incorrect 3", () => {
   const mock = {
-    attempt: function() {},
-  }
-  jest.spyOn(mock, 'attempt')
+    attempt: function () {},
+  };
+  jest.spyOn(mock, "attempt");
 
-  const mockShortcut = { name: 'Copy', combo: ['c'] }
+  const mockShortcut = { name: "Copy", combo: ["c"] };
 
   const wrapper = shallow(
     <Question shortcut={mockShortcut} attempt={mock.attempt} />
-  )
-  const instance = wrapper.instance()
+  );
+  const instance = wrapper.instance();
 
-  instance.keyDown(mockKeyDown('y'))
-  instance.keyUp(mockKeyUp)
-  instance.keyDown(mockKeyDown('x'))
-  instance.keyUp(mockKeyUp)
-  instance.keyDown(mockKeyDown('x'))
-  instance.keyUp(mockKeyUp)
-  instance.keyDown(mockKeyDown('c'))
+  instance.keyDown(mockKeyDown("y"));
+  instance.keyUp(mockKeyUp);
+  instance.keyDown(mockKeyDown("x"));
+  instance.keyUp(mockKeyUp);
+  instance.keyDown(mockKeyDown("x"));
+  instance.keyUp(mockKeyUp);
+  instance.keyDown(mockKeyDown("c"));
 
-  expect(mock.attempt).toBeCalledWith(0, 3)
-})
+  expect(mock.attempt).toBeCalledWith(0, 3);
+});
+
+it("four incorrect, then correct, calls attempt with score 0, incorrect 4", () => {
+  const mock = {
+    attempt: function () {},
+  };
+  jest.spyOn(mock, "attempt");
+
+  const mockShortcut = { name: "Copy", combo: ["c"] };
+
+  const wrapper = shallow(
+    <Question shortcut={mockShortcut} attempt={mock.attempt} />
+  );
+  const instance = wrapper.instance();
+
+  instance.keyDown(mockKeyDown("y"));
+  instance.keyUp(mockKeyUp);
+  instance.keyDown(mockKeyDown("x"));
+  instance.keyUp(mockKeyUp);
+  instance.keyDown(mockKeyDown("x"));
+  instance.keyUp(mockKeyUp);
+  instance.keyDown(mockKeyDown("p"));
+  instance.keyUp(mockKeyUp);
+  instance.keyDown(mockKeyDown("c"));
+
+  expect(mock.attempt).toBeCalledWith(0, 4);
+});
 
 it("mounting subscribes event listeners", () => {
   const mock = {
@@ -116,8 +142,8 @@ it("mounting subscribes event listeners", () => {
   const wrapper = mount(
     <Question shortcut={mockShortcut} attempt={mock.attempt} />
   );
-  expect(spy).toHaveBeenCalledTimes(2)
-  spy.mockClear()
+  expect(spy).toHaveBeenCalledTimes(2);
+  spy.mockClear();
 });
 
 it("unmounting removes event listeners", () => {
@@ -129,13 +155,13 @@ it("unmounting removes event listeners", () => {
   const wrapper = mount(
     <Question shortcut={mockShortcut} attempt={mock.attempt} />
   );
-  wrapper.unmount()
-  expect(spy).toHaveBeenCalledTimes(2)
-  spy.mockClear()
+  wrapper.unmount();
+  expect(spy).toHaveBeenCalledTimes(2);
+  spy.mockClear();
 });
 
-it('shows the required shortcut name', () => {
+it("shows the required shortcut name", () => {
   const mockShortcut = { name: "Copy", combo: ["c"] };
-  const wrapper = shallow(<Question shortcut={mockShortcut}/>)
-  expect(wrapper).toContainReact(<h2>Copy</h2>)
-})
+  const wrapper = shallow(<Question shortcut={mockShortcut} />);
+  expect(wrapper).toContainReact(<h2>Copy</h2>);
+});
