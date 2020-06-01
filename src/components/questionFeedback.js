@@ -10,7 +10,7 @@ export class QuestionFeedback extends Component {
   };
 
   render() {
-    return <h2>{this.joinCombo()}</h2>;
+    return <h3>Try this: {this.joinCombo()}</h3>;
   }
 }
 
