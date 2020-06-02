@@ -1,7 +1,6 @@
 import React from "react";
 import Timer from "./timer.js";
 import { shallow, mount } from "enzyme";
-import { act } from "react-dom/test-utils";
 
 it("renders without crashing", () => {
   shallow(<Timer />);
