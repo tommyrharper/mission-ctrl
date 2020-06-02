@@ -1,45 +1,70 @@
 import React, { Component } from "react";
 import Game from "./game";
-import Scoreboard from "./scoreboard"
+import Scoreboard from "./scoreboard";
+import macShortcuts from "../shortcuts/mac";
+import windowsShortcuts from "../shortcuts/windows";
 
 export class App extends Component {
   constructor() {
     super();
-    this.state = { 
-      show: false,
-      operatingSystem: "mac"
-    }
+    this.state = {
+      showGame: false,
+      operatingSystem: "mac",
+    };
   }
 
   startGame = () => {
-    this.setState({ show: true })
+    this.setState({ showGame: true });
   };
 
-  chooseWindows = () => {
-    this.setState({ operatingSystem: "windows" })
-  }
-
-  chooseMac = () => {
-    this.setState({ operatingSystem: "mac" })
-  }
+  chooseShortcuts = (set) => {
+    this.setState({ operatingSystem: set });
+  };
 
   render() {
-    let game
-    let button
-    let scoreboard
-    let toggle
-    if (this.state.show) {
-      game = <Game operatingSystem={this.state.operatingSystem} />
+    let shortcuts
+    switch (this.state.operatingSystem) {
+      case "mac":
+        shortcuts = macShortcuts
+        break;
+    
+      case "windows":
+        shortcuts = windowsShortcuts
+        break;
+    
+      default:
+        break;
+    }
+    let game;
+    let button;
+    let scoreboard;
+    let toggle;
+    if (this.state.showGame) {
+      game = <Game shortcuts={shortcuts} />;
     } else {
-      toggle = <div>
-                <p>Please select your operating system:</p>
-                <input type="radio" id="mac" name="OS" value="mac" onClick={this.chooseMac}/>
-                <label for="mac">Mac</label>
-                <input type="radio" id="windows" name="OS" value="windows" onClick={this.chooseWindows}/>
-                <label for="female">Windows</label>
-               </div>
-      button = <button onClick={this.startGame}>Start</button>
-      scoreboard = <Scoreboard />
+      toggle = (
+        <div>
+          <p>Please select your operating system:</p>
+          <label for="mac">Mac</label>
+          <input
+            type="radio"
+            id="mac"
+            name="OS"
+            value="mac"
+            onClick={() => this.chooseShortcuts("mac")}
+          />
+          <label for="windows">Windows</label>
+          <input
+            type="radio"
+            id="windows"
+            name="OS"
+            value="windows"
+            onClick={() => this.chooseShortcuts("windows")}
+          />
+        </div>
+      );
+      button = <button onClick={this.startGame}>Start</button>;
+      scoreboard = <Scoreboard />;
     }
     return (
       <div>
