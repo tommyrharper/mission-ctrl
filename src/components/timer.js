@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 // import parent eventually 
 
 export class Timer extends Component {
@@ -24,7 +25,7 @@ export class Timer extends Component {
   } 
 
   timesUp = () => {
-    console.log("times Up")
+    //this.changeGameCompleteStatus()
   }
 
   render() {
@@ -32,6 +33,7 @@ export class Timer extends Component {
     return (
       <div>
         {seconds}
+        {/* {this.props.timesUp} */}
       </div>
     )
   }

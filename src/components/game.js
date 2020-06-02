@@ -19,17 +19,25 @@ export class Game extends Component {
         { name: "Paste", combo: ['Control', 'v'] },
       ],
       currentShortcut: 0,
+      //gameComplete!
       gameComplete: false,
-      gameLength: 5000,
+      //gameLength: 5000,
       failuresThisTurn: 0,
       resetScore: false
     }
+
+    
     this.state = this.initialState
   }
 
   componentDidMount = () => {
     this.startGame()
   }
+
+
+  // changeGameCompleteStatus = () => {
+  //   this.setState({gameComplete: true})
+  // }
 
   startGame = () => {
     setTimeout(() => {
@@ -71,6 +79,8 @@ export class Game extends Component {
   render() {
     let gameCompleteComponent
     let questionComponent
+    let timerComponent
+       
     if (this.state.gameComplete) {
       gameCompleteComponent = <GameComplete 
                               correct={this.state.totalCorrect}
@@ -83,6 +93,7 @@ export class Game extends Component {
                   attempt={this.attempt}
                   />
     }
+    timerComponent = <Timer timesUp={this.timesUp}/>
     return (
       <div>
         <h1>Mission-Ctrl</h1>
@@ -95,7 +106,9 @@ export class Game extends Component {
         />
         {gameCompleteComponent}
         {questionComponent}
-        <Timer />
+        {/* {timerComponent} */}
+        {/* {this.state.gameComplete} */}
+        
         
       </div>
     )
