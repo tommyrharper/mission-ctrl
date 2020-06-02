@@ -1,8 +1,8 @@
 import React from 'react'
 import App from './app.js'
+import { shallow } from 'enzyme'
 import Game from './game.js'
 import Scoreboard from './scoreboard.js'
-import { shallow } from 'enzyme'
 
 it('renders without crashing', () => {
   shallow(<App />)
@@ -11,37 +11,38 @@ it('renders without crashing', () => {
 describe('the start button', () => {
   it('when clicked, contains the game element', () => {
     const wrapper = shallow(<App />)
-    const game = <Game operatingSystem="mac"/>
     const button = wrapper.find('button')
     button.simulate('click')
-    expect(wrapper).toContainReact(game)
+
+    expect(wrapper.find(Game)).toHaveLength(1);
   })
 
   it('does not contain the game element if button not clicked', () => {
     const wrapper = shallow(<App />)
-    const game = <Game operatingSystem="mac" />
-    expect(wrapper).not.toContainReact(game)
+    expect(wrapper.find(Game)).toHaveLength(0);
   })
 
   it('disappears after it has been clicked', () => {
     const wrapper = shallow(<App />)
+
     const button = wrapper.find('button')
     button.simulate('click')
-    expect(wrapper.state().show).toEqual(true)
+
+    expect(wrapper.find('button')).toHaveLength(0);
   })
 
   it('Scoreboard is on the start page', () => {
     const wrapper = shallow(<App />)
-    const scoreboard = <Scoreboard />
-    expect(wrapper).toContainReact(scoreboard)
+    expect(wrapper.find(Scoreboard)).toHaveLength(1);
   })
 
   it('Scoreboard disappears when the start button is clicked', () => {
     const wrapper = shallow(<App />)
-    const scoreboard = <Scoreboard />
+
     const button = wrapper.find('button')
     button.simulate('click')
-    expect(wrapper).not.toContainReact(scoreboard)
+    
+    expect(wrapper.find(Scoreboard)).toHaveLength(0);
   })
 
 })
