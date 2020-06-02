@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Question from "./question";
 import ScoreSummary from "./scoreSummary";
 import Scoreboard from "./scoreboard";
+import Timer from './timer'
+import ScoreForm from './scoreForm'
 
 export class Game extends Component {
   constructor(props) {
@@ -50,7 +52,7 @@ export class Game extends Component {
             totalIncorrect={this.state.totalIncorrect}
             gameLength={this.state.gameLength}
           />
-          {/* <ScoreForm score={this.state.score} formSent={this.formSent} /> */}
+          <ScoreForm score={this.state.score} formSent={this.formSent} />
         </div>
       );
     } else if (this.state.formSent) {
@@ -69,7 +71,7 @@ export class Game extends Component {
     } else {
       return (
         <div>
-          {/* <Timer gameLength={this.state.gameLength} complete={this.completeGame}/> */}
+          <Timer gameLength={this.state.gameLength} complete={this.completeGame}/>
           <p>Score: {this.state.score}</p>
           <Question
             shortcut={this.props.shortcuts[this.state.currentShortcut]}
