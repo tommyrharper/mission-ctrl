@@ -33,7 +33,7 @@ export class Question extends Component {
       });
       if (newKeys.length === this.props.shortcut.combo.length) {
         if (this.compareArrays(newKeys, this.props.shortcut.combo)) {
-          this.props.attempt(this.state.score, this.state.incorrectAttempts);
+          this.props.questionComplete(this.state.score, this.state.incorrectAttempts);
           this.reset()
         } else {
           this.handleIncorrect();
