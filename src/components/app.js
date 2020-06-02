@@ -9,8 +9,7 @@ export class App extends Component {
     super();
     this.state = {
       showGame: false,
-      shortcuts: macShortcuts,
-      autoDetectedOS: false
+      shortcuts: macShortcuts
     };
   }
 
@@ -20,6 +19,8 @@ export class App extends Component {
         autoDetectedOS: true,
         shorcuts: macShortcuts
       })
+    } else {
+      this.setState({shorcuts: windowsShortcuts})
     }
   }
 
@@ -27,57 +28,18 @@ export class App extends Component {
     this.setState({ showGame: true });
   };
 
-  chooseShortcuts = (set) => {
-    switch (set) {
-      case "mac":
-        this.setState({shortcuts: macShortcuts})
-        break;
-    
-      case "windows":
-        this.setState({shortcuts: windowsShortcuts})
-        break;
-
-      default:
-        break;
-    }
-  };
-
   render() {
     if (this.state.showGame) {
       return (
         <Game shortcuts={this.state.shortcuts} />
       )
-    } else if (this.state.autoDetectedOS) {
+    } else {
       return (
         <div>
           <button onClick={this.startGame}>Start</button>
           <Scoreboard />
         </div>
       )
-    } else {
-      return (
-        <div>
-          <p>Please select your operating system:</p>
-          <label for="mac">Mac</label>
-          <input
-            type="radio"
-            id="mac"
-            name="OS"
-            value="mac"
-            onClick={() => this.chooseShortcuts("mac")}
-          />
-          <label for="windows">Windows</label>
-          <input
-            type="radio"
-            id="windows"
-            name="OS"
-            value="windows"
-            onClick={() => this.chooseShortcuts("windows")}
-          />
-          <button onClick={this.startGame}>Start</button>
-          <Scoreboard />
-        </div>
-      );
     }
   }
 }
