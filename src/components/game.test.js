@@ -60,3 +60,18 @@ describe('Score form submitted', () => {
   });
 })
 
+it('tryAgain resets the game', () => {
+  const wrapper = shallow(<Game shortcuts={macShortcuts} />);
+  const instance = wrapper.instance();
+
+  instance.questionComplete(5, 0);
+
+  const score5 = <p>Score: 5</p>;
+  expect(wrapper).toContainReact(score5);
+
+  instance.tryAgain()
+
+  const score0 = <p>Score: 0</p>;
+  expect(wrapper).toContainReact(score0);
+});
+
