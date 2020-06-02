@@ -209,5 +209,3 @@ it(".compareArrays compares arrays", () => {
   expect(instance.compareArrays(arr2, arr3)).toBe(false)
   expect(instance.compareArrays(arr3, arr4)).toBe(true)
 });
-
-
