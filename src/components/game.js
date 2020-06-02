@@ -70,7 +70,7 @@ export class Game extends Component {
     } else {
       return (
         <div>
-          {/* <Timer gameLength={this.state.gameLength} complete={this.completeGame}/> */}
+          <Timer gameLength={this.state.gameLength} complete={this.completeGame}/>
           <p>Score: {this.state.score}</p>
           <Question
             shortcut={this.props.shortcuts[this.state.currentShortcut]}
