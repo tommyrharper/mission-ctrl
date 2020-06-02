@@ -99,7 +99,8 @@ export class Game extends Component {
         />
         {gameCompleteComponent}
         {questionComponent}
-        <Timer />
+        <Timer 
+        gameLength ={this.state.gameLength}/>
         
       </div>
     )
