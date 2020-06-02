@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import Question from './question'
 import GameComplete from './gameComplete'
 import Score from './score'
+import ScoreForm from './scoreForm'
 
 export class Game extends Component {
   constructor() {
     super()
     this.initialState = {
+      score: 0,
       level: 0,
       totalErrors: 0,
       totalCorrect: 0,
@@ -69,12 +71,14 @@ export class Game extends Component {
   render() {
     let gameCompleteComponent
     let questionComponent
+    let scoreFormComponent
     if (this.state.gameComplete) {
       gameCompleteComponent = <GameComplete 
                               correct={this.state.totalCorrect}
                               mistakes={this.state.totalErrors}
                               tryAgain={this.tryAgain}
                               />
+      scoreFormComponent = <ScoreForm score={this.state.score}/>
     } else {
       questionComponent = <Question 
                   shortcut={this.state.shortcutSet[this.state.currentShortcut]}
@@ -91,6 +95,7 @@ export class Game extends Component {
         resetScore={this.state.resetScore}
         gameRestarted={this.gameRestarted}
         />
+        {scoreFormComponent}
         {gameCompleteComponent}
         {questionComponent}
       </div>
