@@ -4,51 +4,69 @@ export class Timer extends Component {
   constructor(props){
     super(props)
     this.state = {
-      // seconds: 5,
-      centiseconds: 500
+      // set to 500 for now needs to be changed 6000 to equal a minute
+      gameLength: 500
+      
     }
   }
 
   componentDidMount () {
+    //let gameLength = this.state.seconds * 100
     this.centisecondInterval = setInterval(() => {
-      if (this.state.centiseconds > 0) {
+      if (this.state.gameLength > 0) {
         this.setState(prevState => ({
-          centiseconds: prevState.centiseconds - 1
+          gameLength: prevState.gameLength - 1
         }))
       }
-    }, 10)
-    if (this.state.seconds === 0) {
+   
+    if (this.state.gameLength === 0) {
       clearInterval(this.centisecondInterval)
+      this.props.complete()
     }
-    this.secInterval = setInterval(() => {
-      if (this.state.seconds > 0) {
-        this.setState(prevState => ({
-          seconds: prevState.seconds -1,
-        }))
-      } 
-      if (this.state.seconds === 0) {
-        clearInterval(this.secInterval)
-        // this.props.complete()
-      }
-    },1000)
+  }, 10)
+
+    
+  //   this.secInterval = setInterval(() => {
+  //     if (this.state.seconds > 0) {
+  //       this.setState(prevState => ({
+  //         seconds: prevState.seconds -1,
+  //       }))
+  //     } 
+  //     if (this.state.seconds === 0) {
+  //       clearInterval(this.secInterval)
+  //       // this.props.complete()
+  //     }
+  //   },1000)
     
   } 
 
-  
 
   render() {
     
-    let seconds = this.state.centiseconds.toString()
-    let newseconds = `${seconds[0]}: ${seconds[1]}${seconds[2]}`
+    let seconds = this.state.gameLength.toString()
+    let newseconds
+   
+    if (seconds[0] === undefined)
+    {
+      newseconds = `0:00`
+    }
+  
+     else if (seconds[1] === undefined ){
+      newseconds = `0:0${seconds[0]}`
+    } 
 
-    const formatted = <p>Time left: {newseconds} </p>
-    // let string = this.state.centiseconds.toString()
-    // console.log(string[0] +":" + string.splice(1, 2).join(""))
-    
+    else if (seconds[2] === undefined ){
+      newseconds = `0:${seconds[0]}${seconds[1]}`
+    }
+
+    else {
+      newseconds = `${seconds[0]}:${seconds[1]}${seconds[2]}`
+    }
+
     return (
-      <div>
-        {formatted}
-      </div>
+      <p>
+        {newseconds}
+      </p>
     )
   }
 }
