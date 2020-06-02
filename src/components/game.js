@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Question from "./question";
 import ScoreSummary from "./scoreSummary";
 import Scoreboard from "./scoreboard";
+import Timer from './timer'
 
 export class Game extends Component {
   constructor(props) {
