@@ -6,4 +6,10 @@ describe('scoreForm', () => {
   it('renders without crashing', () => {
     shallow(<ScoreForm/>)
   })
+
+  it('prompts the user to enter their name', () => {
+    const wrapper = shallow(<ScoreForm/>)
+    const namePrompt = <code>Enter your name: </code>
+    expect(wrapper).toContainReact(namePrompt)
+  })
 })
