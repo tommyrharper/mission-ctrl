@@ -7,8 +7,8 @@ it('renders without crashing', () => {
   shallow(<Game shortcuts={macShortcuts}/>)
 })
 
-it('it welcomes the user', () => {
+it('it displays the score', () => {
   const wrapper = shallow(<Game shortcuts={macShortcuts}/>)
-  const welcome = <h1>Mission-Ctrl</h1>
-  expect(wrapper).toContainReact(welcome)
+  const score = <p>Score: 0</p>
+  expect(wrapper).toContainReact(score)
 })
