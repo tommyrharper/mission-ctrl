@@ -8,7 +8,7 @@ it("renders without crashing", () => {
 
 it("starting time renders length of game", () => {
   const wrapper = shallow(<Timer />);
-  const startTime = <p>Time left: 5</p>;
+  const startTime = <p>5:00</p>;
   expect(wrapper).toContainReact(startTime);
 });
 
@@ -16,24 +16,23 @@ it("counts down by seconds", () => {
   jest.useFakeTimers();
 
   const wrapper = shallow(<Timer />);
-  const time = 5;
-  const newTime = <p>Time left: {time - 2}</p>;
+
   jest.advanceTimersByTime(2000);
-  expect(wrapper).toContainReact(newTime);
+  expect(wrapper).toContainReact(<p>3:00</p>);
 
   jest.clearAllTimers()
 });
 
 it("calls method when timer hits zero", () => {
   jest.useFakeTimers();
-  let mock = {
-    complete: function () { console.log("Hello")}
+  let mockComponent = {
+    complete: function () {}
   }
-  jest.spyOn(mock, "complete")
-  const wrapper = mount(<Timer complete={mock.complete} something={"Hello"}/>)
+  jest.spyOn(mockComponent, "complete")
+  const wrapper = mount(<Timer complete={mockComponent.complete} />)
 
   jest.advanceTimersByTime(5000);
-  expect(mock.complete).toBeCalled();
+  expect(mockComponent.complete).toBeCalled();
 
   jest.clearAllTimers()
 })
