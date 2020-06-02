@@ -28,3 +28,13 @@ describe("Game in progress", () => {
     expect(wrapper.find(Question)).toHaveLength(1);
   });
 });
+
+describe('Game Complete', () => {
+  it('has a try again button', () => {
+    const wrapper = shallow(<Game shortcuts={macShortcuts} />);
+    const instance = wrapper.instance();
+    instance.completeGame()
+
+    expect(wrapper.find('button')).toIncludeText('Try Again')
+  });
+})
