@@ -75,7 +75,7 @@ export class Game extends Component {
           <p>Score: {this.state.score}</p>
           <Question
             shortcut={this.props.shortcuts[this.state.currentShortcut]}
-            attempt={this.questionComplete}
+            questionComplete={this.questionComplete}
           />
         </div>
       );
