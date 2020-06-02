@@ -3,12 +3,12 @@ import Question from "./question.js";
 import { shallow, mount } from "enzyme";
 import QuestionFeedback from "./questionFeedback.js";
 
-it("renders without crashing, taking a shortcut to render and attempt method prop", () => {
-  let mockAttempt = {
-    attempt: function () {},
+it("renders without crashing, taking a shortcut to render and questionComplete method prop", () => {
+  let mockquestionComplete = {
+    questionComplete: function () {},
   };
   const mockShortcut = { name: "Copy", combo: ["c"] };
-  shallow(<Question shortcut={mockShortcut} attempt={mockAttempt.attempt} />);
+  shallow(<Question shortcut={mockShortcut} questionComplete={mockquestionComplete.questionComplete} />);
 });
 
 const mockKeyDown = (key) => {
@@ -23,35 +23,35 @@ const mockKeyUp = {
   preventDefault: function () {},
 };
 
-it("correct immediately calls attempt with score 5, incorrect 0", () => {
+it("correct immediately calls questionComplete with score 5, incorrect 0", () => {
   const mock = {
-    attempt: function () {},
+    questionComplete: function () {},
   };
-  jest.spyOn(mock, "attempt");
+  jest.spyOn(mock, "questionComplete");
 
   const mockShortcut = { name: "Copy", combo: ["c"] };
 
   const wrapper = shallow(
-    <Question shortcut={mockShortcut} attempt={mock.attempt} />
+    <Question shortcut={mockShortcut} questionComplete={mock.questionComplete} />
   );
   const instance = wrapper.instance();
 
   instance.keyDown(mockKeyDown("c"));
   instance.keyDown(mockKeyUp);
 
-  expect(mock.attempt).toBeCalledWith(5, 0);
+  expect(mock.questionComplete).toBeCalledWith(5, 0);
 });
 
-it("one incorrect, then correct, calls attempt with score 3, incorrect 1", () => {
+it("one incorrect, then correct, calls questionComplete with score 3, incorrect 1", () => {
   const mock = {
-    attempt: function () {},
+    questionComplete: function () {},
   };
-  jest.spyOn(mock, "attempt");
+  jest.spyOn(mock, "questionComplete");
 
   const mockShortcut = { name: "Copy", combo: ["c"] };
 
   const wrapper = shallow(
-    <Question shortcut={mockShortcut} attempt={mock.attempt} />
+    <Question shortcut={mockShortcut} questionComplete={mock.questionComplete} />
   );
   const instance = wrapper.instance();
 
@@ -59,41 +59,19 @@ it("one incorrect, then correct, calls attempt with score 3, incorrect 1", () =>
   instance.keyUp(mockKeyUp);
   instance.keyDown(mockKeyDown("c"));
 
-  expect(mock.attempt).toBeCalledWith(3, 1);
+  expect(mock.questionComplete).toBeCalledWith(3, 1);
 });
 
-it("two incorrect, then correct, calls attempt with score 1, incorrect 2", () => {
+it("two incorrect, then correct, calls questionComplete with score 1, incorrect 2", () => {
   const mock = {
-    attempt: function () {},
+    questionComplete: function () {},
   };
-  jest.spyOn(mock, "attempt");
+  jest.spyOn(mock, "questionComplete");
 
   const mockShortcut = { name: "Copy", combo: ["c"] };
 
   const wrapper = shallow(
-    <Question shortcut={mockShortcut} attempt={mock.attempt} />
-  );
-  const instance = wrapper.instance();
-
-  instance.keyDown(mockKeyDown("y"));
-  instance.keyUp(mockKeyUp);
-  instance.keyDown(mockKeyDown("x"));
-  instance.keyUp(mockKeyUp);
-  instance.keyDown(mockKeyDown("c"));
-
-  expect(mock.attempt).toBeCalledWith(1, 2);
-});
-
-it("three incorrect, then correct, calls attempt with score 0, incorrect 3", () => {
-  const mock = {
-    attempt: function () {},
-  };
-  jest.spyOn(mock, "attempt");
-
-  const mockShortcut = { name: "Copy", combo: ["c"] };
-
-  const wrapper = shallow(
-    <Question shortcut={mockShortcut} attempt={mock.attempt} />
+    <Question shortcut={mockShortcut} questionComplete={mock.questionComplete} />
   );
   const instance = wrapper.instance();
 
@@ -101,23 +79,45 @@ it("three incorrect, then correct, calls attempt with score 0, incorrect 3", () 
   instance.keyUp(mockKeyUp);
   instance.keyDown(mockKeyDown("x"));
   instance.keyUp(mockKeyUp);
-  instance.keyDown(mockKeyDown("x"));
-  instance.keyUp(mockKeyUp);
   instance.keyDown(mockKeyDown("c"));
 
-  expect(mock.attempt).toBeCalledWith(0, 3);
+  expect(mock.questionComplete).toBeCalledWith(1, 2);
 });
 
-it("four incorrect, then correct, calls attempt with score 0, incorrect 4", () => {
+it("three incorrect, then correct, calls questionComplete with score 0, incorrect 3", () => {
   const mock = {
-    attempt: function () {},
+    questionComplete: function () {},
   };
-  jest.spyOn(mock, "attempt");
+  jest.spyOn(mock, "questionComplete");
 
   const mockShortcut = { name: "Copy", combo: ["c"] };
 
   const wrapper = shallow(
-    <Question shortcut={mockShortcut} attempt={mock.attempt} />
+    <Question shortcut={mockShortcut} questionComplete={mock.questionComplete} />
+  );
+  const instance = wrapper.instance();
+
+  instance.keyDown(mockKeyDown("y"));
+  instance.keyUp(mockKeyUp);
+  instance.keyDown(mockKeyDown("x"));
+  instance.keyUp(mockKeyUp);
+  instance.keyDown(mockKeyDown("x"));
+  instance.keyUp(mockKeyUp);
+  instance.keyDown(mockKeyDown("c"));
+
+  expect(mock.questionComplete).toBeCalledWith(0, 3);
+});
+
+it("four incorrect, then correct, calls questionComplete with score 0, incorrect 4", () => {
+  const mock = {
+    questionComplete: function () {},
+  };
+  jest.spyOn(mock, "questionComplete");
+
+  const mockShortcut = { name: "Copy", combo: ["c"] };
+
+  const wrapper = shallow(
+    <Question shortcut={mockShortcut} questionComplete={mock.questionComplete} />
   );
   const instance = wrapper.instance();
 
@@ -131,7 +131,7 @@ it("four incorrect, then correct, calls attempt with score 0, incorrect 4", () =
   instance.keyUp(mockKeyUp);
   instance.keyDown(mockKeyDown("c"));
 
-  expect(mock.attempt).toBeCalledWith(0, 4);
+  expect(mock.questionComplete).toBeCalledWith(0, 4);
 });
 
 it("repeat keydowns are not counted", () => {
@@ -144,13 +144,13 @@ it("repeat keydowns are not counted", () => {
   };
 
   const mock = {
-    attempt: function () {},
+    questionComplete: function () {},
   };
 
   const mockShortcut = { name: "Copy", combo: ["c"] };
 
   const wrapper = shallow(
-    <Question shortcut={mockShortcut} attempt={mock.attempt} />
+    <Question shortcut={mockShortcut} questionComplete={mock.questionComplete} />
   );
   const instance = wrapper.instance();
 
@@ -164,12 +164,12 @@ it("repeat keydowns are not counted", () => {
 
 it("mounting subscribes event listeners", () => {
   const mock = {
-    attempt: function () {},
+    questionComplete: function () {},
   };
   const mockShortcut = { name: "Copy", combo: ["c"] };
   const spy = jest.spyOn(document, "addEventListener");
   const wrapper = mount(
-    <Question shortcut={mockShortcut} attempt={mock.attempt} />
+    <Question shortcut={mockShortcut} questionComplete={mock.questionComplete} />
   );
   expect(spy).toHaveBeenCalledTimes(2);
   spy.mockClear();
@@ -177,12 +177,12 @@ it("mounting subscribes event listeners", () => {
 
 it("unmounting removes event listeners", () => {
   const mock = {
-    attempt: function () {},
+    questionComplete: function () {},
   };
   const mockShortcut = { name: "Copy", combo: ["c"] };
   const spy = jest.spyOn(document, "removeEventListener");
   const wrapper = mount(
-    <Question shortcut={mockShortcut} attempt={mock.attempt} />
+    <Question shortcut={mockShortcut} questionComplete={mock.questionComplete} />
   );
   wrapper.unmount();
   expect(spy).toHaveBeenCalledTimes(2);
