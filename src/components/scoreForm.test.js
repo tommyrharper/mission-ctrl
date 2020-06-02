@@ -12,4 +12,10 @@ describe('scoreForm', () => {
     const namePrompt = <code>Enter your name: </code>
     expect(wrapper).toContainReact(namePrompt)
   })
+
+  it('allows user to enter name', () => {
+    const wrapper = shallow(<ScoreForm/>)
+    const inputBox = <input type="text"/>
+    expect(wrapper).toContainReact(inputBox)
+  })
 })

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Game from "./game";
 import Scoreboard from "./scoreboard"
+import ScoreForm from "./scoreForm"
 
 export class App extends Component {
   constructor() {
@@ -25,9 +26,9 @@ export class App extends Component {
 
   render() {
     let game
-    let button
     let scoreboard
     let toggle
+    let button
     if (this.state.show) {
       game = <Game operatingSystem={this.state.operatingSystem} />
     } else {
@@ -43,6 +44,7 @@ export class App extends Component {
     }
     return (
       <div>
+        <ScoreForm/>
         {toggle}
         {button}
         {game}

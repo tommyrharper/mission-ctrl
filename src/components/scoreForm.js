@@ -5,6 +5,7 @@ export class scoreForm extends Component {
     return (
       <div>
         <code>Enter your name: </code>
+        <input type="text"/>
       </div>
     )
   }
