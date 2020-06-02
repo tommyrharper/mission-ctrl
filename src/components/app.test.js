@@ -73,7 +73,7 @@ describe('Operating system toggle', () => {
 })
 
 describe('Automatic mac detection', () => {
-  it('Automatically checks if it is a mac', () => {
+  it('Does not display the radio buttons if mac autodetection occurs', () => {
     const wrapper = shallow(<App />)
     const instance = wrapper.instance()
     instance.setState({autoDetectedOS: true})
