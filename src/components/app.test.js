@@ -3,6 +3,8 @@ import App from './app.js'
 import { shallow } from 'enzyme'
 import Game from './game.js'
 import Scoreboard from './scoreboard.js'
+import macShortcuts from '../shortcuts/mac.js'
+import windowsShortcuts from '../shortcuts/windows.js'
 
 it('renders without crashing', () => {
   shallow(<App />)
@@ -50,23 +52,23 @@ describe('the start button', () => {
 describe('Operating system toggle', () => {
   it('Starts by default as mac', () => {
     const wrapper = shallow(<App />)
-    expect(wrapper.state().operatingSystem).toEqual("mac")
+    expect(wrapper.state().shortcuts).toEqual(macShortcuts)
   })
 
   it('Changes to windows when the toggle is clicked', () => {
     const wrapper = shallow(<App />)
     const windowsToggle = wrapper.find('#windows')
     windowsToggle.simulate('click')
-    expect(wrapper.state().operatingSystem).toEqual("windows")
+    expect(wrapper.state().shortcuts).toEqual(windowsShortcuts)
   })
 
-  it('Starts by default as mac', () => {
+  it('Goes back to mac after selecting windows then mac', () => {
     const wrapper = shallow(<App />)
     const windowsToggle = wrapper.find('#windows')
     windowsToggle.simulate('click')
     const macToggle = wrapper.find('#mac')
     macToggle.simulate('click')
-    expect(wrapper.state().operatingSystem).toEqual("mac")
+    expect(wrapper.state().shortcuts).toEqual(macShortcuts)
   })
 })
 
