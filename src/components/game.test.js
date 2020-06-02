@@ -22,4 +22,9 @@ describe("Game in progress", () => {
     expect(wrapper).toContainReact(score5);
   });
 
+  it("renders a question", () => {
+    const wrapper = shallow(<Game shortcuts={macShortcuts} />);
+
+    expect(wrapper.find(Question)).toHaveLength(1);
+  });
 });
