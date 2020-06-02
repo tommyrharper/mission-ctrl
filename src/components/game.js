@@ -1,50 +1,29 @@
 import React, { Component } from 'react'
 import Question from './question'
-import GameComplete from './gameComplete'
-import Score from './score'
+import ScoreSummary from './scoreSummary'
+import Scoreboard from './scoreboard'
 
 export class Game extends Component {
   constructor(props) {
     super(props)
     this.initialState = {
-      level: 0,
-      totalErrors: 0,
+      totalIncorrect: 0,
       totalCorrect: 0,
       currentShortcut: 0,
       gameComplete: false,
       gameLength: 5000,
-      failuresThisTurn: 0,
-      resetScore: false
+      score: 0
     }
     this.state = this.initialState
   }
 
-  componentDidMount = () => {
-    console.log('this.props.shortcuts', this.props.shortcuts)
-    this.startGame()
-  }
-
-  startGame = () => {
-    setTimeout(() => {
-      this.setState({
-        gameComplete: true
-      })
-    }, this.state.gameLength);
-  }
-
-  attempt = (correct) => {
-    if (correct) {
-      this.setState({
-        totalCorrect: this.state.totalCorrect + 1,
-        currentShortcut: this.randomShortcut(),
-        failuresThisTurn: 0
-      })
-    } else {
-      this.setState({
-        totalErrors: this.state.totalErrors + 1,
-        failuresThisTurn: this.state.failuresThisTurn + 1
-      })
-    }
+  questionComplete = (score, incorrectAttempts) => {
+    this.setState({
+      totalCorrect: this.state.totalCorrect + 1,
+      totalIncorrect: this.state.totalIncorrect + incorrectAttempts,
+      score: this.state.score + score,
+      currentShortcut: this.randomShortcut()
+    })
   }
 
   tryAgain = () => {
@@ -55,41 +34,52 @@ export class Game extends Component {
     this.startGame()
   }
 
-  gameRestarted = () => {
-    this.setState({
-      resetScore: false
-    })
+
+  completeGame = () => {
+    this.setState({gameComplete: true})
+  }
+
+  tryAgain = () => {
+    this.setState(this.initialState)
   }
 
   render() {
-    let gameCompleteComponent
-    let questionComponent
-    if (this.state.gameComplete) {
-      gameCompleteComponent = <GameComplete 
-                              correct={this.state.totalCorrect}
-                              mistakes={this.state.totalErrors}
-                              tryAgain={this.tryAgain}
-                              />
-    } else {
-      questionComponent = <Question 
-                  shortcut={this.props.shortcuts[this.state.currentShortcut]}
-                  attempt={this.attempt}
-                  />
-    }
-    return (
+    let tryAgain = <button onClick={this.tryAgain}>Try Again</button>
+    if (this.props.gameComplete) {
+      return(
+        <div>
+          {tryAgain}
+          <ScoreSummary 
+          score={this.state.score} 
+          totalCorrect={this.state.totalCorrect} 
+          totalIncorrect={this.state.totalIncorrect} 
+          gameLength={this.state.gameLength}/>
+          {/* <ScoreForm score={this.state.score}/> */}
+        </div>
+      )
+    } else if (this.state.formSent) {
+      return (
       <div>
-        <h1>Mission-Ctrl</h1>
-        <Score 
-        totalFailures={this.state.totalErrors}
-        failuresThisTurn={this.state.failuresThisTurn}
-        numberOfCorrect={this.state.totalCorrect}
-        resetScore={this.state.resetScore}
-        gameRestarted={this.gameRestarted}
-        />
-        {gameCompleteComponent}
-        {questionComponent}
+        {tryAgain}
+        <ScoreSummary 
+        score={this.state.score} 
+        totalCorrect={this.state.totalCorrect} 
+        totalIncorrect={this.state.totalIncorrect} 
+        gameLength={this.state.gameLength}/>
+        <Scoreboard />
       </div>
-    )
+      )
+    } else {
+      return(
+        <div>
+          {/* <Timer gameLength={this.state.gameLength} complete={this.completeGame}/> */}
+          <p>Score: {this.state.score}</p>
+          <Question 
+          shortcut={this.props.shortcuts[this.state.currentShortcut]}
+          attempt={this.questionComplete}/>
+        </div>
+      )
+    }
   }
 
   randomShortcut = () => {
