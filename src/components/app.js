@@ -9,7 +9,7 @@ export class App extends Component {
     super();
     this.state = {
       showGame: false,
-      operatingSystem: "mac",
+      shortcuts: macShortcuts,
     };
   }
 
@@ -18,31 +18,24 @@ export class App extends Component {
   };
 
   chooseShortcuts = (set) => {
-    this.setState({ operatingSystem: set });
-  };
-
-  render() {
-    let shortcuts
-    switch (this.state.operatingSystem) {
+    switch (set) {
       case "mac":
-        shortcuts = macShortcuts
+        this.setState({shortcuts: macShortcuts})
         break;
     
       case "windows":
-        shortcuts = windowsShortcuts
-        break;
-    
-      default:
+        this.setState({shortcuts: windowsShortcuts})
         break;
     }
-    let game;
-    let button;
-    let scoreboard;
-    let toggle;
+  };
+
+  render() {
     if (this.state.showGame) {
-      game = <Game shortcuts={shortcuts} />;
+      return (
+        <Game shortcuts={this.state.shortcuts} />
+      )
     } else {
-      toggle = (
+      return (
         <div>
           <p>Please select your operating system:</p>
           <label for="mac">Mac</label>
@@ -61,20 +54,11 @@ export class App extends Component {
             value="windows"
             onClick={() => this.chooseShortcuts("windows")}
           />
+          <button onClick={this.startGame}>Start</button>
+          <Scoreboard />
         </div>
       );
-      button = <button onClick={this.startGame}>Start</button>;
-      scoreboard = <Scoreboard />;
     }
-    return (
-      <div>
-        <h1>Mission-Ctrl</h1>
-        {toggle}
-        {button}
-        {game}
-        {scoreboard}
-      </div>
-    );
   }
 }
 
