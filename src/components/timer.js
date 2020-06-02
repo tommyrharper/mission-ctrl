@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import parent eventually 
 
 export class Timer extends Component {
   constructor(props){
@@ -9,7 +8,7 @@ export class Timer extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.secInterval = setInterval(() => {
       if (this.state.seconds > 0) {
         this.setState(prevState => ({
@@ -18,13 +17,14 @@ export class Timer extends Component {
       } 
       if (this.state.seconds === 0) {
         clearInterval(this.secInterval)
-        this.timesUp()
+        param1.complete()
+        // this.timesUp()
       }
-    },1000)
+    },1000, this.props)
   } 
 
   timesUp = () => {
-    console.log("times Up")
+    console.log(this.props)
   }
 
   render() {
@@ -32,6 +32,7 @@ export class Timer extends Component {
     return (
       <div>
         {seconds}
+        
       </div>
     )
   }
