@@ -68,6 +68,7 @@ export class App extends Component {
     }
     return (
       <div>
+        <h1>Mission-Ctrl</h1>
         {toggle}
         {button}
         {game}
