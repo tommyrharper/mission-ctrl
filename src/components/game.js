@@ -36,7 +36,7 @@ export class Game extends Component {
 
   render() {
     let tryAgain = <button onClick={this.tryAgain}>Try Again</button>;
-    if (this.state.gameComplete) {
+    if (this.state.gameComplete && !this.state.formSent) {
       return (
         <div>
           {tryAgain}
