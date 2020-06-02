@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import Question from './question'
 import GameComplete from './gameComplete'
 import Score from './score'
+// added for timer 
+import Timer from './timer'
 
 export class Game extends Component {
   constructor(props) {
@@ -17,6 +19,10 @@ export class Game extends Component {
       resetScore: false
     }
     this.state = this.initialState
+  }
+
+  changeGameComplete = () => {
+    this.setState({gameComplete: true})
   }
 
   componentDidMount = () => {
@@ -88,6 +94,9 @@ export class Game extends Component {
         />
         {gameCompleteComponent}
         {questionComponent}
+        <Timer 
+        gameLength ={this.state.gameLength}/>
+        
       </div>
     )
   }
