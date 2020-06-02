@@ -16,7 +16,7 @@ class ScoreForm extends Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault();
+    if (event) event.preventDefault();
     const newObj = {
       name: this.state.name,
       score: this.props.score,
