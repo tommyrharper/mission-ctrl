@@ -4,6 +4,7 @@ import { shallow } from "enzyme";
 import macShortcuts from "../shortcuts/mac";
 import Question from "./question.js";
 import ScoreSummary from "./scoreSummary.js";
+import Scoreboard from "./scoreboard.js";
 
 it("renders without crashing, taking shortcuts as prop", () => {
   shallow(<Game shortcuts={macShortcuts} />);
@@ -47,3 +48,15 @@ describe('Game Complete', () => {
     expect(wrapper.find(ScoreSummary)).toHaveLength(1);
   });
 })
+
+describe('Score form submitted', () => {
+  it('renders a ScoreSummary and Scoreboard', () => {
+    const wrapper = shallow(<Game shortcuts={macShortcuts} />);
+    const instance = wrapper.instance();
+    instance.formSent()
+
+    expect(wrapper.find(ScoreSummary)).toHaveLength(1);
+    expect(wrapper.find(Scoreboard)).toHaveLength(1);
+  });
+})
+

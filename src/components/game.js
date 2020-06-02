@@ -34,6 +34,10 @@ export class Game extends Component {
     this.setState(this.initialState);
   };
 
+  formSent = () => {
+    this.setState({ formSent: true });
+  };
+
   render() {
     let tryAgain = <button onClick={this.tryAgain}>Try Again</button>;
     if (this.state.gameComplete && !this.state.formSent) {
@@ -46,7 +50,7 @@ export class Game extends Component {
             totalIncorrect={this.state.totalIncorrect}
             gameLength={this.state.gameLength}
           />
-          {/* <ScoreForm score={this.state.score}/> */}
+          {/* <ScoreForm score={this.state.score} formSent={this.formSent} /> */}
         </div>
       );
     } else if (this.state.formSent) {
