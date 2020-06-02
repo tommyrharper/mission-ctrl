@@ -10,7 +10,17 @@ export class App extends Component {
     this.state = {
       showGame: false,
       shortcuts: macShortcuts,
+      autoDetectedOS: false
     };
+  }
+
+  componentDidMount = () => {
+    if (navigator.platform.includes("Mac")) {
+      this.setState({
+        autoDetectedOS: true,
+        shorcuts: macShortcuts
+      })
+    }
   }
 
   startGame = () => {
@@ -33,6 +43,13 @@ export class App extends Component {
     if (this.state.showGame) {
       return (
         <Game shortcuts={this.state.shortcuts} />
+      )
+    } else if (this.state.autoDetectedOS) {
+      return (
+        <div>
+          <button onClick={this.startGame}>Start</button>
+          <Scoreboard />
+        </div>
       )
     } else {
       return (
