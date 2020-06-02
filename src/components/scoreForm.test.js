@@ -1,5 +1,5 @@
 import React from 'react'
-import ScoreForm from './ScoreForm.js'
+import ScoreForm from './scoreForm.js'
 import { shallow } from 'enzyme'
 
 describe('ScoreForm', () => {
@@ -7,17 +7,14 @@ describe('ScoreForm', () => {
     shallow(<ScoreForm/>)
   })
 
-  xit('prompts the user to enter their name', () => {
+  it('prompts the user to enter their name', () => {
     const wrapper = shallow(<ScoreForm/>)
-    const namePrompt = <code>Enter your name: </code>
-    expect(wrapper).toContainReact(namePrompt)
+    expect(wrapper).toIncludeText("Name:")
   })
-
-  xit('has input for user to enter name', () => {
+  
+  it('has input for user to enter name', () => {
     const wrapper = shallow(<ScoreForm/>)
-    const inputBox = <input type="text"/>
-    expect(wrapper).toContainReact(inputBox)
+    expect(wrapper).toContainMatchingElement('input[name="name"]')
   })
 })
 
-//coverage needs ramping up
