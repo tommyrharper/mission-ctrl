@@ -72,4 +72,12 @@ describe('Operating system toggle', () => {
   })
 })
 
-
+describe('Automatic mac detection', () => {
+  it('Automatically checks if it is a mac', () => {
+    const wrapper = shallow(<App />)
+    const instance = wrapper.instance()
+    instance.setState({autoDetectedOS: true})
+    const label = <label for="mac">Mac</label>
+    expect(wrapper).not.toContainReact(label)
+  })
+})
