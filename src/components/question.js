@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import QuestionFeedback from "./questionFeedback";
 
 const INITIAL_SCORE = 5;
+const SCORE_DECREMENT = 2;
 
 export class Question extends Component {
   constructor(props) {
@@ -49,7 +50,7 @@ export class Question extends Component {
   };
 
   handleIncorrect = () => {
-    let newScore = this.state.score - 2;
+    let newScore = this.state.score - SCORE_DECREMENT;
     if (newScore < 0) newScore = 0;
     this.setState({
       incorrectAttempts: this.state.incorrectAttempts + 1,
