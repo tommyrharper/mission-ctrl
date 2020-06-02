@@ -2,6 +2,8 @@ import React from "react";
 import ScoreForm from "./scoreForm.js";
 import { shallow } from "enzyme";
 import axios from "axios";
+import waitUntil from 'async-wait-until';
+
 
 describe("ScoreForm", () => {
   it("renders without crashing, taking props of a formSent func and a score", () => {
@@ -34,15 +36,53 @@ describe("ScoreForm", () => {
 
     const wrapper = shallow(<ScoreForm />);
 
-    wrapper.simulate("change", {
-      name: "Dave",
+    const form = wrapper.find("form");
+    form.simulate("change", {
+        name: "Dave",
     });
 
-    wrapper.simulate("submit");
+    form.simulate("submit");
 
     expect(spy).toHaveBeenCalledTimes(1);
 
     spy.mockClear();
+    done();
+  });
+
+  it("calls props.formSent when post is completed", async (done) => {
+    const mock = {
+      formSent: function () {},
+    };
+    const formSentSpy = jest.spyOn(mock, "formSent")
+
+    const mockSuccessResponse = {
+      _id: "5ed66ed66a02e00017173cf3",
+      name: "Clive",
+      score: 75,
+      date: "2020-06-02T15:23:02.650Z",
+      __v: 0,
+    };
+    const mockJsonPromise = Promise.resolve(mockSuccessResponse);
+    const mockFetchPromise = Promise.resolve({
+      json: () => mockJsonPromise,
+    });
+    const axiosSpy = jest
+      .spyOn(axios, "post")
+      .mockImplementation(() => mockFetchPromise);
+
+    const wrapper = shallow(<ScoreForm formSent={mock.formSent} score={5} />);
+
+    const form = wrapper.find("form");
+    form.simulate("change", {
+        name: "Dave",
+    });
+
+    form.simulate("submit");
+    await waitUntil(() => wrapper.state('isSubmitting') === false)
+
+    expect(formSentSpy).toHaveBeenCalledTimes(1);
+
+    axiosSpy.mockClear();
     done();
   });
 });
