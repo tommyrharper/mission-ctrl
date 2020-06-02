@@ -26,8 +26,14 @@ describe('ScoreSummary', () => {
 
   it('Returns my accuracy for the round as a percentage', () => {
     const wrapper = shallow(<ScoreSummary score={15} totalCorrect={3} totalIncorrect={5} gameLength={3000}/>)
-    const accuracy = <li>Round Accuracy: 37.5%</li>
+    const accuracy = <li>Round Accuracy: 37.50%</li>
     expect(wrapper).toContainReact(accuracy)
+  })
+
+  it('Returns my average speed for the game', () => {
+    const wrapper = shallow(<ScoreSummary score={15} totalCorrect={3} totalIncorrect={5} gameLength={3000}/>)
+    const speed = <li>Average speed: 1.00 seconds/question</li>
+    expect(wrapper).toContainReact(speed)
   })
 
   it('Returns my average speed for the game', () => {
