@@ -33,7 +33,7 @@ it("calls method when timer hits zero", () => {
   jest.spyOn(mock, "complete")
   const wrapper = mount(<Timer complete={mock.complete} something={"Hello"}/>)
 
-  jest.advanceTimersByTime(6000);
+  jest.advanceTimersByTime(5000);
   expect(mock.complete).toBeCalled();
 
   jest.clearAllTimers()
