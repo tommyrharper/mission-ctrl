@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 
 export class ScoreSummary extends Component {
-  constructor(props){
-    super(props)
-  }
   calculateAccuracy = () => {
     return ((this.props.totalCorrect / (this.props.totalCorrect + this.props.totalIncorrect)) * 100).toFixed(2)
   }
