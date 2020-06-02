@@ -21,7 +21,7 @@ export class Game extends Component {
       currentShortcut: 0,
       //gameComplete!
       gameComplete: false,
-      //gameLength: 5000,
+      gameLength: 5000,
       failuresThisTurn: 0,
       resetScore: false
     }
@@ -35,9 +35,11 @@ export class Game extends Component {
   }
 
 
-  // changeGameCompleteStatus = () => {
-  //   this.setState({gameComplete: true})
-  // }
+  isGameComplete = () => {
+      this.setState({
+        gameComplete: true
+      })
+  }
 
   startGame = () => {
     setTimeout(() => {
@@ -93,7 +95,10 @@ export class Game extends Component {
                   attempt={this.attempt}
                   />
     }
-    timerComponent = <Timer timesUp={this.timesUp}/>
+    timerComponent = <Timer timesUp={this.isGameComplete}/>
+    // name should be gameComplete 
+    // times up = prop 
+    // this.isGameComplete - method in THIS componant
     return (
       <div>
         <h1>Mission-Ctrl</h1>
@@ -106,8 +111,8 @@ export class Game extends Component {
         />
         {gameCompleteComponent}
         {questionComponent}
-        {/* {timerComponent} */}
-        {/* {this.state.gameComplete} */}
+        {timerComponent}
+        {this.state.gameComplete}
         
         
       </div>

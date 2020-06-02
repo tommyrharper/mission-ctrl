@@ -19,24 +19,23 @@ export class Timer extends Component {
       } 
       if (this.state.seconds === 0) {
         clearInterval(this.secInterval)
-        this.timesUp()
+        this.props.timesUp()
       }
     },1000)
   } 
 
-  timesUp = () => {
-    //this.changeGameCompleteStatus()
-  }
+  // timesUp = () => {
+  //   this.props.timesUp(true)
+  // }
 
   render() {
     const seconds = <p>Time left: {this.state.seconds}</p>
     return (
-      <div>
         {seconds}
-        {/* {this.props.timesUp} */}
-      </div>
     )
   }
 }
 
 export default Timer
+
+// game needs could send its own time to make more oop 
