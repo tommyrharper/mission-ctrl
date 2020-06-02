@@ -17,10 +17,10 @@ export class App extends Component {
     if (navigator.platform.includes("Mac")) {
       this.setState({
         autoDetectedOS: true,
-        shorcuts: macShortcuts
+        shortcuts: macShortcuts
       })
     } else {
-      this.setState({shorcuts: windowsShortcuts})
+      this.setState({shortcuts: windowsShortcuts})
     }
   }
 
