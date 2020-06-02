@@ -26,15 +26,6 @@ export class Game extends Component {
     })
   }
 
-  tryAgain = () => {
-    this.setState(this.initialState)
-    this.setState({
-      resetScore: true
-    })
-    this.startGame()
-  }
-
-
   completeGame = () => {
     this.setState({gameComplete: true})
   }
@@ -45,7 +36,7 @@ export class Game extends Component {
 
   render() {
     let tryAgain = <button onClick={this.tryAgain}>Try Again</button>
-    if (this.props.gameComplete) {
+    if (this.props.gameComplete && !this.state.formSent) {
       return(
         <div>
           {tryAgain}
