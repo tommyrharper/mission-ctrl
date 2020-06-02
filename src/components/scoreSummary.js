@@ -5,10 +5,10 @@ export class ScoreSummary extends Component {
     super(props)
   }
   calculateAccuracy = () => {
-    return (this.props.totalCorrect / (this.props.totalCorrect + this.props.totalIncorrect)) * 100
+    return ((this.props.totalCorrect / (this.props.totalCorrect + this.props.totalIncorrect)) * 100).toFixed(2)
   }
   calculateSpeed = () => {
-    return Math.round((this.props.gameLength/this.props.totalCorrect)/1000).toFixed(2);
+    return ((this.props.gameLength/this.props.totalCorrect)/1000).toFixed(2);
   }
   render() {
     let accuracy = this.calculateAccuracy()
