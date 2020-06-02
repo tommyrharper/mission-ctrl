@@ -1,6 +1,6 @@
 import React from "react";
 import Timer from "./timer.js";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import { act } from "react-dom/test-utils";
 
 jest.useFakeTimers();
@@ -20,17 +20,22 @@ it("counts down by seconds", () => {
   const wrapper = shallow(<Timer />);
   const time = 5;
   const newTime = <p>Time left: {time - 2}</p>;
-  act(() => {
-    jest.advanceTimersByTime(2000);
-  });
+  jest.advanceTimersByTime(2000);
   expect(wrapper).toContainReact(newTime);
 });
 
-xit("timer ends at zero to call method", () => {
-  const wrapper = shallow(<Timer />);
-  const timesUp = 
-  act(() => {
-    jest.advanceTimersByTime(5000);
-  });
-  expect(timesUp).toHaveBeenCalled;
-});
+// xit("timer ends at zero to call method", () => {
+//   const wrapper = shallow(<Timer seconds={3}/>);
+//   jest.advanceTimersByTime(4000);
+//   expect(timesUp).toBeCalled();
+// });
+
+it("calls method when timer hits zero", () => {
+  let mock = {
+    complete: function () {}
+  }
+  jest.spyOn(mock, "complete")
+  const wrapper = shallow(<Timer complete={mock.complete}/>)
+  jest.advanceTimersByTime(5000);
+  expect(mock.complete).toBeCalled();
+})

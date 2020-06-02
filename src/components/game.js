@@ -27,6 +27,10 @@ export class Game extends Component {
     this.state = this.initialState
   }
 
+  changeGameComplete = () => {
+    this.setState({gameComplete: true})
+  }
+
   componentDidMount = () => {
     this.startGame()
   }
