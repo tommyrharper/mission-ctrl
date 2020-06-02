@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
 
+const CONVERT_TO_CENTISECONDS  = 10
+
 export class Timer extends Component {
   constructor(props){
     super(props)
     this.state = {
-      // set to 500 for now needs to be changed 6000 to equal a minute
-      gameLength: 500
-      
+      gameLength: this.props.gameLength/CONVERT_TO_CENTISECONDS
     }
   }
 
   componentDidMount () {
-    //let gameLength = this.state.seconds * 100
     this.centisecondInterval = setInterval(() => {
       if (this.state.gameLength > 0) {
         this.setState(prevState => ({
@@ -19,25 +18,11 @@ export class Timer extends Component {
         }))
       }
    
-    if (this.state.gameLength === 0) {
-      clearInterval(this.centisecondInterval)
-      this.props.complete()
-    }
-  }, 10)
-
-    
-  //   this.secInterval = setInterval(() => {
-  //     if (this.state.seconds > 0) {
-  //       this.setState(prevState => ({
-  //         seconds: prevState.seconds -1,
-  //       }))
-  //     } 
-  //     if (this.state.seconds === 0) {
-  //       clearInterval(this.secInterval)
-  //       // this.props.complete()
-  //     }
-  //   },1000)
-    
+      if (this.state.gameLength === 0) {
+        clearInterval(this.centisecondInterval)
+        this.props.complete()
+      }
+    }, 10)
   } 
 
 
