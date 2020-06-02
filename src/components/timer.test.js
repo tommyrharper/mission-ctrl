@@ -3,39 +3,38 @@ import Timer from "./timer.js";
 import { shallow, mount } from "enzyme";
 import { act } from "react-dom/test-utils";
 
-jest.useFakeTimers();
-
 it("renders without crashing", () => {
   shallow(<Timer />);
 });
 
 it("starting time renders length of game", () => {
   const wrapper = shallow(<Timer />);
-  const time = 5;
-  const startTime = <p>Time left: {time}</p>;
+  const startTime = <p>Time left: 5</p>;
   expect(wrapper).toContainReact(startTime);
 });
 
 it("counts down by seconds", () => {
+  jest.useFakeTimers();
+
   const wrapper = shallow(<Timer />);
   const time = 5;
   const newTime = <p>Time left: {time - 2}</p>;
   jest.advanceTimersByTime(2000);
   expect(wrapper).toContainReact(newTime);
+
+  jest.clearAllTimers()
 });
 
-// xit("timer ends at zero to call method", () => {
-//   const wrapper = shallow(<Timer seconds={3}/>);
-//   jest.advanceTimersByTime(4000);
-//   expect(timesUp).toBeCalled();
-// });
-
 it("calls method when timer hits zero", () => {
+  jest.useFakeTimers();
   let mock = {
-    complete: function () {}
+    complete: function () { console.log("Hello")}
   }
   jest.spyOn(mock, "complete")
-  const wrapper = shallow(<Timer complete={mock.complete}/>)
-  jest.advanceTimersByTime(5000);
+  const wrapper = mount(<Timer complete={mock.complete} something={"Hello"}/>)
+
+  jest.advanceTimersByTime(6000);
   expect(mock.complete).toBeCalled();
+
+  jest.clearAllTimers()
 })
