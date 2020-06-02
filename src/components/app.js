@@ -26,6 +26,9 @@ export class App extends Component {
       case "windows":
         this.setState({shortcuts: windowsShortcuts})
         break;
+
+      default:
+        break;
     }
   };
 
