@@ -4,18 +4,12 @@ import GameComplete from './gameComplete'
 import Score from './score'
 
 export class Game extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.initialState = {
       level: 0,
       totalErrors: 0,
       totalCorrect: 0,
-      shortcutSet: [
-        { name: "Copy", combo: ['Control', 'c'] },
-        { name: "Cut", combo: ['Control', 'x'] },
-        { name: "Undo", combo: ['Control', 'z'] },
-        { name: "Paste", combo: ['Control', 'v'] },
-      ],
       currentShortcut: 0,
       gameComplete: false,
       gameLength: 5000,
@@ -26,6 +20,7 @@ export class Game extends Component {
   }
 
   componentDidMount = () => {
+    console.log('this.props.shortcuts', this.props.shortcuts)
     this.startGame()
   }
 
@@ -77,7 +72,7 @@ export class Game extends Component {
                               />
     } else {
       questionComponent = <Question 
-                  shortcut={this.state.shortcutSet[this.state.currentShortcut]}
+                  shortcut={this.props.shortcuts[this.state.currentShortcut]}
                   attempt={this.attempt}
                   />
     }
@@ -98,8 +93,8 @@ export class Game extends Component {
   }
 
   randomShortcut = () => {
-    const shortcutSet = this.state.shortcutSet
-    return Math.floor(Math.random() * shortcutSet.length)
+    const shortcuts = this.props.shortcuts
+    return Math.floor(Math.random() * shortcuts.length)
   }
 }
 
