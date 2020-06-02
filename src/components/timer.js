@@ -17,15 +17,10 @@ export class Timer extends Component {
       } 
       if (this.state.seconds === 0) {
         clearInterval(this.secInterval)
-        param1.complete()
-        // this.timesUp()
+        this.props.complete()
       }
-    },1000, this.props)
+    },1000)
   } 
-
-  timesUp = () => {
-    console.log(this.props)
-  }
 
   render() {
     const seconds = <p>Time left: {this.state.seconds}</p>
