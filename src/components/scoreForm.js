@@ -16,6 +16,7 @@ class ScoreForm extends Component {
   }
 
   handleSubmit(event) {
+    this.setState({ isSubmitting: true });
     if (event) event.preventDefault();
     const newObj = {
       name: this.state.name,
@@ -23,25 +24,33 @@ class ScoreForm extends Component {
     };
     axios
       .post("http://mission-ctrl-node.herokuapp.com/scores", newObj)
-      .then((res) => {})
+      .then((res) => res.json())
+      .then((json) => {
+        this.setState({ isSubmitting: false });
+        this.props.formSent();
+      })
       .catch((error) => {
-        console.log(error);
+        this.setState({ error: true });
       });
     this.setState({ name: "" });
   }
 
   render() {
+    const errorMessage = this.state.error ? <p>There was an error submitting the score</p> : null
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label htmlForm="name">Name:</label>
-        <input
-          name="name"
-          type="text"
-          value={this.state.name}
-          onChange={this.handleChange}
-        />
-        <input type="submit" value="Submit" />
-      </form>
+      <div>
+        {errorMessage}
+        <form onSubmit={this.handleSubmit}>
+          <label htmlForm="name">Name:</label>
+          <input
+            name="name"
+            type="text"
+            value={this.state.name}
+            onChange={this.handleChange}
+          />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
     );
   }
 }
