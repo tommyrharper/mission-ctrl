@@ -33,13 +33,19 @@ export class Game extends Component {
     } else {
       this.setState({comboStreak: 0})
     }
-    if (this.state.comboStreak >= COMBO_MULTIPLIER) {
-      if (this.state.comboStreak % COMBO_MULTIPLIER === 0) {
-        this.setState({
-          score: this.state.score + this.calculateComboStreak()
-        })
-      }
+    if (this.minimumComboStreak() && this.reachedComboMultiplier()) {
+      this.setState({
+        score: this.state.score + this.calculateComboStreak()
+      })
     }
+  }
+
+  minimumComboStreak = () => {
+    return this.state.comboStreak >= COMBO_MULTIPLIER
+  }
+
+  reachedComboMultiplier = () => {
+    return this.state.comboStreak % COMBO_MULTIPLIER === 0
   }
 
   questionComplete = (score, incorrectAttempts) => {
