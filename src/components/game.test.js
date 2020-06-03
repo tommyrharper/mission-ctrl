@@ -104,13 +104,22 @@ describe('Combo streak', () => {
     expect(instance.state.score).toEqual(45)
   })
 
-  it('Displays the combo streak on the screen', () => {
+  it('Displays the combo streak on the screen for +5', () => {
     const wrapper = shallow(<Game shortcuts={macShortcuts} />)
     const instance = wrapper.instance()
     for (let i= 0; i < 3; i++) {
       instance.questionComplete(5, 0)
     }
     expect(wrapper).toIncludeText("Combo Streak +5")
+  })
+
+  it('Displays the combo streak on the screen for + 10', () => {
+    const wrapper = shallow(<Game shortcuts={macShortcuts} />)
+    const instance = wrapper.instance()
+    for (let i= 0; i < 6; i++) {
+      instance.questionComplete(5, 0)
+    }
+    expect(wrapper).toIncludeText("Combo Streak +10")
   })
 })
 
