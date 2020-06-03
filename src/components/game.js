@@ -90,10 +90,15 @@ export class Game extends Component {
         </div>
       );
     } else {
+      let comboStreak
+      if (this.state.comboStreak === 3) {
+        comboStreak = "Combo Streak +5"
+      }
       return (
         <div>
           <Timer gameLength={this.state.gameLength} complete={this.completeGame}/>
           <p>Score: {this.state.score}</p>
+          {comboStreak}
           <Question
             shortcut={this.props.shortcuts[this.state.currentShortcut]}
             questionComplete={this.questionComplete}
