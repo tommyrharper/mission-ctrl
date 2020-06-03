@@ -62,19 +62,26 @@ table {
   color: $highlight;
 }
 
-.score-indication {
-  color: $neon-green;
-  animation-name: fade-out;
-  animation-duration: 2s;
-  animation-iteration-count: 1;
-  opacity: 0;
+.score-counter {
+  display: flex;
+  .score-indication {
+    margin-left: 1ch;
+    color: $neon-green;
+    animation-name: fade-out;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    opacity: 0;
+    position: relative;
+  }
 }
 
 @keyframes fade-out {
   from {
     opacity: 1;
+    transform: translateY(0);
   }
   to {
     opacity: 0;
+    transform: translateY(-1em);
   }
 }

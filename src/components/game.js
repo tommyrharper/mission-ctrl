@@ -5,8 +5,8 @@ import Scoreboard from "./scoreboard";
 import Timer from "./timer";
 import ScoreForm from "./scoreForm";
 
-const COMBO_MULTIPLIER = 3
-const COMBO_BONUS = 5
+const COMBO_MULTIPLIER = 3;
+const COMBO_BONUS = 5;
 
 export class Game extends Component {
   constructor(props) {
@@ -19,44 +19,44 @@ export class Game extends Component {
       totalCorrect: 0,
       currentShortcut: 0,
       gameComplete: false,
-      gameLength: 10000,
+      gameLength: 5000,
       score: 0,
-      comboStreak: 0
+      comboStreak: 0,
     };
     this.state = this.initialState;
   }
 
   calculateComboStreak = () => {
-    return ((this.state.comboStreak/COMBO_MULTIPLIER)*COMBO_BONUS)
-  }
-  
+    return (this.state.comboStreak / COMBO_MULTIPLIER) * COMBO_BONUS;
+  };
+
   addComboStreak = (incorrectAttempts) => {
     if (incorrectAttempts === 0) {
-      this.setState({comboStreak: this.state.comboStreak + 1})
+      this.setState({ comboStreak: this.state.comboStreak + 1 });
     } else {
-      this.setState({comboStreak: 0})
+      this.setState({ comboStreak: 0 });
     }
     if (this.minimumComboStreak() && this.reachedComboMultiplier()) {
-      const comboBonus = this.calculateComboStreak()
-      this.setState({ comboIndication: null })
-      this.setState({ comboIndication: comboBonus })
+      const comboBonus = this.calculateComboStreak();
+      this.setState({ comboIndication: null });
+      this.setState({ comboIndication: comboBonus });
       this.setState({
-        score: this.state.score + comboBonus
-      })
+        score: this.state.score + comboBonus,
+      });
     }
-  }
+  };
 
   minimumComboStreak = () => {
-    return this.state.comboStreak >= COMBO_MULTIPLIER
-  }
+    return this.state.comboStreak >= COMBO_MULTIPLIER;
+  };
 
   reachedComboMultiplier = () => {
-    return this.state.comboStreak % COMBO_MULTIPLIER === 0
-  }
+    return this.state.comboStreak % COMBO_MULTIPLIER === 0;
+  };
 
   questionComplete = (score, incorrectAttempts) => {
     this.scoreIndication(score);
-    this.addComboStreak(incorrectAttempts)
+    this.addComboStreak(incorrectAttempts);
 
     this.setState({
       totalCorrect: this.state.totalCorrect + 1,
@@ -83,19 +83,22 @@ export class Game extends Component {
 
   scoreIndication = (score) => {
     this.setState({
-      scoreIndication: null
+      scoreIndication: null,
     });
     this.setState({
       scoreIndication: score,
-    })
-  }
+    });
+  };
 
   render() {
     const scoreIndication = this.state.scoreIndication ? (
-      <span className="score-indication"> + {this.state.scoreIndication}</span>
+      <div className="score-indication"> + {this.state.scoreIndication}</div>
     ) : null;
     const comboIndication = this.state.comboIndication ? (
-      <span className="score-indication"> + {this.state.comboIndication} Combo!</span>
+      <div className="score-indication">
+        {" "}
+        + {this.state.comboIndication} Combo!
+      </div>
     ) : null;
     const tryAgain = (
       <button className="btn" onClick={this.tryAgain}>
@@ -129,9 +132,9 @@ export class Game extends Component {
         </div>
       );
     } else {
-      let comboStreak
+      let comboStreak;
       if (this.state.comboStreak % 3 === 0) {
-        comboStreak = "Combo Streak +" + this.calculateComboStreak()
+        comboStreak = "Combo Streak +" + this.calculateComboStreak();
       }
       return (
         <div>
@@ -139,9 +142,11 @@ export class Game extends Component {
             gameLength={this.state.gameLength}
             complete={this.completeGame}
           />
-          <p>
-            Score: {this.state.score} {scoreIndication} {comboIndication}
-          </p>
+          <div className="score-counter">
+            <div>Score: {this.state.score}</div>
+            {scoreIndication}
+            {comboIndication}
+          </div>
           <Question
             shortcut={this.props.shortcuts[this.state.currentShortcut]}
             questionComplete={this.questionComplete}
