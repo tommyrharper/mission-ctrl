@@ -1,5 +1,5 @@
 const windowsShortcuts = [
-  { name: "Show Command Palette", combo: ['Control', 'Shift', 'p'] },
+  { name: "Show Command Palette", combo: ['Control', 'Shift', 'P'] },
   { name: "Quick Open, Go to File..", combo: ['Control', 'p'] },
   { name: "User Settings", combo: ['Control', ','] },
   { name: "Cut Line (empty selection)", combo: ['Control', 'x'] },
@@ -24,7 +24,7 @@ const windowsShortcuts = [
   { name: "Find previous", combo: ['Shift', 'F3'] },
   { name: "Open File..", combo: ['Control', 'o'] },
   { name: "Save", combo: ['Control', 's'] },
-  { name: "Reopen closed editor", combo: ['Control', 'Shift', 't'] },
+  { name: "Reopen closed editor", combo: ['Control', 'Shift', 'T'] },
   { name: "Show integrated terminal", combo: ['Control', '`'] },
   { name: "Toggle full screen", combo: ['F11'] },
   { name: "Create new terminal", combo: ['Control', 'Shift', '`'] },
