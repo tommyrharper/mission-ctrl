@@ -27,10 +27,10 @@ export class ScoreSummary extends Component {
           </tr>
           <tr>
             <td>Round Accuracy:</td>
-            <td>{accuracy}</td>
+            <td>{accuracy}%</td>
           </tr>
           <tr>
-            <td>Average speed:</td>
+            <td>Average Speed:</td>
             <td>{speed} seconds/question</td>
           </tr>
         </tbody>
