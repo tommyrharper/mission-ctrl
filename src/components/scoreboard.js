@@ -40,12 +40,29 @@ export class Scoreboard extends Component {
     } else if (!isLoaded) {
       content = <h3>Loading...</h3>;
     } else {
-      const scoresMapped = scores.map((score) => (
-        <li key={score._id}>
-          {score.name} {moment(score.date).format("DD/MM/Y")} {score.score}
-        </li>
+      const scoresMapped = scores.map((score, index) => (
+        <tr>
+          <td>{index + 1}.</td>
+          <td>{score.name}</td>
+          <td>{moment(score.date).format("DD/MM/Y")}</td>
+          <td>{score.score}</td>
+        </tr>
       ));
-      content = <ol>{scoresMapped}</ol>;
+      content = (
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {scoresMapped}
+          </tbody>
+        </table>
+      );
     }
     return (
       <div>
@@ -55,5 +72,7 @@ export class Scoreboard extends Component {
     );
   }
 }
+
+
 
 export default Scoreboard;
