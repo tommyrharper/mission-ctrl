@@ -55,8 +55,8 @@ export class Game extends Component {
             totalIncorrect={this.state.totalIncorrect}
             gameLength={this.state.gameLength}
           />
-          {tryAgain}
           <ScoreForm score={this.state.score} formSent={this.formSent} />
+          {tryAgain}
         </div>
       );
     } else if (this.state.formSent) {
