@@ -5,6 +5,9 @@ import Scoreboard from "./scoreboard";
 import Timer from "./timer";
 import ScoreForm from "./scoreForm";
 
+const COMBO_MULTIPLIER = 3
+const COMBO_BONUS = 5
+
 export class Game extends Component {
   constructor(props) {
     super(props);
@@ -17,12 +20,40 @@ export class Game extends Component {
       gameComplete: false,
       gameLength: 10000,
       score: 0,
+      comboStreak: 0
     };
     this.state = this.initialState;
   }
 
+  calculateComboStreak = () => {
+    return ((this.state.comboStreak/COMBO_MULTIPLIER)*COMBO_BONUS)
+  }
+  
+  addComboStreak = (incorrectAttempts) => {
+    if (incorrectAttempts === 0) {
+      this.setState({comboStreak: this.state.comboStreak + 1})
+    } else {
+      this.setState({comboStreak: 0})
+    }
+    if (this.minimumComboStreak() && this.reachedComboMultiplier()) {
+      this.setState({
+        score: this.state.score + this.calculateComboStreak()
+      })
+    }
+  }
+
+  minimumComboStreak = () => {
+    return this.state.comboStreak >= COMBO_MULTIPLIER
+  }
+
+  reachedComboMultiplier = () => {
+    return this.state.comboStreak % COMBO_MULTIPLIER === 0
+  }
+
   questionComplete = (score, incorrectAttempts) => {
     this.scoreIndication(score);
+    this.addComboStreak(incorrectAttempts)
+
     this.setState({
       totalCorrect: this.state.totalCorrect + 1,
       totalIncorrect: this.state.totalIncorrect + incorrectAttempts,
@@ -91,6 +122,10 @@ export class Game extends Component {
         </div>
       );
     } else {
+      let comboStreak
+      if (this.state.comboStreak % 3 === 0) {
+        comboStreak = "Combo Streak +" + this.calculateComboStreak()
+      }
       return (
         <div>
           <Timer
