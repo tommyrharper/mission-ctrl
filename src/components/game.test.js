@@ -75,3 +75,51 @@ it('tryAgain resets the game', () => {
   expect(wrapper).toContainReact(score0);
 });
 
+describe('Combo streak', () => {
+  it('Adds +5 if you get 3 correct in a row', () => {
+    const wrapper = shallow(<Game shortcuts={macShortcuts} />)
+    const instance = wrapper.instance()
+    instance.questionComplete(5, 0)
+    instance.questionComplete(5, 0)
+    instance.questionComplete(5, 0)
+    expect(instance.state.score).toEqual(20)
+  })
+
+  it('No combostreak if you get two correct in a row', () => {
+    const wrapper = shallow(<Game shortcuts={macShortcuts} />)
+    const instance = wrapper.instance()
+    instance.questionComplete(5, 0)
+    instance.questionComplete(5, 0)
+    instance.questionComplete(3, 1)
+    instance.questionComplete(5, 0)
+    expect(instance.state.score).toEqual(18)
+  })
+  
+  it('Adds +15 if you get 6 correct in a row', () => {
+    const wrapper = shallow(<Game shortcuts={macShortcuts} />)
+    const instance = wrapper.instance()
+    for (let i = 0; i < 6; i++) {
+      instance.questionComplete(5, 0)
+    }
+    expect(instance.state.score).toEqual(45)
+  })
+
+  it('Displays the combo streak on the screen for +5', () => {
+    const wrapper = shallow(<Game shortcuts={macShortcuts} />)
+    const instance = wrapper.instance()
+    for (let i= 0; i < 3; i++) {
+      instance.questionComplete(5, 0)
+    }
+    expect(wrapper).toIncludeText("Combo Streak +5")
+  })
+
+  it('Displays the combo streak on the screen for + 10', () => {
+    const wrapper = shallow(<Game shortcuts={macShortcuts} />)
+    const instance = wrapper.instance()
+    for (let i= 0; i < 6; i++) {
+      instance.questionComplete(5, 0)
+    }
+    expect(wrapper).toIncludeText("Combo Streak +10")
+  })
+})
+
