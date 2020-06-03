@@ -36,10 +36,12 @@ class ScoreForm extends Component {
   }
 
   render() {
-    const errorMessage = this.state.error ? <p>There was an error submitting the score</p> : null
+    const errorMessage = this.state.error;
     return (
       <div>
-        {errorMessage}
+        {errorMessage
+        ? <p>There was an error submitting the score</p> 
+        : null}
         <form onSubmit={this.handleSubmit}>
           <label htmlForm="name">Name:</label>
           <input
