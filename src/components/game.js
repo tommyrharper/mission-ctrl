@@ -9,6 +9,7 @@ export class Game extends Component {
   constructor(props) {
     super(props);
     this.initialState = {
+      scoreIndication: null,
       totalIncorrect: 0,
       totalCorrect: 0,
       currentShortcut: 0,
@@ -21,6 +22,7 @@ export class Game extends Component {
 
   questionComplete = (score, incorrectAttempts) => {
     this.setState({
+      scoreIndication: score,
       totalCorrect: this.state.totalCorrect + 1,
       totalIncorrect: this.state.totalIncorrect + incorrectAttempts,
       score: this.state.score + score,
@@ -44,6 +46,7 @@ export class Game extends Component {
   };
 
   render() {
+    const scoreIndication = this.state.scoreIndication ? <span className="score-indication"> + {this.state.scoreIndication}</span> : null
     let tryAgain = (
       <button className="btn" onClick={this.tryAgain}>
         Try Again
@@ -82,7 +85,7 @@ export class Game extends Component {
             gameLength={this.state.gameLength}
             complete={this.completeGame}
           />
-          <p>Score: {this.state.score}</p>
+          <p>Score: {this.state.score} {scoreIndication} </p>  
           <Question
             shortcut={this.props.shortcuts[this.state.currentShortcut]}
             questionComplete={this.questionComplete}
