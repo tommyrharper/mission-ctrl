@@ -29,9 +29,13 @@ export class App extends Component {
   };
 
   render() {
+    let button = <button onClick={this.Again}>Home</button>
     if (this.state.showGame) {
       return (
-        <Game shortcuts={this.state.shortcuts} />
+        <div>
+          <Game shortcuts={this.state.shortcuts} />
+          {button}
+        </div>
       )
     } else {
       return (

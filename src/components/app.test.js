@@ -30,7 +30,9 @@ describe('the start button', () => {
     const button = wrapper.find('button')
     button.simulate('click')
 
-    expect(wrapper.find('button')).toHaveLength(0);
+    expect(wrapper).not.toHaveText('Start');
+    
+
   })
 
   it('Scoreboard is on the start page', () => {
@@ -65,5 +67,19 @@ describe('Automatic mac detection', () => {
     instance.setState({autoDetectedOS: true})
     const label = <label for="mac">Mac</label>
     expect(wrapper).not.toContainReact(label)
+  })
+})
+
+describe('Home button', () => {
+  it('appears when the game has been started', () => {
+    const wrapper = shallow(<App />)
+    const button = wrapper.find('button')
+    button.simulate('click')
+    expect(wrapper.find('button')).toIncludeText('Home')
+  })
+
+  it('does not appear on the home page', () => {
+    const wrapper = shallow(<App />)
+    expect(wrapper.find('button')).not.toIncludeText('Home')
   })
 })
