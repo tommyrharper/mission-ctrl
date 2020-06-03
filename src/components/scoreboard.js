@@ -40,11 +40,15 @@ export class Scoreboard extends Component {
     } else if (!isLoaded) {
       content = <h3>Loading...</h3>;
     } else {
-      content = <ol>{scores.map((score) => (
-          <li key={score._id}>
-             {score.name} {moment(score.date).format("DD/MM/Y")} {score.score}
-          </li>
-      ))}</ol>;
+      content = (
+        <ol>
+          {scores.map((score) => (
+            <li key={score._id}>
+              {score.name} {moment(score.date).format("DD/MM/Y")} {score.score}
+            </li>
+          ))}
+        </ol>
+      );
     }
 
     return (
