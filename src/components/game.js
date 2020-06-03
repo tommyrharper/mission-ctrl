@@ -16,7 +16,7 @@ export class Game extends Component {
       totalCorrect: 0,
       currentShortcut: 0,
       gameComplete: false,
-      gameLength: 10000,
+      gameLength: 60000,
       score: 0,
       comboStreak: 0
     };
@@ -101,7 +101,7 @@ export class Game extends Component {
       );
     } else {
       let comboStreak
-      if (this.state.comboStreak % 3 === 0) {
+      if (this.state.comboStreak % 3 === 0 && this.state.comboStreak !== 0) {
         comboStreak = "Combo Streak +" + this.calculateComboStreak()
       }
       return (
