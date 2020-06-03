@@ -79,7 +79,6 @@ describe("ScoreForm", () => {
     form.simulate("submit");
     await waitUntil(() => wrapper.state("isSubmitting") === false);
 
-    console.log("formSentSpy", formSentSpy);
     expect(formSentSpy).toHaveBeenCalled();
 
     axiosSpy.mockClear();
