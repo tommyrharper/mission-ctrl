@@ -1,17 +1,23 @@
-$highlight: #F98424;
+$highlight: #f98424;
 
 body {
   color: white;
   background-color: black;
-  font-family: 'Press Start 2P', cursive;
+  font-family: "Press Start 2P", cursive;
 }
 
-input, button {
-  font-family: 'Press Start 2P', cursive;
+input,
+button {
+  font-family: "Press Start 2P", cursive;
+}
+
+.text-field {
+  padding: 0.5em 1em;
+  border: 0;
 }
 
 .btn {
-  padding: .5em 1em;
+  padding: 0.5em 1em;
   border-radius: 0;
   border: 0;
   background-color: white;
@@ -23,7 +29,7 @@ input, button {
 
 h1 {
   span {
-    padding: .2em;
+    padding: 0.2em;
     display: inline-block;
     color: black;
     background: white;
@@ -33,7 +39,7 @@ h1 {
 table {
   tbody {
     td {
-      padding: .5em 1em;
+      padding: 0.5em 1em;
     }
   }
 }
