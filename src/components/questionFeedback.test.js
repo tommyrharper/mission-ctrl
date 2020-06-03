@@ -21,3 +21,11 @@ it("informs the user they have given an incorrect answer", () => {
   expect(wrapper).toContainReact(wrongAnswer)
 })
 
+it("displays command instead of meta", () => {
+  const combo = ["Meta", "c"]
+  const wrapper = shallow(<QuestionFeedback incorrectAttempts={3} combo={combo} />);
+  const phrase = <h3>Try this: Command + c</h3>
+  expect(wrapper).toContainReact(phrase);
+});
+
+
