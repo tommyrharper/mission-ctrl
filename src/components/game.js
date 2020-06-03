@@ -5,6 +5,9 @@ import Scoreboard from "./scoreboard";
 import Timer from './timer'
 import ScoreForm from './scoreForm'
 
+const COMBO_MULTIPLIER = 3
+const COMBO_BONUS = 5
+
 export class Game extends Component {
   constructor(props) {
     super(props);
@@ -26,10 +29,11 @@ export class Game extends Component {
     } else {
       this.setState({comboStreak: 0})
     }
-
-    if (this.state.comboStreak >= 3) {
-      if (this.state.comboStreak % 3 === 0) {
-        this.setState({score: this.state.score + ((this.state.comboStreak/3)*5)})
+    if (this.state.comboStreak >= COMBO_MULTIPLIER) {
+      if (this.state.comboStreak % COMBO_MULTIPLIER === 0) {
+        this.setState({
+          score: this.state.score + ((this.state.comboStreak/COMBO_MULTIPLIER)*COMBO_BONUS)
+        })
       }
     }
   }
