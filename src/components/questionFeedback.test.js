@@ -27,5 +27,3 @@ it("displays command instead of meta", () => {
   const phrase = <h3>Try this: Command + c</h3>
   expect(wrapper).toContainReact(phrase);
 });
-
-
