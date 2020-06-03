@@ -26,12 +26,10 @@ class ScoreForm extends Component {
       .post("http://mission-ctrl-node.herokuapp.com/scores", newObj)
       .then((res) => {
         const data = res.data
-        console.log('data', data)
         this.setState({ isSubmitting: false });
         this.props.formSent();
       })
       .catch((error) => {
-        console.log('error', error)
         this.setState({ error: true });
       });
     this.setState({ name: "" });
@@ -47,12 +45,13 @@ class ScoreForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="name">Name:</label>
           <input
+            className="text-field"
             name="name"
             type="text"
             value={this.state.name}
             onChange={this.handleChange}
           />
-          <input type="submit" value="Submit Score" />
+          <input className="btn" type="submit" value="Submit Score" />
         </form>
       </div>
     );
