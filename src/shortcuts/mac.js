@@ -30,8 +30,8 @@ const macShortcuts = [
   { name: "Create new terminal", combo: ['Control', 'Shift', '`'] },
   { name: "Zoom in", combo: ['Meta', '='] },
   { name: "Zoom out", combo: ['Shift', 'Meta', '-'] },
-  { name: "Expand selection", combo: ['Control', 'Shift', 'Meta', 'ArrowLeft'] },
-  { name: "Shrink selection", combo: ['Control', 'Shift', 'Meta', 'ArrowRight'] },
+  { name: "Expand selection", combo: ['Control', 'Shift', 'Meta', 'ArrowRight'] },
+  { name: "Shrink selection", combo: ['Control', 'Shift', 'Meta', 'ArrowLeft'] },
   { name: "Toggle Sidebar visability", combo: ['Meta', 'b']}
 ]
 
