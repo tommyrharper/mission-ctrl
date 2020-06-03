@@ -82,4 +82,13 @@ describe('Home button', () => {
     const wrapper = shallow(<App />)
     expect(wrapper.find('button')).not.toIncludeText('Home')
   })
+
+  it('returns the user to the home page', () => {
+    const wrapper = shallow(<App />)
+    const button = wrapper.find('button')
+    button.simulate('click')
+    const homeButton = wrapper.find('button')
+    homeButton.simulate('click')
+    expect(wrapper.find('button')).toIncludeText('Start')
+  })
 })

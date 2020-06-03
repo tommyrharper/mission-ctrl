@@ -28,8 +28,12 @@ export class App extends Component {
     this.setState({ showGame: true });
   };
 
+  sendToHome = () => {
+    this.setState({ showGame: false})
+  }
+
   render() {
-    let button = <button onClick={this.Again}>Home</button>
+    let button = <button onClick={this.sendToHome}>Home</button>
     if (this.state.showGame) {
       return (
         <div>
