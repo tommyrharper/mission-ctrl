@@ -13,6 +13,7 @@ export class Game extends Component {
     super(props);
     this.initialState = {
       scoreIndication: null,
+      comboIndication: null,
       formSent: false,
       totalIncorrect: 0,
       totalCorrect: 0,
@@ -36,8 +37,11 @@ export class Game extends Component {
       this.setState({comboStreak: 0})
     }
     if (this.minimumComboStreak() && this.reachedComboMultiplier()) {
+      const comboBonus = this.calculateComboStreak()
+      this.setState({ comboIndication: null })
+      this.setState({ comboIndication: comboBonus })
       this.setState({
-        score: this.state.score + this.calculateComboStreak()
+        score: this.state.score + comboBonus
       })
     }
   }
@@ -90,6 +94,9 @@ export class Game extends Component {
     const scoreIndication = this.state.scoreIndication ? (
       <span className="score-indication"> + {this.state.scoreIndication}</span>
     ) : null;
+    const comboIndication = this.state.scoreIndication ? (
+      <span className="score-indication"> + {this.state.comboIndication} COMBO!</span>
+    ) : null;
     const tryAgain = (
       <button className="btn" onClick={this.tryAgain}>
         Try Again
@@ -133,7 +140,7 @@ export class Game extends Component {
             complete={this.completeGame}
           />
           <p>
-            Score: {this.state.score} {scoreIndication}{" "}
+            Score: {this.state.score} {scoreIndication} {comboIndication}
           </p>
           <Question
             shortcut={this.props.shortcuts[this.state.currentShortcut]}
