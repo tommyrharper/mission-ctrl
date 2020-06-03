@@ -132,10 +132,6 @@ export class Game extends Component {
         </div>
       );
     } else {
-      let comboStreak;
-      if (this.state.comboStreak % 3 === 0) {
-        comboStreak = "Combo Streak +" + this.calculateComboStreak();
-      }
       return (
         <div>
           <Timer
