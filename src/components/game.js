@@ -13,13 +13,26 @@ export class Game extends Component {
       totalCorrect: 0,
       currentShortcut: 0,
       gameComplete: false,
-      gameLength: 5000,
+      gameLength: 10000,
       score: 0,
+      comboStreak: 0
     };
     this.state = this.initialState;
   }
 
   questionComplete = (score, incorrectAttempts) => {
+    if (incorrectAttempts === 0) {
+      this.setState({comboStreak: this.state.comboStreak + 1})
+    } else {
+      this.setState({comboStreak: 0})
+    }
+
+    if (this.state.comboStreak >= 3) {
+      if (this.state.comboStreak % 3 === 0) {
+        this.setState({score: this.state.score + ((this.state.comboStreak/3)*5)})
+      }
+    }
+
     this.setState({
       totalCorrect: this.state.totalCorrect + 1,
       totalIncorrect: this.state.totalIncorrect + incorrectAttempts,
