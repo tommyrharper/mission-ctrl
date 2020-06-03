@@ -19,7 +19,7 @@ export class Game extends Component {
       totalCorrect: 0,
       currentShortcut: 0,
       gameComplete: false,
-      gameLength: 5000,
+      gameLength: 60000,
       score: 0,
       comboStreak: 0,
     };
