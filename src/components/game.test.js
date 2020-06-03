@@ -106,7 +106,7 @@ describe('Combo streak', () => {
     for (let i= 0; i < 3; i++) {
       instance.questionComplete(5, 0)
     }
-    expect(wrapper).toIncludeText("+ 5 COMBO")
+    expect(wrapper).toIncludeText("+ 5 Combo!")
   })
 
   it('Displays the combo streak on the screen for + 10', () => {
@@ -115,7 +115,7 @@ describe('Combo streak', () => {
     for (let i= 0; i < 6; i++) {
       instance.questionComplete(5, 0)
     }
-    expect(wrapper).toIncludeText("+ 10 COMBO")
+    expect(wrapper).toIncludeText("+ 10 Combo!")
   })
 })
 

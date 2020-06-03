@@ -94,8 +94,8 @@ export class Game extends Component {
     const scoreIndication = this.state.scoreIndication ? (
       <span className="score-indication"> + {this.state.scoreIndication}</span>
     ) : null;
-    const comboIndication = this.state.scoreIndication ? (
-      <span className="score-indication"> + {this.state.comboIndication} COMBO!</span>
+    const comboIndication = this.state.comboIndication ? (
+      <span className="score-indication"> + {this.state.comboIndication} Combo!</span>
     ) : null;
     const tryAgain = (
       <button className="btn" onClick={this.tryAgain}>
