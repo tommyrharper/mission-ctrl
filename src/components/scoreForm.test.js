@@ -63,7 +63,7 @@ describe("ScoreForm", () => {
         __v: 0,
       },
     };
-    // const mockJsonPromise = Promise.resolve(mockSuccessResponse);
+
     const mockFetchPromise = Promise.resolve(mockSuccessResponse)
     const axiosSpy = jest
       .spyOn(axios, "post")
