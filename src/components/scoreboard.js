@@ -11,6 +11,12 @@ export class Scoreboard extends Component {
   }
 
   componentDidMount() {
+    if (this.props.scoreId) {
+      this.setState({
+        scoreId: this.props.scoreId,
+      });
+    }
+
     const url = "http://mission-ctrl-node.herokuapp.com/scores";
     fetch(url)
       .then((result) => result.json())
@@ -31,6 +37,28 @@ export class Scoreboard extends Component {
       );
   }
 
+  scoreRow = (score, index) => {
+    if (score._id === this.state.scoreId) {
+      return (
+        <tr key={score._id} className="score highlight">
+          <td>{index + 1}.</td>
+          <td>{score.name}</td>
+          <td>{moment(score.date).format("DD/MM/Y")}</td>
+          <td>{score.score}</td>
+        </tr>
+      );
+    } else {
+      return (
+        <tr key={score._id} className="score">
+          <td>{index + 1}.</td>
+          <td>{score.name}</td>
+          <td>{moment(score.date).format("DD/MM/Y")}</td>
+          <td>{score.score}</td>
+        </tr>
+      );
+    }
+  }
+
   render() {
     const { error, isLoaded, scores } = this.state;
 
@@ -40,14 +68,7 @@ export class Scoreboard extends Component {
     } else if (!isLoaded) {
       content = <h3>Loading...</h3>;
     } else {
-      const scoresMapped = scores.map((score, index) => (
-        <tr key={score._id} className="score">
-          <td>{index + 1}.</td>
-          <td>{score.name}</td>
-          <td>{moment(score.date).format("DD/MM/Y")}</td>
-          <td>{score.score}</td>
-        </tr>
-      ));
+      const scoresMapped = scores.map(this.scoreRow);
       content = (
         <table>
           <thead>
@@ -58,9 +79,7 @@ export class Scoreboard extends Component {
               <th>Score</th>
             </tr>
           </thead>
-          <tbody>
-            {scoresMapped}
-          </tbody>
+          <tbody>{scoresMapped}</tbody>
         </table>
       );
     }
@@ -72,7 +91,5 @@ export class Scoreboard extends Component {
     );
   }
 }
-
-
 
 export default Scoreboard;
