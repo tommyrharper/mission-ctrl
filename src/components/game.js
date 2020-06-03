@@ -91,8 +91,8 @@ export class Game extends Component {
       );
     } else {
       let comboStreak
-      if (this.state.comboStreak === 3) {
-        comboStreak = "Combo Streak +5"
+      if (this.state.comboStreak % 3 === 0) {
+        comboStreak = "Combo Streak +" + ((this.state.comboStreak/COMBO_MULTIPLIER)*COMBO_BONUS)
       }
       return (
         <div>
