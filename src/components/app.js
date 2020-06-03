@@ -36,7 +36,8 @@ export class App extends Component {
     } else {
       return (
         <div>
-          <button onClick={this.startGame}>Start</button>
+          <h1>MISSION<span>CTRL</span></h1>
+          <button className="btn" onClick={this.startGame}>Start</button>
           <Scoreboard />
         </div>
       )
