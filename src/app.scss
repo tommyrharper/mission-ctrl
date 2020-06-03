@@ -61,6 +61,7 @@ table {
   animation-name: fade-out;
   animation-duration: 2s;
   animation-iteration-count: 1;
+  opacity: 0;
 }
 
 @keyframes fade-out {
