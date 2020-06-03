@@ -53,7 +53,7 @@ describe("Scoreboard", () => {
     expect(score2).toIncludeText("Jim")
     expect(score2).toIncludeText("80")
     expect(score2).toIncludeText("29/05/2020")
-    asd
+
     global.fetch.mockClear();
   });
 
