@@ -37,6 +37,11 @@ export class App extends Component {
       return (
         <div>
           <h1>MISSION<span>CTRL</span></h1>
+          <div>
+          <p>Welcome, pilot.</p>
+          <p>Your mission is to get as far as you can by entering correct keyboard shortcuts.</p>
+          <p>Ready for blast off?</p>
+          </div>
           <button className="btn" onClick={this.startGame}>Start</button>
           <Scoreboard />
         </div>
