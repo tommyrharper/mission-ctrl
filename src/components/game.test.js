@@ -85,5 +85,16 @@ describe('Combo streak', () => {
     expect(instance.state.score).toEqual(20)
   })
   
+  it('Adds +15 if you get 6 correct in a row', () => {
+    const wrapper = shallow(<Game shortcuts={macShortcuts} />)
+    const instance = wrapper.instance()
+    instance.questionComplete(5, 0)
+    instance.questionComplete(5, 0)
+    instance.questionComplete(5, 0)
+    instance.questionComplete(5, 0)
+    instance.questionComplete(5, 0)
+    instance.questionComplete(5, 0)
+    expect(instance.state.score).toEqual(45)
+  })
 })
 
