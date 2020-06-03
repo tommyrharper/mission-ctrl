@@ -10,19 +10,20 @@ export class Game extends Component {
     super(props);
     this.initialState = {
       scoreIndication: null,
+      formSent: false,
       totalIncorrect: 0,
       totalCorrect: 0,
       currentShortcut: 0,
       gameComplete: false,
-      gameLength: 5000,
+      gameLength: 10000,
       score: 0,
     };
     this.state = this.initialState;
   }
 
   questionComplete = (score, incorrectAttempts) => {
+    this.scoreIndication(score);
     this.setState({
-      scoreIndication: score,
       totalCorrect: this.state.totalCorrect + 1,
       totalIncorrect: this.state.totalIncorrect + incorrectAttempts,
       score: this.state.score + score,
@@ -39,15 +40,26 @@ export class Game extends Component {
   };
 
   formSent = (id) => {
-    this.setState({ 
+    this.setState({
       formSent: true,
-      scoreId: id
+      scoreId: id,
     });
   };
 
+  scoreIndication = (score) => {
+    this.setState({
+      scoreIndication: null
+    });
+    this.setState({
+      scoreIndication: score,
+    })
+  }
+
   render() {
-    const scoreIndication = this.state.scoreIndication ? <span className="score-indication"> + {this.state.scoreIndication}</span> : null
-    let tryAgain = (
+    const scoreIndication = this.state.scoreIndication ? (
+      <span className="score-indication"> + {this.state.scoreIndication}</span>
+    ) : null;
+    const tryAgain = (
       <button className="btn" onClick={this.tryAgain}>
         Try Again
       </button>
@@ -85,7 +97,9 @@ export class Game extends Component {
             gameLength={this.state.gameLength}
             complete={this.completeGame}
           />
-          <p>Score: {this.state.score} {scoreIndication} </p>  
+          <p>
+            Score: {this.state.score} {scoreIndication}{" "}
+          </p>
           <Question
             shortcut={this.props.shortcuts[this.state.currentShortcut]}
             questionComplete={this.questionComplete}
