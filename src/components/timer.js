@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 const CONVERT_TO_SECONDS = 1000;
+const CENTISECOND = 10
 
 export class Timer extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ export class Timer extends Component {
     this.centisecondInterval = setInterval(() => {
       if (this.state.gameLength > 0) {
         this.setState((prevState) => ({
-          gameLength: prevState.gameLength - 1,
+          gameLength: prevState.gameLength - CENTISECOND,
         }));
       }
 
