@@ -31,7 +31,10 @@ export class App extends Component {
   render() {
     if (this.state.showGame) {
       return (
-        <Game shortcuts={this.state.shortcuts} />
+        <div>
+          <h1>MISSION<span>CTRL</span></h1>
+          <Game shortcuts={this.state.shortcuts} />
+        </div>
       )
     } else {
       return (
