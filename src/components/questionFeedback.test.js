@@ -21,10 +21,27 @@ it("informs the user they have given an incorrect answer", () => {
   expect(wrapper).toContainReact(wrongAnswer)
 })
 
-it('gives the user a hint after they have given two incorrect answers', () => {
-  const combo = ["Control", "c"]
-  const wrapper = shallow(<QuestionFeedback incorrectAttempts={2} combo={combo}/>)
-  const hint = "Hint: Control + ?" 
-  expect(wrapper).toIncludeText(hint)
+describe('gives user a hint', () => {
+  it('after they have given two incorrect answers', () => {
+    const combo = ["Control", "c"]
+    const wrapper = shallow(<QuestionFeedback incorrectAttempts={2} combo={combo}/>)
+    const hint = "Hint: Control + ?" 
+    expect(wrapper).toIncludeText(hint)
+  })
+
+  it('after they have given two incorrect answers for a combo that is three keys long', () => {
+    const combo = ["Control", "c", "y"]
+    const wrapper = shallow(<QuestionFeedback incorrectAttempts={2} combo={combo}/>)
+    const hint = "Hint: Control + ? + ?" 
+    expect(wrapper).toIncludeText(hint)
+  })
+  
+  it('after they have given two incorrect answers for a combo that is four keys long', () => {
+    const combo = ["Control", "c", "y", "t"]
+    const wrapper = shallow(<QuestionFeedback incorrectAttempts={2} combo={combo}/>)
+    const hint = "Hint: Control + ? + ? + ?" 
+    expect(wrapper).toIncludeText(hint)
+  })
 })
+
 
