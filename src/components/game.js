@@ -36,8 +36,11 @@ export class Game extends Component {
     this.setState(this.initialState);
   };
 
-  formSent = () => {
-    this.setState({ formSent: true });
+  formSent = (id) => {
+    this.setState({ 
+      formSent: true,
+      scoreId: id
+    });
   };
 
   render() {
@@ -69,7 +72,7 @@ export class Game extends Component {
             gameLength={this.state.gameLength}
           />
           {tryAgain}
-          <Scoreboard />
+          <Scoreboard scoreId={this.state.scoreId} />
         </div>
       );
     } else {
