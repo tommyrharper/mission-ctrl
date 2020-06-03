@@ -16,6 +16,11 @@ button {
   border: 0;
 }
 
+p {
+  max-width: 50ch;
+  line-height: 1.5em;
+}
+
 .btn {
   margin: .5em;
   padding: 0.5em 1em;
