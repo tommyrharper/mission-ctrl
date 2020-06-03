@@ -27,7 +27,7 @@ class ScoreForm extends Component {
       .then((res) => {
         const data = res.data
         this.setState({ isSubmitting: false });
-        this.props.formSent();
+        this.props.formSent(data._id);
       })
       .catch((error) => {
         this.setState({ error: true });
