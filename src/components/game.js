@@ -92,11 +92,10 @@ export class Game extends Component {
 
   render() {
     const scoreIndication = this.state.scoreIndication ? (
-      <div className="score-indication"> + {this.state.scoreIndication}</div>
+      <div className="score-indication">+ {this.state.scoreIndication}</div>
     ) : null;
     const comboIndication = this.state.comboIndication ? (
       <div className="score-indication">
-        {" "}
         + {this.state.comboIndication} Combo!
       </div>
     ) : null;
