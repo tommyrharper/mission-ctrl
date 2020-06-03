@@ -23,7 +23,11 @@ export class Game extends Component {
     this.state = this.initialState;
   }
 
-  comboStreak = (incorrectAttempts) => {
+  calculateComboStreak = () => {
+    return ((this.state.comboStreak/COMBO_MULTIPLIER)*COMBO_BONUS)
+  }
+  
+  addComboStreak = (incorrectAttempts) => {
     if (incorrectAttempts === 0) {
       this.setState({comboStreak: this.state.comboStreak + 1})
     } else {
@@ -32,14 +36,14 @@ export class Game extends Component {
     if (this.state.comboStreak >= COMBO_MULTIPLIER) {
       if (this.state.comboStreak % COMBO_MULTIPLIER === 0) {
         this.setState({
-          score: this.state.score + ((this.state.comboStreak/COMBO_MULTIPLIER)*COMBO_BONUS)
+          score: this.state.score + this.calculateComboStreak()
         })
       }
     }
   }
 
   questionComplete = (score, incorrectAttempts) => {
-    this.comboStreak(incorrectAttempts)
+    this.addComboStreak(incorrectAttempts)
 
     this.setState({
       totalCorrect: this.state.totalCorrect + 1,
@@ -92,7 +96,7 @@ export class Game extends Component {
     } else {
       let comboStreak
       if (this.state.comboStreak % 3 === 0) {
-        comboStreak = "Combo Streak +" + ((this.state.comboStreak/COMBO_MULTIPLIER)*COMBO_BONUS)
+        comboStreak = "Combo Streak +" + this.calculateComboStreak()
       }
       return (
         <div>
