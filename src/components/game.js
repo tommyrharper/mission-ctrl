@@ -20,7 +20,7 @@ export class Game extends Component {
     this.state = this.initialState;
   }
 
-  questionComplete = (score, incorrectAttempts) => {
+  comboStreak = (incorrectAttempts) => {
     if (incorrectAttempts === 0) {
       this.setState({comboStreak: this.state.comboStreak + 1})
     } else {
@@ -32,6 +32,10 @@ export class Game extends Component {
         this.setState({score: this.state.score + ((this.state.comboStreak/3)*5)})
       }
     }
+  }
+
+  questionComplete = (score, incorrectAttempts) => {
+    this.comboStreak(incorrectAttempts)
 
     this.setState({
       totalCorrect: this.state.totalCorrect + 1,
