@@ -28,7 +28,7 @@ describe("Scoreboard", () => {
         _id: "5ed22fd8c72b923f7f701986",
         name: "Jim",
         score: 80,
-        date: "2020-05-30T10:05:12.924Z",
+        date: "2020-05-29T10:05:12.924Z",
         __v: 0,
       },
     ];
@@ -44,11 +44,15 @@ describe("Scoreboard", () => {
 
     await waitUntil(() => wrapper.state("isLoaded") === true)
 
-    const score2 = <li>Jim 30/05/2020 80</li>
-    const score1 = <li>Dave 30/05/2020 100</li>
+    const score1 = wrapper.find('.score').first()
+    const score2 = wrapper.find('.score').last()
 
-    expect(wrapper).toContainReact(score1)
-    expect(wrapper).toContainReact(score2)
+    expect(score1).toIncludeText("Dave")
+    expect(score1).toIncludeText("100")
+    expect(score1).toIncludeText("30/05/2020")
+    expect(score2).toIncludeText("Jim")
+    expect(score2).toIncludeText("80")
+    expect(score2).toIncludeText("29/05/2020")
     
     global.fetch.mockClear();
   });
