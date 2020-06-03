@@ -41,7 +41,7 @@ export class Scoreboard extends Component {
       content = <h3>Loading...</h3>;
     } else {
       const scoresMapped = scores.map((score, index) => (
-        <tr className="score">
+        <tr key={score._id} className="score">
           <td>{index + 1}.</td>
           <td>{score.name}</td>
           <td>{moment(score.date).format("DD/MM/Y")}</td>
