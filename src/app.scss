@@ -8,6 +8,23 @@ input, button {
   font-family: 'Press Start 2P', cursive;
 }
 
-.score-item {
-  display: flex;
+.btn {
+  padding: .5em 1em;
+}
+
+h1 {
+  span {
+    padding: .2em;
+    display: inline-block;
+    color: black;
+    background: white;
+  }
+}
+
+table {
+  tbody {
+    td {
+      padding: .5em 1em;
+    }
+  }
 }
