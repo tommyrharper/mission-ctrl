@@ -4,6 +4,11 @@ const ANSWER_THRESHOLD = 2
 
 export class QuestionFeedback extends Component {
   joinCombo = () => {
+    var index = this.props.combo.indexOf("Meta")
+    if (index !== -1) {
+      this.props.combo[index] = "Command"
+    }
+    
     return this.props.combo.join(" + ");
   };
 
