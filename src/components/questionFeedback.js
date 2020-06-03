@@ -12,6 +12,9 @@ export class QuestionFeedback extends Component {
   }
 
   render() {
+    if (this.props.incorrectAttempts === 2 && this.props.combo.length === 4) {
+      return <p>Hint: {this.firstKey()} + ? + ? + ?</p>
+    }
     if (this.props.incorrectAttempts === 2 && this.props.combo.length === 3) {
       return <p>Hint: {this.firstKey()} + ? + ?</p>
     } 
