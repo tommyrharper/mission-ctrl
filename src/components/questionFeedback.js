@@ -4,26 +4,19 @@ const ANSWER_THRESHOLD = 2
 
 export class QuestionFeedback extends Component {
   joinCombo = () => {
-    this.renameKeys()
-    return this.props.combo.join(" + ");
+    return this.props.hint.join(" + ");
   };
 
   firstKey = () => {
-    return this.props.combo[0]
+    return this.props.hint[0]
   }
   
-  renameKeys = () => {
-    var indexMeta = this.props.combo.indexOf("Meta")
-    if (indexMeta !== -1) {
-      this.props.combo[indexMeta] = "Command"
-    }
-  }
 
   render() {
-    if (this.props.incorrectAttempts === 2 && this.props.combo.length === 4) {
+    if (this.props.incorrectAttempts === 2 && this.props.hint.length === 4) {
       return <p>Hint: {this.firstKey()} + ? + ? + ?</p>
     }
-    if (this.props.incorrectAttempts === 2 && this.props.combo.length === 3) {
+    if (this.props.incorrectAttempts === 2 && this.props.hint.length === 3) {
       return <p>Hint: {this.firstKey()} + ? + ?</p>
     } 
     if (this.props.incorrectAttempts === 2) {
