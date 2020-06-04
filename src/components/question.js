@@ -28,7 +28,6 @@ export class Question extends Component {
     e.preventDefault();
     if (!e.repeat) {
       const newKeys = [...this.state.currentKeys, e.key];
-      console.log(newKeys)
       this.setState({
         currentKeys: newKeys,
       });
@@ -70,11 +69,11 @@ export class Question extends Component {
   render() {
     const { incorrectAttempts } = this.state;
     const { hint } = this.props.shortcut;
-
+    const length = this.props.shortcut.combo.length
     return (
       <div>
-        <p>Press the correct key combination</p>
         <h2>{this.props.shortcut.name}</h2>
+        <p>{length} key combo</p>
         <QuestionFeedback incorrectAttempts={incorrectAttempts} hint={hint} />
       </div>
     );
