@@ -48,6 +48,7 @@ class ScoreForm extends Component {
             className="text-field"
             name="name"
             type="text"
+            required
             value={this.state.name}
             onChange={this.handleChange}
           />

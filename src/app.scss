@@ -1,10 +1,19 @@
 $highlight: #f98424;
 $neon-green: #16ff00;
 
+#root {
+  padding: 0;
+  margin: 0;
+}
+
 body {
   color: white;
-  background-color: black;
+  background-image: url("/star-background.jpg");
   font-family: "Press Start 2P", cursive;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
 }
 
 input,
@@ -38,6 +47,7 @@ p {
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 h1 {
@@ -53,9 +63,15 @@ h1 {
 table {
   tbody {
     td {
-      padding: 0.5em 1em;
+      padding: 0.5em 1em 0.5em 0;
     }
   }
+}
+
+.container {
+  max-width: 50ch;
+  margin: auto;
+  padding: 0;
 }
 
 .highlight {
@@ -84,4 +100,20 @@ table {
     opacity: 0;
     transform: translateY(-1em);
   }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: black; 
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: white; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $highlight; 
 }
