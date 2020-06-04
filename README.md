@@ -67,7 +67,7 @@ Watch your name appear on the scoreboard:
 
 ## How to install and run the project
 
-First clone this repository to your local machine, then...
+First clone this repository to your local machine, then from your terminal run:
 
 ```shell
 cd mission-ctrl
