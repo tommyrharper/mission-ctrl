@@ -91,7 +91,7 @@ const macShortcuts = [
     hint: ["Shift", "Command", "g"],
   },
   { name: "Open File..", combo: ["Meta", "o"], hint: ["Command", "o"] },
-  { name: "Save", combo: ["Meta", "s"], combo: ["Command", "s"] },
+  { name: "Save", combo: ["Meta", "s"], hint: ["Command", "s"] },
   {
     name: "Show integrated terminal",
     combo: ["Control", "`"],
