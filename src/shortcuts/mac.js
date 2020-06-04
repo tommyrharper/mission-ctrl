@@ -12,7 +12,7 @@ const macShortcuts = [
   { name: "User Settings", combo: ["Meta", ","], hint: ["Command", ","] },
   {
     name: "Cut Line (empty selection)",
-    combo: [ "Meta", "x"],
+    combo: ["Meta", "x"],
     hint: ["Command", "x"],
   },
   {
