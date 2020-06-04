@@ -7,7 +7,7 @@ it("renders without crashing, taking a shortcut to render and questionComplete m
   let mockquestionComplete = {
     questionComplete: function () {},
   };
-  const mockShortcut = { name: "Copy", combo: ["c"] };
+  const mockShortcut = { name: "Copy", combo: ["c"], hint: ["c"] };
   shallow(<Question shortcut={mockShortcut} questionComplete={mockquestionComplete.questionComplete} />);
 });
 
@@ -29,7 +29,7 @@ it("correct immediately calls questionComplete with score 5, incorrect 0", () =>
   };
   jest.spyOn(mock, "questionComplete");
 
-  const mockShortcut = { name: "Copy", combo: ["c"] };
+  const mockShortcut = { name: "Copy", combo: ["c"], hint: ["c"] };
 
   const wrapper = shallow(
     <Question shortcut={mockShortcut} questionComplete={mock.questionComplete} />
@@ -48,7 +48,7 @@ it("one incorrect, then correct, calls questionComplete with score 3, incorrect 
   };
   jest.spyOn(mock, "questionComplete");
 
-  const mockShortcut = { name: "Copy", combo: ["c"] };
+  const mockShortcut = { name: "Copy", combo: ["c"], hint: ["c"] };
 
   const wrapper = shallow(
     <Question shortcut={mockShortcut} questionComplete={mock.questionComplete} />
@@ -68,7 +68,7 @@ it("two incorrect, then correct, calls questionComplete with score 1, incorrect 
   };
   jest.spyOn(mock, "questionComplete");
 
-  const mockShortcut = { name: "Copy", combo: ["c"] };
+  const mockShortcut = { name: "Copy", combo: ["c"], hint: ["c"] };
 
   const wrapper = shallow(
     <Question shortcut={mockShortcut} questionComplete={mock.questionComplete} />
@@ -90,7 +90,7 @@ it("three incorrect, then correct, calls questionComplete with score 0, incorrec
   };
   jest.spyOn(mock, "questionComplete");
 
-  const mockShortcut = { name: "Copy", combo: ["c"] };
+  const mockShortcut = { name: "Copy", combo: ["c"], hint: ["c"] };
 
   const wrapper = shallow(
     <Question shortcut={mockShortcut} questionComplete={mock.questionComplete} />
@@ -114,7 +114,7 @@ it("four incorrect, then correct, calls questionComplete with score 0, incorrect
   };
   jest.spyOn(mock, "questionComplete");
 
-  const mockShortcut = { name: "Copy", combo: ["c"] };
+  const mockShortcut = { name: "Copy", combo: ["c"], hint: ["c"] };
 
   const wrapper = shallow(
     <Question shortcut={mockShortcut} questionComplete={mock.questionComplete} />
@@ -147,7 +147,7 @@ it("repeat keydowns are not counted", () => {
     questionComplete: function () {},
   };
 
-  const mockShortcut = { name: "Copy", combo: ["c"] };
+  const mockShortcut = { name: "Copy", combo: ["c"], hint: ["c"] };
 
   const wrapper = shallow(
     <Question shortcut={mockShortcut} questionComplete={mock.questionComplete} />
@@ -166,7 +166,7 @@ it("mounting subscribes event listeners", () => {
   const mock = {
     questionComplete: function () {},
   };
-  const mockShortcut = { name: "Copy", combo: ["c"] };
+  const mockShortcut = { name: "Copy", combo: ["c"], hint: ["c"] };
   const spy = jest.spyOn(document, "addEventListener");
   const wrapper = mount(
     <Question shortcut={mockShortcut} questionComplete={mock.questionComplete} />
@@ -179,7 +179,7 @@ it("unmounting removes event listeners", () => {
   const mock = {
     questionComplete: function () {},
   };
-  const mockShortcut = { name: "Copy", combo: ["c"] };
+  const mockShortcut = { name: "Copy", combo: ["c"], hint: ["c"] };
   const spy = jest.spyOn(document, "removeEventListener");
   const wrapper = mount(
     <Question shortcut={mockShortcut} questionComplete={mock.questionComplete} />
@@ -190,13 +190,13 @@ it("unmounting removes event listeners", () => {
 });
 
 it("shows the required shortcut name", () => {
-  const mockShortcut = { name: "Copy", combo: ["c"] };
+  const mockShortcut = { name: "Copy", combo: ["c"], hint: ["c"] };
   const wrapper = shallow(<Question shortcut={mockShortcut} />);
   expect(wrapper).toContainReact(<h2>Copy</h2>);
 });
 
 it(".compareArrays compares arrays", () => {
-  const mockShortcut = { name: "Copy", combo: ["c"] };
+  const mockShortcut = { name: "Copy", combo: ["c"], hint: ["c"] };
   const wrapper = shallow(<Question shortcut={mockShortcut} />);
   const instance = wrapper.instance()
 
