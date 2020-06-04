@@ -15,13 +15,11 @@ describe("Game in progress", () => {
     const wrapper = shallow(<Game shortcuts={macShortcuts} />);
     const instance = wrapper.instance();
 
-    const score0 = <p>Score: 0</p>;
-    expect(wrapper).toContainReact(score0);
+    expect(wrapper).toIncludeText("Score: 0");
 
     instance.questionComplete(5, 0);
 
-    const score5 = <p>Score: 5</p>;
-    expect(wrapper).toContainReact(score5);
+    expect(wrapper).toIncludeText("Score: 5");
   });
 
   it("renders a question", () => {
@@ -66,13 +64,11 @@ it('tryAgain resets the game', () => {
 
   instance.questionComplete(5, 0);
 
-  const score5 = <p>Score: 5</p>;
-  expect(wrapper).toContainReact(score5);
+  expect(wrapper).toIncludeText("Score: 5");
 
   instance.tryAgain()
 
-  const score0 = <p>Score: 0</p>;
-  expect(wrapper).toContainReact(score0);
+  expect(wrapper).toIncludeText("Score: 0");
 });
 
 describe('Combo streak', () => {
@@ -110,7 +106,7 @@ describe('Combo streak', () => {
     for (let i= 0; i < 3; i++) {
       instance.questionComplete(5, 0)
     }
-    expect(wrapper).toIncludeText("Combo Streak +5")
+    expect(wrapper).toIncludeText("+ 5 Combo!")
   })
 
   it('Displays the combo streak on the screen for + 10', () => {
@@ -119,7 +115,7 @@ describe('Combo streak', () => {
     for (let i= 0; i < 6; i++) {
       instance.questionComplete(5, 0)
     }
-    expect(wrapper).toIncludeText("Combo Streak +10")
+    expect(wrapper).toIncludeText("+ 10 Combo!")
   })
 })
 
