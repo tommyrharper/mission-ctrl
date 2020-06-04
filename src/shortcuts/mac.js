@@ -64,13 +64,13 @@ const macShortcuts = [
   { name: "Outdent line", combo: ["Meta", "["], hint: ["Command", "["] },
   {
     name: "Go to beginning of line",
-    combo: ["Meta", "ArrowUp"],
-    hint: ["Command", "Up arrow"],
+    combo: ["Home"],
+    hint: ["Fn", "Left arrow"],
   },
   {
     name: "Go to end of line",
-    combo: ["Meta", "ArrowDown"],
-    hint: ["Command", "Down arrow"],
+    combo: ["End"],
+    hint: ["Fn", "Right arrow"],
   },
   { name: "Toggle line comment", combo: ["Meta", "/"], hint: ["Command", "/"] },
   {
