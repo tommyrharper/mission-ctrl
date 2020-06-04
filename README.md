@@ -77,6 +77,8 @@ npm start
 
 ## How to run tests
 
+From the root directory, run in your terminal:
+
 ```shell
 npm test
 ```
