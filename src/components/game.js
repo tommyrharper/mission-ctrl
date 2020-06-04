@@ -1,106 +1,160 @@
-import React, { Component } from 'react'
-import Question from './question'
-import GameComplete from './gameComplete'
-import Score from './score'
+import React, { Component } from "react";
+import Question from "./question";
+import ScoreSummary from "./scoreSummary";
+import Scoreboard from "./scoreboard";
+import Timer from "./timer";
+import ScoreForm from "./scoreForm";
+
+const COMBO_MULTIPLIER = 3;
+const COMBO_BONUS = 5;
 
 export class Game extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props);
     this.initialState = {
-      level: 0,
-      totalErrors: 0,
+      scoreIndication: null,
+      comboIndication: null,
+      formSent: false,
+      totalIncorrect: 0,
       totalCorrect: 0,
-      shortcutSet: [
-        { name: "Copy", combo: ['Control', 'c'] },
-        { name: "Cut", combo: ['Control', 'x'] },
-        { name: "Undo", combo: ['Control', 'z'] },
-        { name: "Paste", combo: ['Control', 'v'] },
-      ],
       currentShortcut: 0,
       gameComplete: false,
-      gameLength: 5000,
-      failuresThisTurn: 0,
-      resetScore: false
-    }
-    this.state = this.initialState
+      gameLength: 60000,
+      score: 0,
+      comboStreak: 0,
+    };
+    this.state = this.initialState;
   }
 
-  componentDidMount = () => {
-    this.startGame()
-  }
+  calculateComboStreak = () => {
+    return (this.state.comboStreak / COMBO_MULTIPLIER) * COMBO_BONUS;
+  };
 
-  startGame = () => {
-    setTimeout(() => {
-      this.setState({
-        gameComplete: true
-      })
-    }, this.state.gameLength);
-  }
-
-  attempt = (correct) => {
-    if (correct) {
-      this.setState({
-        totalCorrect: this.state.totalCorrect + 1,
-        currentShortcut: this.randomShortcut(),
-        failuresThisTurn: 0
-      })
+  addComboStreak = (incorrectAttempts) => {
+    if (incorrectAttempts === 0) {
+      this.setState({ comboStreak: this.state.comboStreak + 1 });
     } else {
-      this.setState({
-        totalErrors: this.state.totalErrors + 1,
-        failuresThisTurn: this.state.failuresThisTurn + 1
-      })
+      this.setState({ comboStreak: 0 });
     }
-  }
+    if (this.minimumComboStreak() && this.reachedComboMultiplier()) {
+      const comboBonus = this.calculateComboStreak();
+      this.setState({ comboIndication: null });
+      this.setState({ comboIndication: comboBonus });
+      this.setState({
+        score: this.state.score + comboBonus,
+      });
+    }
+  };
+
+  minimumComboStreak = () => {
+    return this.state.comboStreak >= COMBO_MULTIPLIER;
+  };
+
+  reachedComboMultiplier = () => {
+    return this.state.comboStreak % COMBO_MULTIPLIER === 0;
+  };
+
+  questionComplete = (score, incorrectAttempts) => {
+    this.scoreIndication(score);
+    this.addComboStreak(incorrectAttempts);
+
+    this.setState({
+      totalCorrect: this.state.totalCorrect + 1,
+      totalIncorrect: this.state.totalIncorrect + incorrectAttempts,
+      score: this.state.score + score,
+      currentShortcut: this.randomShortcut(),
+    });
+  };
+
+  completeGame = () => {
+    this.setState({ gameComplete: true });
+  };
 
   tryAgain = () => {
-    this.setState(this.initialState)
-    this.setState({
-      resetScore: true
-    })
-    this.startGame()
-  }
+    this.setState(this.initialState);
+  };
 
-  gameRestarted = () => {
+  formSent = (id) => {
     this.setState({
-      resetScore: false
-    })
-  }
+      formSent: true,
+      scoreId: id,
+    });
+  };
+
+  scoreIndication = (score) => {
+    this.setState({
+      scoreIndication: null,
+    });
+    this.setState({
+      scoreIndication: score,
+    });
+  };
 
   render() {
-    let gameCompleteComponent
-    let questionComponent
-    if (this.state.gameComplete) {
-      gameCompleteComponent = <GameComplete 
-                              correct={this.state.totalCorrect}
-                              mistakes={this.state.totalErrors}
-                              tryAgain={this.tryAgain}
-                              />
-    } else {
-      questionComponent = <Question 
-                  shortcut={this.state.shortcutSet[this.state.currentShortcut]}
-                  attempt={this.attempt}
-                  />
-    }
-    return (
-      <div>
-        <h1>Mission-Ctrl</h1>
-        <Score 
-        totalFailures={this.state.totalErrors}
-        failuresThisTurn={this.state.failuresThisTurn}
-        numberOfCorrect={this.state.totalCorrect}
-        resetScore={this.state.resetScore}
-        gameRestarted={this.gameRestarted}
-        />
-        {gameCompleteComponent}
-        {questionComponent}
+    const scoreIndication = this.state.scoreIndication ? (
+      <div className="score-indication">+ {this.state.scoreIndication}</div>
+    ) : null;
+    const comboIndication = this.state.comboIndication ? (
+      <div className="score-indication">
+        + {this.state.comboIndication} Combo!
       </div>
-    )
+    ) : null;
+    const tryAgain = (
+      <button className="btn" onClick={this.tryAgain}>
+        Try Again
+      </button>
+    );
+    if (this.state.gameComplete && !this.state.formSent) {
+      return (
+        <div>
+          <ScoreSummary
+            score={this.state.score}
+            totalCorrect={this.state.totalCorrect}
+            totalIncorrect={this.state.totalIncorrect}
+            gameLength={this.state.gameLength}
+          />
+          <ScoreForm score={this.state.score} formSent={this.formSent} />
+          {tryAgain}
+        </div>
+      );
+    } else if (this.state.formSent) {
+      return (
+        <div>
+          <ScoreSummary
+            score={this.state.score}
+            totalCorrect={this.state.totalCorrect}
+            totalIncorrect={this.state.totalIncorrect}
+            gameLength={this.state.gameLength}
+          />
+          {tryAgain}
+          <Scoreboard scoreId={this.state.scoreId} />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Timer
+            gameLength={this.state.gameLength}
+            complete={this.completeGame}
+          />
+          <div className="score-counter">
+            <div>Score: {this.state.score}</div>
+            {scoreIndication}
+            {comboIndication}
+          </div>
+          <Question
+            shortcut={this.props.shortcuts[this.state.currentShortcut]}
+            questionComplete={this.questionComplete}
+          />
+        </div>
+      );
+    }
   }
 
   randomShortcut = () => {
-    const shortcutSet = this.state.shortcutSet
-    return Math.floor(Math.random() * shortcutSet.length)
-  }
+    const shortcuts = this.props.shortcuts;
+    return Math.floor(Math.random() * shortcuts.length);
+  };
 }
 
-export default Game
+export default Game;
