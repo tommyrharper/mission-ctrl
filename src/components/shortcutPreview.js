@@ -8,7 +8,7 @@ export class ShortcutPreview extends Component {
   shortcutRow = (shortcut) => {
     return (
       <tr key={shortcut.name} className="score">
-        <td>{shortcut.name}.</td>
+        <td>{shortcut.name}</td>
         <td>{this.joinCombo(shortcut.hint)}</td>
       </tr>
     );
