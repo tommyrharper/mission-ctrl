@@ -13,26 +13,6 @@ We enable the user to reach great heights in our game with a sophisticated scori
 
 Our game is built with custom event-listeners that can detect multiple key-presses at a time and give feedback to the user about their attempt.
 
-# Playing the game
-Simply click the start button to start running the game
-![](readme_pictures/startScreen.png)
-
-Press down on the correct combination of keys to complete a question
-![](readme_pictures/exampleQuestion.png)
-
-If you get the question wrong you may receive a prompt such as
-![](readme_pictures/exampleQuestionFeedback.png)
-
-If you get the question wrong multiple times you will be given the correct answer but will face a reduced points amount
-![](readme_pictures/correctAnswer.png)
-
-View your game feedback at the end to see how you can improve, if you're proud of your score, then enter your name and click submit to add it to our database!
-![](readme_pictures/exampleScoreForm.png)
-
-Watch your name easily appear on the scoreboard
-![](readme_pictures/exampleScoreBoard.png)
-
-
 
 # Team Members
 - [Gina Frankel](https://github.com/Gina-Frankel)
@@ -76,5 +56,26 @@ Visit localhost:3000 (provided you dont have any other local servers running) an
 ```
 
 This will show you passing, pending and failed tests as well as test coverage for the individual files and overall project.
+
+# Playing the game
+Simply click the start button to start running the game
+![](readme_pictures/startScreen.png)
+
+Press down on the correct combination of keys to complete a question
+![](readme_pictures/exampleQuestion.png)
+
+If you get the question wrong you may receive a prompt such as
+![](readme_pictures/exampleQuestionFeedback.png)
+
+If you get the question wrong multiple times you will be given the correct answer but will face a reduced points amount
+![](readme_pictures/correctAnswer.png)
+
+View your game feedback at the end to see how you can improve, if you're proud of your score, then enter your name and click submit to add it to our database!
+![](readme_pictures/exampleScoreForm.png)
+
+Watch your name easily appear on the scoreboard
+![](readme_pictures/exampleScoreBoard.png)
+
+
 
 
