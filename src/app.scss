@@ -1,0 +1,87 @@
+$highlight: #f98424;
+$neon-green: #16ff00;
+
+body {
+  color: white;
+  background-color: black;
+  font-family: "Press Start 2P", cursive;
+}
+
+input,
+button {
+  font-family: "Press Start 2P", cursive;
+}
+
+.text-field {
+  padding: 0.5em 1em;
+  border: 0;
+}
+
+p {
+  max-width: 50ch;
+  line-height: 1.5em;
+}
+
+.btn {
+  height: 100%;
+  margin: 0.5em;
+  padding: 0.5em 1em;
+  border-radius: 0;
+  border: 0;
+  background-color: white;
+  &:hover {
+    cursor: pointer;
+    background-color: $highlight;
+  }
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+h1 {
+  span {
+    margin-left: 0.2em;
+    padding: 0.2em;
+    display: inline-block;
+    color: black;
+    background: white;
+  }
+}
+
+table {
+  tbody {
+    td {
+      padding: 0.5em 1em;
+    }
+  }
+}
+
+.highlight {
+  color: $highlight;
+}
+
+.score-counter {
+  display: flex;
+  .score-indication {
+    margin-left: 1ch;
+    color: $neon-green;
+    animation-name: fade-out;
+    animation-duration: 2s;
+    animation-iteration-count: 1;
+    opacity: 0;
+    position: relative;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-1em);
+  }
+}
