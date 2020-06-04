@@ -11,7 +11,7 @@ const windowsShortcuts = [
   { name: "Delete line", combo: ["Control", "Shift", "K"] },
   { name: "Insert line below", combo: ["Control", "Enter"] },
   { name: "Insert line above", combo: ["Control", "Shift", "Enter"] },
-  { name: "Jump to matching bracket", combo: ["Control", "Shift", "\|"] },
+  { name: "Jump to matching bracket", combo: ["Control", "Shift", "|"] },
   { name: "Indent line", combo: ["Control", "]"] },
   { name: "Outdent line", combo: ["Control", "["] },
   { name: "Go to beginning of line", combo: ["Home"] },
