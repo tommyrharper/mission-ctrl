@@ -8,7 +8,7 @@ it("renders without crashing, taking gameLength in ms", () => {
 
 it("starting time renders length of game", () => {
   const wrapper = shallow(<Timer gameLength={5000} />);
-  const startTime = <p>5:00</p>;
+  const startTime = <p>5.00</p>;
   expect(wrapper).toContainReact(startTime);
 });
 
@@ -18,7 +18,7 @@ it("counts down by seconds", () => {
   const wrapper = shallow(<Timer gameLength={5000} />);
 
   jest.advanceTimersByTime(2000);
-  expect(wrapper).toContainReact(<p>3:00</p>);
+  expect(wrapper).toContainReact(<p>3.00</p>);
 
   jest.clearAllTimers();
 });
