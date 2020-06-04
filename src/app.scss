@@ -1,10 +1,13 @@
 $highlight: #f98424;
 $neon-green: #16ff00;
 
+
 body {
   color: white;
   background-color: black;
   font-family: "Press Start 2P", cursive;
+  margin: 0;
+  padding: 0;
 }
 
 input,
@@ -38,6 +41,7 @@ p {
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 h1 {
@@ -53,9 +57,14 @@ h1 {
 table {
   tbody {
     td {
-      padding: 0.5em 1em;
+      padding: 0.5em 1em 0.5em 0;
     }
   }
+}
+
+.container {
+  max-width: 50ch;
+  margin: auto;
 }
 
 .highlight {
