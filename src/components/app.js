@@ -36,7 +36,7 @@ export class App extends Component {
     let button = <button onClick={this.sendToHome}>Home</button>;
     if (this.state.showGame) {
       return (
-        <div>
+        <div className="container">
           <header>
             <h1>
               MISSION<span>CTRL</span>
@@ -50,7 +50,7 @@ export class App extends Component {
       );
     } else {
       return (
-        <div>
+        <div className="container">
           <h1>
             MISSION<span>CTRL</span>
           </h1>
