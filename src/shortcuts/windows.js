@@ -58,7 +58,7 @@ const windowsShortcuts = [
   {
     name: "Jump to matching bracket",
     combo: ["Control", "Shift", "|"],
-    hint: ["Control", "Shift", "\"],
+    hint: ["Control", "Shift", "\\"],
   },
   { name: "Indent line", combo: ["Control", "]"], hint: ["Control", "]"] },
   { name: "Outdent line", combo: ["Control", "["], hint: ["Control", "["] },
