@@ -2,8 +2,7 @@ import React from "react";
 import ScoreForm from "./scoreForm.js";
 import { shallow } from "enzyme";
 import axios from "axios";
-import waitUntil from 'async-wait-until';
-
+import waitUntil from "async-wait-until";
 
 describe("ScoreForm", () => {
   it("renders without crashing, taking props of a formSent func and a score", () => {
@@ -38,7 +37,7 @@ describe("ScoreForm", () => {
 
     const form = wrapper.find("form");
     form.simulate("change", {
-        name: "Dave",
+      name: "Dave",
     });
 
     form.simulate("submit");
@@ -51,21 +50,21 @@ describe("ScoreForm", () => {
 
   it("calls props.formSent when post is completed", async (done) => {
     const mock = {
-      formSent: function () {},
+      formSent: function (data) {},
     };
-    const formSentSpy = jest.spyOn(mock, "formSent")
+    const formSentSpy = jest.spyOn(mock, "formSent");
 
     const mockSuccessResponse = {
-      _id: "5ed66ed66a02e00017173cf3",
-      name: "Clive",
-      score: 75,
-      date: "2020-06-02T15:23:02.650Z",
-      __v: 0,
+      data: {
+        _id: "5ed66ed66a02e00017173cf3",
+        name: "Clive",
+        score: 75,
+        date: "2020-06-02T15:23:02.650Z",
+        __v: 0,
+      },
     };
-    const mockJsonPromise = Promise.resolve(mockSuccessResponse);
-    const mockFetchPromise = Promise.resolve({
-      json: () => mockJsonPromise,
-    });
+
+    const mockFetchPromise = Promise.resolve(mockSuccessResponse)
     const axiosSpy = jest
       .spyOn(axios, "post")
       .mockImplementation(() => mockFetchPromise);
@@ -74,13 +73,13 @@ describe("ScoreForm", () => {
 
     const form = wrapper.find("form");
     form.simulate("change", {
-        name: "Dave",
+      name: "Dave",
     });
 
     form.simulate("submit");
-    await waitUntil(() => wrapper.state('isSubmitting') === false)
+    await waitUntil(() => wrapper.state("isSubmitting") === false);
 
-    expect(formSentSpy).toHaveBeenCalledTimes(1);
+    expect(formSentSpy).toHaveBeenCalled();
 
     axiosSpy.mockClear();
     done();
