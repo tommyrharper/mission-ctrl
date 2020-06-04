@@ -13,7 +13,8 @@ export class QuestionFeedback extends Component {
   }
   
   renameKeys = () => {
-    var indexMeta = this.props.combo.indexOf("Meta")
+    const alteredKeys = [...this.props.combo]
+    var indexMeta = alteredKeys.indexOf("Meta")
     if (indexMeta !== -1) {
       this.props.combo[indexMeta] = "Command"
     }
