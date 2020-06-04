@@ -38,22 +38,22 @@ Our game is built with custom event-listeners that can detect multiple key-press
 # How to install and run the project
 First clone this repository to your local machine, then...
 
-'''
-- cd mission-ctrl
+```
+> cd mission-ctrl
 
-- npm install
+> npm install
 
-- npm start
-'''
+> npm start
+```
 
 Visit localhost:3000 (provided you dont have any other local servers running) and you should see:
 --- Insert Intro page ---
 
 # How to run tests
 
-'''bash
+```
 > npm test
-'''
+```
 
 This will show you passing, pending and failed tests as well as test coverage for the individual files and overall project.
 
