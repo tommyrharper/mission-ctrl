@@ -21,6 +21,7 @@ export class QuestionFeedback extends Component {
     if (this.props.incorrectAttempts === 2) {
       return <p>Hint: {this.firstKey()} + ?</p>
     }
+
     if (this.props.incorrectAttempts > ANSWER_THRESHOLD) {
       return <h3>Try this: {this.joinCombo()}</h3>;
     }
