@@ -28,6 +28,7 @@ export class Question extends Component {
     e.preventDefault();
     if (!e.repeat) {
       const newKeys = [...this.state.currentKeys, e.key];
+      console.log(newKeys)
       this.setState({
         currentKeys: newKeys,
       });
