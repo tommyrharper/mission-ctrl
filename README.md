@@ -4,7 +4,7 @@
 
 http://mission-ctrl.surge.sh
 
-This was our final project at Makers Academ. The focus of the project was to take on a completely new tech stack and showcase our ability to follow AGILE processes and T.D.D when faced with such challenge.
+This was our final project at Makers Academy. The focus of the project was to take on a completely new tech stack and showcase our ability to follow AGILE processes and T.D.D when faced with such challenge.
 
 # What is Mission-Ctrl?
 Mission-ctrl is a game developed to help engineers hone their shortcut knowledge and practise them in a fun and competitive space ! 
