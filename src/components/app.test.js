@@ -13,7 +13,7 @@ it('renders without crashing', () => {
 describe('the start button', () => {
   it('when clicked, contains the game element', () => {
     const wrapper = shallow(<App />)
-    const button = wrapper.find('button')
+    const button = wrapper.find('#start')
     button.simulate('click')
 
     expect(wrapper.find(Game)).toHaveLength(1);
@@ -27,7 +27,7 @@ describe('the start button', () => {
   it('disappears after it has been clicked', () => {
     const wrapper = shallow(<App />)
 
-    const button = wrapper.find('button')
+    const button = wrapper.find('#start')
     button.simulate('click')
 
     expect(wrapper).not.toHaveText('Start');
@@ -43,7 +43,7 @@ describe('the start button', () => {
   it('Scoreboard disappears when the start button is clicked', () => {
     const wrapper = shallow(<App />)
 
-    const button = wrapper.find('button')
+    const button = wrapper.find('#start')
     button.simulate('click')
     
     expect(wrapper.find(Scoreboard)).toHaveLength(0);
@@ -55,22 +55,22 @@ describe('the start button', () => {
 describe('Home button', () => {
   it('appears when the game has been started', () => {
     const wrapper = shallow(<App />)
-    const button = wrapper.find('button')
+    const button = wrapper.find('#start')
     button.simulate('click')
-    expect(wrapper.find('button')).toIncludeText('Home')
+    expect(wrapper).toIncludeText('Home')
   })
 
   it('does not appear on the home page', () => {
     const wrapper = shallow(<App />)
-    expect(wrapper.find('button')).not.toIncludeText('Home')
+    expect(wrapper).not.toIncludeText('Home')
   })
 
   it('returns the user to the home page', () => {
     const wrapper = shallow(<App />)
-    const button = wrapper.find('button')
+    const button = wrapper.find('#start')
     button.simulate('click')
-    const homeButton = wrapper.find('button')
+    const homeButton = wrapper.find('#home')
     homeButton.simulate('click')
-    expect(wrapper.find('button')).toIncludeText('Start')
+    expect(wrapper).toIncludeText('Start')
   })
 })
