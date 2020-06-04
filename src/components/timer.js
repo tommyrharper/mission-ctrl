@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-const CONVERT_TO_SECONDS = 1000;
+const MILLISECONDS_IN_A_SECOND = 1000;
 const CENTISECOND = 10
 
 export class Timer extends Component {
@@ -27,7 +27,7 @@ export class Timer extends Component {
   }
 
   render() {
-    return <p>{(this.state.gameLength / CONVERT_TO_SECONDS).toFixed(2)}</p>;
+    return <p>{(this.state.gameLength / MILLISECONDS_IN_A_SECOND).toFixed(2)}</p>;
   }
 }
 
