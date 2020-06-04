@@ -1,45 +1,79 @@
+import React from "react";
+import ScoreSummary from "./scoreSummary.js";
+import { shallow } from "enzyme";
 
-import React from 'react'
-import ScoreSummary from './scoreSummary.js'
-import { shallow } from 'enzyme'
+describe("ScoreSummary", () => {
+  it("renders without crashing", () => {
+    shallow(<ScoreSummary />);
+  });
 
-describe('ScoreSummary', () => {
-  it('renders without crashing',() => {
-    shallow(<ScoreSummary/>)
-  })
-  it('Returns the users score', () => {
-    const wrapper = shallow(<ScoreSummary score={15} totalCorrect={3} totalIncorrect={5} gameLength={3000}/>)
-    const score = <li>Your score: 15</li>
-    expect(wrapper).toContainReact(score)
-  })
+  it("Returns the users score", () => {
+    const wrapper = shallow(
+      <ScoreSummary
+        score={15}
+        totalCorrect={3}
+        totalIncorrect={5}
+        gameLength={3000}
+      />
+    );
 
-  it('Returns the total correct', () => {
-    const wrapper = shallow(<ScoreSummary score={15} totalCorrect={3} totalIncorrect={5} gameLength={3000}/>)
-    const totalCorrect = <li>Total Correct: 3</li>
-    expect(wrapper).toContainReact(totalCorrect)
-  })
+    expect(wrapper).toIncludeText("Score:");
+    expect(wrapper).toIncludeText("15");
+  });
 
-  it('Returns total incorrect', () => {
-    const wrapper = shallow(<ScoreSummary score={15} totalCorrect={3} totalIncorrect={5} gameLength={3000}/>)
-    const totalIncorrect = <li>Total Incorrect: 5</li>
-    expect(wrapper).toContainReact(totalIncorrect)
-  })
+  it("Returns the total correct", () => {
+    const wrapper = shallow(
+      <ScoreSummary
+        score={15}
+        totalCorrect={3}
+        totalIncorrect={5}
+        gameLength={3000}
+      />
+    );
 
-  it('Returns my accuracy for the round as a percentage', () => {
-    const wrapper = shallow(<ScoreSummary score={15} totalCorrect={3} totalIncorrect={5} gameLength={3000}/>)
-    const accuracy = <li>Round Accuracy: 37.50%</li>
-    expect(wrapper).toContainReact(accuracy)
-  })
+    expect(wrapper).toIncludeText("Total Correct:");
+    expect(wrapper).toIncludeText("3");
+  });
 
-  it('Returns my average speed for the game', () => {
-    const wrapper = shallow(<ScoreSummary score={15} totalCorrect={3} totalIncorrect={5} gameLength={3000}/>)
-    const speed = <li>Average speed: 1.00 seconds/question</li>
-    expect(wrapper).toContainReact(speed)
-  })
+  it("Returns total incorrect", () => {
+    const wrapper = shallow(
+      <ScoreSummary
+        score={15}
+        totalCorrect={3}
+        totalIncorrect={5}
+        gameLength={3000}
+      />
+    );
 
-  it('Returns my average speed for the game', () => {
-    const wrapper = shallow(<ScoreSummary score={15} totalCorrect={3} totalIncorrect={5} gameLength={3000}/>)
-    const speed = <li>Average speed: 1.00 seconds/question</li>
-    expect(wrapper).toContainReact(speed)
-  })
-})
+    expect(wrapper).toIncludeText("Total Incorrect:");
+    expect(wrapper).toIncludeText("5");
+  });
+
+  it("Returns my accuracy for the round as a percentage", () => {
+    const wrapper = shallow(
+      <ScoreSummary
+        score={15}
+        totalCorrect={3}
+        totalIncorrect={5}
+        gameLength={3000}
+      />
+    );
+
+    expect(wrapper).toIncludeText("Round Accuracy:");
+    expect(wrapper).toIncludeText("37.50%");
+  });
+
+  it("Returns my average speed for the game", () => {
+    const wrapper = shallow(
+      <ScoreSummary
+        score={15}
+        totalCorrect={3}
+        totalIncorrect={5}
+        gameLength={3000}
+      />
+    );
+
+    expect(wrapper).toIncludeText("Average Speed:");
+    expect(wrapper).toIncludeText("1.00 seconds/question");
+  });
+});
