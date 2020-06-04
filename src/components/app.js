@@ -3,6 +3,7 @@ import Game from "./game";
 import Scoreboard from "./scoreboard";
 import macShortcuts from "../shortcuts/mac";
 import windowsShortcuts from "../shortcuts/windows";
+import ShortcutPreview from "./shortcutPreview";
 
 export class App extends Component {
   constructor() {
@@ -10,6 +11,7 @@ export class App extends Component {
     this.state = {
       showGame: false,
       shortcuts: macShortcuts,
+      showScoreboard: true
     };
   }
 
@@ -32,8 +34,21 @@ export class App extends Component {
     this.setState({ showGame: false });
   };
 
+  toggleScoreboard = () => {
+    this.setState({
+      showScoreboard: !this.state.showScoreboard
+    })
+  }
+
   render() {
     let button = <button onClick={this.sendToHome}>Home</button>;
+    let table = this.state.showScoreboard ? (
+      <Scoreboard />
+    ) : (
+      <ShortcutPreview shortcuts={this.state.shortcuts} />
+    );
+    let tableToggle = this.state.showScoreboard ? "Show shortcuts list" : "Show scoreboard"
+
     if (this.state.showGame) {
       return (
         <div className="container">
@@ -41,7 +56,7 @@ export class App extends Component {
             <h1>
               MISSION<span>CTRL</span>
             </h1>
-            <button className="btn" onClick={this.sendToHome}>
+            <button id="home" className="btn" onClick={this.sendToHome}>
               Home
             </button>
           </header>
@@ -62,10 +77,13 @@ export class App extends Component {
             </p>
             <p>Ready for blast off?</p>
           </div>
-          <button className="btn" onClick={this.startGame}>
+          <button id="start" className="btn" onClick={this.startGame}>
             Start
           </button>
-          <Scoreboard />
+          <button className="btn" onClick={this.toggleScoreboard}>
+            {tableToggle}
+          </button>
+          {table}
         </div>
       );
     }
