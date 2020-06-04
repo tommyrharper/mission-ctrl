@@ -24,10 +24,10 @@ class ScoreForm extends Component {
     };
     axios
       .post("http://mission-ctrl-node.herokuapp.com/scores", newObj)
-      .then((res) => res.json())
-      .then((json) => {
+      .then((res) => {
+        const data = res.data
         this.setState({ isSubmitting: false });
-        this.props.formSent();
+        this.props.formSent(data._id);
       })
       .catch((error) => {
         this.setState({ error: true });
@@ -36,19 +36,22 @@ class ScoreForm extends Component {
   }
 
   render() {
-    const errorMessage = this.state.error ? <p>There was an error submitting the score</p> : null
+    const errorMessage = this.state.error ? (
+      <p>There was an error submitting the score</p>
+    ) : null;
     return (
       <div>
         {errorMessage}
         <form onSubmit={this.handleSubmit}>
-          <label htmlForm="name">Name:</label>
+          <label htmlFor="name">Name:</label>
           <input
+            className="text-field"
             name="name"
             type="text"
             value={this.state.name}
             onChange={this.handleChange}
           />
-          <input type="submit" value="Submit" />
+          <input className="btn" type="submit" value="Submit Score" />
         </form>
       </div>
     );

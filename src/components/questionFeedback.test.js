@@ -44,4 +44,9 @@ describe('gives user a hint', () => {
   })
 })
 
-
+it("displays command instead of meta", () => {
+  const combo = ["Meta", "c"]
+  const wrapper = shallow(<QuestionFeedback incorrectAttempts={3} combo={combo} />);
+  const phrase = <h3>Try this: Command + c</h3>
+  expect(wrapper).toContainReact(phrase);
+});
