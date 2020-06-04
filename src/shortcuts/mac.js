@@ -124,7 +124,7 @@ const macShortcuts = [
     hint: ["Control", "Shift", "Command", "Left arrow"],
   },
   {
-    name: "Toggle Sidebar visability",
+    name: "Toggle Sidebar visibility",
     combo: ["Meta", "b"],
     hint: ["Command", "b"],
   },
