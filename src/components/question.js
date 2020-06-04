@@ -69,7 +69,7 @@ export class Question extends Component {
   render() {
     const { incorrectAttempts } = this.state;
     const { hint } = this.props.shortcut;
-    const length = this.props.shortcut.combo.length
+    const length = this.props.shortcut.hint.length
     return (
       <div>
         <h2>{this.props.shortcut.name}</h2>
