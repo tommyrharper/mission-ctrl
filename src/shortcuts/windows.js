@@ -8,10 +8,10 @@ const windowsShortcuts = [
   { name: "Move line down", combo: ["Alt", "ArrowDown"] },
   { name: "Copy line up", combo: ["Shift", "Alt", "ArrowUp"] },
   { name: "Copy line down", combo: ["Shift", "Alt", "ArrowDown"] },
-  { name: "Delete line", combo: ["Control", "Shift", "k"] },
+  { name: "Delete line", combo: ["Control", "Shift", "K"] },
   { name: "Insert line above", combo: ["Control", "Enter"] },
   { name: "Insert line below", combo: ["Control", "Shift", "Enter"] },
-  { name: "Jump to matching bracket", combo: ["Control", "Shift", "\\"] },
+  { name: "Jump to matching bracket", combo: ["Control", "Shift", "\|"] },
   { name: "Indent line", combo: ["Control", "]"] },
   { name: "Outdent line", combo: ["Control", "["] },
   { name: "Go to beginning of line", combo: ["Home"] },
@@ -26,12 +26,12 @@ const windowsShortcuts = [
   { name: "Save", combo: ["Control", "s"] },
   { name: "Show integrated terminal", combo: ["Control", "`"] },
   { name: "Toggle full screen", combo: ["F11"] },
-  { name: "Create new terminal", combo: ["Control", "Shift", "`"] },
+  { name: "Create new terminal", combo: ["Control", "Shift", "¬"] },
   { name: "Zoom in", combo: ["Control", "="] },
   { name: "Zoom out", combo: ["Control", "-"] },
   { name: "Expand selection", combo: ["Shift", "Alt", "ArrowRight"] },
   { name: "Shrink selection", combo: ["Shift", "Alt", "ArrowLeft"] },
-  { name: "Toggle Sidebar visability", combo: ["Control", "b"] },
+  { name: "Toggle Sidebar visibility", combo: ["Control", "b"] },
 ];
 
 export default windowsShortcuts;
