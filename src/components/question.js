@@ -3,6 +3,12 @@ import QuestionFeedback from "./questionFeedback";
 
 const INITIAL_SCORE = 5;
 const SCORE_DECREMENT = 2;
+const powerKeys = {
+  "Meta": true,
+  "Shift": true,
+  "Alt": true,
+  "Control": true
+}
 
 export class Question extends Component {
   constructor(props) {
@@ -64,14 +70,22 @@ export class Question extends Component {
     // Decrement number of keys down by 1
     // Do not allows number of keys down to be less than 1
     if (numOfKeysDown > 0) {
-      console.log('num of keys updated', e.key);
+      console.log('num of keys updated', e.key, numOfKeysDown, numOfKeysDown - 1);
       // newNumOfKeysDown = numOfKeysDown - 1;
       newNumOfKeysDown -= 1;
     }
 
     if (this.state.currentKeys.includes("Meta") && this.state.currentKeys.length > 1) {
-      console.log('inside extra condition');
-      newNumOfKeysDown -= 1;
+      let extraDecrement = 0;
+      console.log('inside extra condition', extraDecrement, this.state.currentKeys);
+      for (let i = 0; i < this.state.currentKeys.length; i++) {
+        console.log('INSIDE LOOP');
+        console.log('this.state.currentKeys[i]', this.state.currentKeys[i]);
+        if (!powerKeys[this.state.currentKeys[i]]) {
+          extraDecrement += 1;
+        }
+      }
+      newNumOfKeysDown -= extraDecrement;
     }
 
     console.log('newNumOfKeysDown, e.key, this.state.currentKeys', newNumOfKeysDown, e.key, this.state.currentKeys)
@@ -81,6 +95,8 @@ export class Question extends Component {
       console.log('---- INCORRECT!!!!! ----', justCompletedQuestion, newNumOfKeysDown)
       this.handleIncorrect();
     }
+
+
 
     this.setState({
       currentKeys: [],
