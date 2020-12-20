@@ -12,7 +12,7 @@ export class Question extends Component {
       score: INITIAL_SCORE,
       incorrectAttempts: 0,
       justCompletedQuestion: false,
-      keysDown: 0
+      numOfKeysDown: 0
     };
   }
 
@@ -27,13 +27,13 @@ export class Question extends Component {
   }
 
   keyDown = (e) => {
-    const { justCompletedQuestion, currentKeys, keysDown, score, incorrectAttempts } = this.state;
+    const { justCompletedQuestion, currentKeys, numOfKeysDown, score, incorrectAttempts } = this.state;
     const { shortcut, questionComplete } = this.props;
 
     e.preventDefault();
     if (!e.repeat) {
-      // Increment number of keysDown by 1
-      this.setState({keysDown: keysDown + 1});
+      // Increment number of numOfKeysDown by 1
+      this.setState({numOfKeysDown: numOfKeysDown + 1});
 
       // If we have just completed a question,
       // Set justCompletedQuestion to false on the first key down of the new question
@@ -45,8 +45,8 @@ export class Question extends Component {
 
       if (newKeys.length === shortcut.combo.length) {
         if (this.compareArrays(newKeys, shortcut.combo)) {
-          // Set justCompletedQuestion to true and clear the number of keysDown
-          this.setState({justCompletedQuestion: true, keysDown: 0})
+          // Set justCompletedQuestion to true and clear the number of numOfKeysDown
+          this.setState({justCompletedQuestion: true, numOfKeysDown: 0})
           questionComplete(score, incorrectAttempts);
           this.reset()
         } else {
@@ -58,19 +58,19 @@ export class Question extends Component {
 
   keyUp = (e) => {
     e.preventDefault();
-    let { justCompletedQuestion, keysDown } = this.state;
-    let keysComparison = keysDown
+    let { justCompletedQuestion, numOfKeysDown } = this.state;
+    let newNumOfKeysDown = numOfKeysDown
 
     // Decrement number of keys down by 1
     // Do not allows number of keys down to be less than 1
-    if (keysDown > 0) keysComparison = keysDown - 1;
+    if (numOfKeysDown > 0) newNumOfKeysDown = numOfKeysDown - 1;
 
     // Handle incorrect if there are no keys down, and we have not just completed a question
-    if (!justCompletedQuestion && keysComparison === 0) this.handleIncorrect();
+    if (!justCompletedQuestion && newNumOfKeysDown === 0) this.handleIncorrect();
 
     this.setState({
       currentKeys: [],
-      keysDown: keysComparison
+      numOfKeysDown: newNumOfKeysDown
     });
   };
 
