@@ -200,8 +200,8 @@ it(".compareArrays compares arrays", () => {
   const wrapper = shallow(<Question shortcut={mockShortcut} />);
   const instance = wrapper.instance()
 
-  const arr1 = [1,2]
-  const arr2 = [1,2, 3]
+  const arr1 = ["1", "2"]
+  const arr2 = ["1", "2", "3"]
   const arr3 = ["a","b", "c"]
   const arr4 = ["a","b", "c"]
 
