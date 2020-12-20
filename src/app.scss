@@ -119,3 +119,8 @@ table {
 ::-webkit-scrollbar-thumb:hover {
   background: $highlight; 
 }
+
+.selectedDificulty {
+  background-color: green;
+  color: white;
+}

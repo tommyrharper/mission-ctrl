@@ -26,6 +26,10 @@ export class Timer extends Component {
     }, 10);
   }
 
+  componentWillUnmount() {
+    clearInterval(this.centisecondInterval);
+  }
+
   render() {
     return <p>{(this.state.gameLength / MILLISECONDS_IN_A_SECOND).toFixed(2)}</p>;
   }
