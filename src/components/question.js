@@ -145,7 +145,8 @@ export class Question extends Component {
     arr2.sort();
 
     for (let i = 0; i < arr1.length; i++) {
-      if (arr1[i] !== arr2[i]) return false;
+      if (!arr1[i]) return false;
+      if (arr1[i].toLowerCase() !== arr2[i].toLowerCase()) return false;
     }
     return true;
   }
