@@ -65,6 +65,12 @@ Watch your name appear on the scoreboard:
 | API testing frameworks       | Mocha, Chai, Sinon |
 | Code Coverage                | Jest               |
 
+## Back-end
+
+The back-end runs using Node.js.
+
+You can find our [backend API repository here](https://github.com/hturnbull93/mission-ctrl-api-node).
+
 ## How to install and run the project locally
 
 First clone this repository to your local machine, then from your terminal run:
