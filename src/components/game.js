@@ -113,7 +113,9 @@ export class Game extends Component {
             totalIncorrect={this.state.totalIncorrect}
             gameLength={this.state.gameLength}
           />
-          <ScoreForm score={this.state.score} formSent={this.formSent} />
+          { this.props.difficulty === 'medium' &&
+            <ScoreForm score={this.state.score} formSent={this.formSent} />
+          }
           {tryAgain}
         </div>
       );
