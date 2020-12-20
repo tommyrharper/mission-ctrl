@@ -1,5 +1,14 @@
 # Mission Ctrl
 
+- [Mission Ctrl](#mission-ctrl)
+  - [What is Mission-Ctrl?](#what-is-mission-ctrl)
+  - [Playing the game](#playing-the-game)
+  - [Team Members](#team-members)
+  - [Technologies](#technologies)
+  - [Back-end](#back-end)
+  - [How to install and run the project locally](#how-to-install-and-run-the-project-locally)
+  - [How to run tests](#how-to-run-tests)
+
 [![Build Status](https://travis-ci.com/tommyrharper/mission-ctrl.svg?branch=master)](https://travis-ci.com/tommyrharper/mission-ctrl)
 
 [Deployed here.](http://mission-ctrl.surge.sh)
