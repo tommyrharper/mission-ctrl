@@ -51,26 +51,18 @@ export class Question extends Component {
     }
   };
 
-  removeItemFromArray = (array, item) => {
-    let index = array.indexOf(item);
-    if (index > -1) {
-      array.splice(index, 1);
-    }
-
-    return array;
-  }
-
   keyUp = (e) => {
     e.preventDefault();
     let { justCompletedQuestion, keysDown } = this.state;
     let keysComparison = keysDown
-    if (keysDown > 0) {
-      keysComparison = keysDown - 1;
-    }
 
-    if (!justCompletedQuestion && keysComparison === 0) {
-      this.handleIncorrect();
-    }
+    // Decrement number of keys down by 1
+    // Do not allows number of keys down to be less than 1
+    if (keysDown > 0) keysComparison = keysDown - 1;
+
+    // Handle incorrect if there are no keys down, and we have not just completed a question
+    if (!justCompletedQuestion && keysComparison === 0) this.handleIncorrect();
+
     this.setState({
       currentKeys: [],
       keysDown: keysComparison
