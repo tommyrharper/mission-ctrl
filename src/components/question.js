@@ -3,6 +3,12 @@ import QuestionFeedback from "./questionFeedback";
 
 const INITIAL_SCORE = 5;
 const SCORE_DECREMENT = 2;
+const POWER_KEYS = {
+  "Meta": true,
+  "Shift": true,
+  "Alt": true,
+  "Control": true
+}
 
 export class Question extends Component {
   constructor(props) {
@@ -11,6 +17,8 @@ export class Question extends Component {
       currentKeys: [],
       score: INITIAL_SCORE,
       incorrectAttempts: 0,
+      justCompletedQuestion: false,
+      numOfKeysDown: 0
     };
   }
 
@@ -25,27 +33,78 @@ export class Question extends Component {
   }
 
   keyDown = (e) => {
+    const { justCompletedQuestion, currentKeys, numOfKeysDown, score, incorrectAttempts } = this.state;
+    const { shortcut, questionComplete } = this.props;
+
     e.preventDefault();
     if (!e.repeat) {
-      const newKeys = [...this.state.currentKeys, e.key];
-      this.setState({
-        currentKeys: newKeys,
-      });
-      if (newKeys.length === this.props.shortcut.combo.length) {
-        if (this.compareArrays(newKeys, this.props.shortcut.combo)) {
-          this.props.questionComplete(this.state.score, this.state.incorrectAttempts);
+      // Increment number of numOfKeysDown by 1
+      this.setState({numOfKeysDown: numOfKeysDown + 1});
+
+      // If we have just completed a question,
+      // Set justCompletedQuestion to false on the first key down of the new question
+      if (justCompletedQuestion) this.setState({justCompletedQuestion: false});
+
+      // Update the array of keys with the new key
+      const newKeys = [...currentKeys, e.key];
+      this.setState({currentKeys: newKeys});
+
+      if (newKeys.length === shortcut.combo.length) {
+        if (this.compareArrays(newKeys, shortcut.combo)) {
+          // Set justCompletedQuestion to true and clear the number of numOfKeysDown
+          this.setState({justCompletedQuestion: true, numOfKeysDown: 0})
+          questionComplete(score, incorrectAttempts);
           this.reset()
-        } else {
-          this.handleIncorrect();
         }
       }
     }
   };
 
+  findNewNumOfKeysDown() {
+    let { numOfKeysDown, currentKeys } = this.state;
+    let newNumOfKeysDown = numOfKeysDown
+
+    // Decrement number of keys down by 1
+    // Do not allows number of keys down to be less than 1
+    if (numOfKeysDown > 0) {
+      newNumOfKeysDown -= 1;
+    }
+
+    // If the command key and other keys are held down, handle special behaviour for power keys
+    if (currentKeys.includes("Meta") && currentKeys.length > 1) {
+      newNumOfKeysDown = this.handlePowerKeys(newNumOfKeysDown)
+    }
+    return newNumOfKeysDown;
+  }
+
+  handlePowerKeys(numOfKeysDown) {
+    let { currentKeys } = this.state;
+    let newNumOfKeysDown = numOfKeysDown
+    let extraDecrement = 0;
+
+    // Decrement by the number of non-power keys being held down
+    // This is due to the factor non-power keys that are pressed down while command is being held do not register as a key up
+    for (let i = 0; i < currentKeys.length; i++) {
+      if (!POWER_KEYS[currentKeys[i]]) extraDecrement += 1;
+    }
+    return newNumOfKeysDown - extraDecrement
+  }
+
   keyUp = (e) => {
     e.preventDefault();
+    let { justCompletedQuestion } = this.state;
+
+    // Find the new numebr of keys being held down
+    let newNumOfKeysDown = this.findNewNumOfKeysDown();
+
+    // Handle incorrect if there are no keys down, and we have not just completed a question
+    if (!justCompletedQuestion && newNumOfKeysDown === 0) {
+      this.handleIncorrect();
+    }
+
     this.setState({
       currentKeys: [],
+      numOfKeysDown: newNumOfKeysDown
     });
   };
 
@@ -69,7 +128,7 @@ export class Question extends Component {
   render() {
     const { incorrectAttempts } = this.state;
     const { hint } = this.props.shortcut;
-    const length = this.props.shortcut.hint.length
+    const length = this.props.shortcut.hint.length;
     return (
       <div>
         <h2>{this.props.shortcut.name}</h2>
@@ -86,7 +145,8 @@ export class Question extends Component {
     arr2.sort();
 
     for (let i = 0; i < arr1.length; i++) {
-      if (arr1[i] !== arr2[i]) return false;
+      if (!arr1[i]) return false;
+      if (arr1[i].toLowerCase() !== arr2[i].toLowerCase()) return false;
     }
     return true;
   }
