@@ -41,7 +41,6 @@ export class Question extends Component {
       });
       if (newKeys.length === this.props.shortcut.combo.length) {
         if (this.compareArrays(newKeys, this.props.shortcut.combo)) {
-          console.log('just won!', this.state.currentKeys)
           this.setState({justCompletedQuestion: true, keysDown: 0})
           this.props.questionComplete(this.state.score, this.state.incorrectAttempts);
           this.reset()
@@ -63,30 +62,18 @@ export class Question extends Component {
 
   keyUp = (e) => {
     e.preventDefault();
-    let { currentKeys, justCompletedQuestion, keysDown } = this.state;
+    let { justCompletedQuestion, keysDown } = this.state;
     let keysComparison = keysDown
     if (keysDown > 0) {
       keysComparison = keysDown - 1;
     }
-    console.log('keysDown, keysComparison', currentKeys, keysDown, keysComparison)
-    this.setState({keysDown: keysComparison});
-    // currentKeys = [...new Set(currentKeys)];
-
-    // console.log('e.key', e.key);
-    // console.log('this.state.currentKeys', this.state.currentKeys);
-
-    // this.removeItemFromArray(currentKeys, e.key);
-    // currentKeys.pop();
-    // console.log('this.state.currentKeys, e.key', currentKeys, e.key);
-
-    // this.state.currentKeys.splice(keyIndex, 1);
 
     if (!justCompletedQuestion && keysComparison === 0) {
       this.handleIncorrect();
     }
     this.setState({
       currentKeys: [],
-      // justCompletedQuestion: false,
+      keysDown: keysComparison
     });
   };
 
