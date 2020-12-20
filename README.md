@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.com/tommyrharper/mission-ctrl.svg?branch=master)](https://travis-ci.com/tommyrharper/mission-ctrl)
 
+<img src="https://img.shields.io/badge/coverage-97%25-brightgreen" alt="">
+
 [Deployed here.](http://mission-ctrl.surge.sh)
 
 This is our final project at Makers Academy. The focus of the project was to take on a completely new tech stack and showcase our ability to follow AGILE processes and T.D.D when faced with such challenges.
