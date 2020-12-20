@@ -3,7 +3,6 @@ import Game from "./game";
 import Scoreboard from "./scoreboard";
 import macShortcuts from "../shortcuts/mac";
 import macShortcutsEasy from "../shortcuts/macEasy";
-import macShortcutsHard from "../shortcuts/macHard";
 import windowsShortcuts from "../shortcuts/windows";
 import windowsShortcutsEasy from "../shortcuts/windowsEasy";
 import ShortcutPreview from "./shortcutPreview";
@@ -12,12 +11,10 @@ const SHORTCUTS = {
   mac: {
     easy: macShortcutsEasy,
     medium: macShortcuts,
-    hard: macShortcutsHard
   },
   windows: {
     easy: windowsShortcutsEasy,
     medium: windowsShortcuts,
-    hard: windowsShortcuts
   }
 }
 
@@ -90,7 +87,7 @@ export class App extends Component {
               Home
             </button>
           </header>
-          <Game shortcuts={this.state.shortcuts} />
+          <Game shortcuts={this.state.shortcuts} difficulty={this.state.difficulty}/>
         </div>
       );
     } else {
@@ -115,11 +112,6 @@ export class App extends Component {
               className={this.getButtonClass('medium')}
               onClick={() => this.changeDifficulty('medium')}>
               MEDIUM
-            </button>
-            <button id="start"
-              className={this.getButtonClass('hard')}
-              onClick={() => this.changeDifficulty('hard')}>
-              HARD
             </button>
           </div>
           <button id="start" className="btn" onClick={this.startGame}>
