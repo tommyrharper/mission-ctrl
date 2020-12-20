@@ -2,8 +2,23 @@ import React, { Component } from "react";
 import Game from "./game";
 import Scoreboard from "./scoreboard";
 import macShortcuts from "../shortcuts/mac";
+import macShortcutsEasy from "../shortcuts/macEasy";
 import windowsShortcuts from "../shortcuts/windows";
+import windowsShortcutsEasy from "../shortcuts/windowsEasy";
 import ShortcutPreview from "./shortcutPreview";
+
+const SHORTCUTS = {
+  mac: {
+    easy: macShortcutsEasy,
+    medium: macShortcuts,
+    hard: macShortcuts
+  },
+  windows: {
+    easy: windowsShortcutsEasy,
+    medium: windowsShortcuts,
+    hard: windowsShortcuts
+  }
+}
 
 export class App extends Component {
   constructor() {
@@ -11,18 +26,23 @@ export class App extends Component {
     this.state = {
       showGame: false,
       shortcuts: macShortcuts,
-      showScoreboard: true
+      showScoreboard: true,
+      difficulty: 'medium',
+      operatingSystem: 'mac'
     };
   }
 
   componentDidMount = () => {
     if (navigator.platform.includes("Mac")) {
       this.setState({
-        autoDetectedOS: true,
+        operatingSystem: 'mac',
         shortcuts: macShortcuts,
       });
     } else {
-      this.setState({ shortcuts: windowsShortcuts });
+      this.setState({
+        operatingSystem: 'windows',
+        shortcuts: windowsShortcuts 
+      });
     }
   };
 
@@ -40,8 +60,17 @@ export class App extends Component {
     })
   }
 
+  changeDifficulty = (difficulty) => {
+    const { operatingSystem } = this.state;
+    this.setState({
+      difficulty: difficulty,
+      shortcuts: SHORTCUTS[operatingSystem][difficulty],
+    });
+  }
+
+  getButtonClass = (difficulty) => (this.state.difficulty === difficulty) ? 'btn selectedDificulty' : 'btn';
+
   render() {
-    let button = <button onClick={this.sendToHome}>Home</button>;
     let table = this.state.showScoreboard ? (
       <Scoreboard />
     ) : (
@@ -69,13 +98,28 @@ export class App extends Component {
           <h1>
             MISSION<span>CTRL</span>
           </h1>
-          <div>
+          <div style={{marginBottom: '10px'}}>
             <p>Welcome, pilot.</p>
             <p>
               Your mission is to get as far as you can by entering correct
               keyboard shortcuts.
             </p>
             <p>Ready for blast off?</p>
+            <button id="start"
+              className={this.getButtonClass('easy')}
+              onClick={() => this.changeDifficulty('easy')}>
+              EASY
+            </button>
+            <button id="start"
+              className={this.getButtonClass('medium')}
+              onClick={() => this.changeDifficulty('medium')}>
+              MEDIUM
+            </button>
+            <button id="start"
+              className={this.getButtonClass('hard')}
+              onClick={() => this.changeDifficulty('hard')}>
+              HARD
+            </button>
           </div>
           <button id="start" className="btn" onClick={this.startGame}>
             Start
