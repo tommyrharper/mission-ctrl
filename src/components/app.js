@@ -103,12 +103,12 @@ export class App extends Component {
               keyboard shortcuts.
             </p>
             <p>Ready for blast off?</p>
-            <button id="start"
+            <button
               className={this.getButtonClass('easy')}
               onClick={() => this.changeDifficulty('easy')}>
               EASY
             </button>
-            <button id="start"
+            <button
               className={this.getButtonClass('medium')}
               onClick={() => this.changeDifficulty('medium')}>
               MEDIUM
