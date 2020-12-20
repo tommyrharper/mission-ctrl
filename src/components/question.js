@@ -27,22 +27,27 @@ export class Question extends Component {
   }
 
   keyDown = (e) => {
-    const { justCompletedQuestion } = this.state;
+    const { justCompletedQuestion, currentKeys, keysDown, score, incorrectAttempts } = this.state;
+    const { shortcut, questionComplete } = this.props;
 
     e.preventDefault();
     if (!e.repeat) {
-      this.setState({keysDown: this.state.keysDown + 1});
-      if (justCompletedQuestion) {
-        this.setState({justCompletedQuestion: false})
-      }
-      const newKeys = [...this.state.currentKeys, e.key];
-      this.setState({
-        currentKeys: newKeys,
-      });
-      if (newKeys.length === this.props.shortcut.combo.length) {
-        if (this.compareArrays(newKeys, this.props.shortcut.combo)) {
+      // Increment number of keysDown by 1
+      this.setState({keysDown: keysDown + 1});
+
+      // If we have just completed a question,
+      // Set justCompletedQuestion to false on the first key down of the new question
+      if (justCompletedQuestion) this.setState({justCompletedQuestion: false});
+
+      // Update the array of keys with the new key
+      const newKeys = [...currentKeys, e.key];
+      this.setState({currentKeys: newKeys});
+
+      if (newKeys.length === shortcut.combo.length) {
+        if (this.compareArrays(newKeys, shortcut.combo)) {
+          // Set justCompletedQuestion to true
           this.setState({justCompletedQuestion: true, keysDown: 0})
-          this.props.questionComplete(this.state.score, this.state.incorrectAttempts);
+          questionComplete(score, incorrectAttempts);
           this.reset()
         } else {
           this.handleIncorrect();
@@ -89,7 +94,7 @@ export class Question extends Component {
   render() {
     const { incorrectAttempts } = this.state;
     const { hint } = this.props.shortcut;
-    const length = this.props.shortcut.hint.length
+    const length = this.props.shortcut.hint.length;
     return (
       <div>
         <h2>{this.props.shortcut.name}</h2>
