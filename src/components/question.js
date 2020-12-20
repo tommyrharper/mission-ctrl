@@ -3,7 +3,7 @@ import QuestionFeedback from "./questionFeedback";
 
 const INITIAL_SCORE = 5;
 const SCORE_DECREMENT = 2;
-const powerKeys = {
+const POWER_KEYS = {
   "Meta": true,
   "Shift": true,
   "Alt": true,
@@ -55,48 +55,52 @@ export class Question extends Component {
           this.setState({justCompletedQuestion: true, numOfKeysDown: 0})
           questionComplete(score, incorrectAttempts);
           this.reset()
-        } else {
-          // this.handleIncorrect();
         }
       }
     }
   };
 
-  keyUp = (e) => {
-    e.preventDefault();
-    let { justCompletedQuestion, numOfKeysDown } = this.state;
+  findNewNumOfKeysDown() {
+    let { numOfKeysDown, currentKeys } = this.state;
     let newNumOfKeysDown = numOfKeysDown
 
     // Decrement number of keys down by 1
     // Do not allows number of keys down to be less than 1
     if (numOfKeysDown > 0) {
-      console.log('num of keys updated', e.key, numOfKeysDown, numOfKeysDown - 1);
-      // newNumOfKeysDown = numOfKeysDown - 1;
       newNumOfKeysDown -= 1;
     }
 
-    if (this.state.currentKeys.includes("Meta") && this.state.currentKeys.length > 1) {
-      let extraDecrement = 0;
-      console.log('inside extra condition', extraDecrement, this.state.currentKeys);
-      for (let i = 0; i < this.state.currentKeys.length; i++) {
-        console.log('INSIDE LOOP');
-        console.log('this.state.currentKeys[i]', this.state.currentKeys[i]);
-        if (!powerKeys[this.state.currentKeys[i]]) {
-          extraDecrement += 1;
-        }
-      }
-      newNumOfKeysDown -= extraDecrement;
+    // If the command key and other keys are held down, handle special behaviour for power keys
+    if (currentKeys.includes("Meta") && currentKeys.length > 1) {
+      newNumOfKeysDown = this.handlePowerKeys(newNumOfKeysDown)
     }
+    return newNumOfKeysDown;
+  }
 
-    console.log('newNumOfKeysDown, e.key, this.state.currentKeys', newNumOfKeysDown, e.key, this.state.currentKeys)
+  handlePowerKeys(numOfKeysDown) {
+    let { currentKeys } = this.state;
+    let newNumOfKeysDown = numOfKeysDown
+    let extraDecrement = 0;
+
+    // Decrement by the number of non-power keys being held down
+    // This is due to the factor non-power keys that are pressed down while command is being held do not register as a key up
+    for (let i = 0; i < currentKeys.length; i++) {
+      if (!POWER_KEYS[currentKeys[i]]) extraDecrement += 1;
+    }
+    return newNumOfKeysDown - extraDecrement
+  }
+
+  keyUp = (e) => {
+    e.preventDefault();
+    let { justCompletedQuestion } = this.state;
+
+    // Find the new numebr of keys being held down
+    let newNumOfKeysDown = this.findNewNumOfKeysDown();
 
     // Handle incorrect if there are no keys down, and we have not just completed a question
     if (!justCompletedQuestion && newNumOfKeysDown === 0) {
-      console.log('---- INCORRECT!!!!! ----', justCompletedQuestion, newNumOfKeysDown)
       this.handleIncorrect();
     }
-
-
 
     this.setState({
       currentKeys: [],
