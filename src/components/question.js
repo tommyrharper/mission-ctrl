@@ -45,7 +45,7 @@ export class Question extends Component {
 
       if (newKeys.length === shortcut.combo.length) {
         if (this.compareArrays(newKeys, shortcut.combo)) {
-          // Set justCompletedQuestion to true
+          // Set justCompletedQuestion to true and clear the number of keysDown
           this.setState({justCompletedQuestion: true, keysDown: 0})
           questionComplete(score, incorrectAttempts);
           this.reset()
