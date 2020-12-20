@@ -1,5 +1,11 @@
 # Mission Ctrl
 
+[![Build Status](https://travis-ci.com/tommyrharper/mission-ctrl.svg?branch=master)](https://travis-ci.com/tommyrharper/mission-ctrl)
+
+[Deployed here.](http://mission-ctrl.surge.sh)
+
+This is our final project at Makers Academy. The focus of the project was to take on a completely new tech stack and showcase our ability to follow AGILE processes and T.D.D when faced with such challenges.
+
 - [Mission Ctrl](#mission-ctrl)
   - [What is Mission-Ctrl?](#what-is-mission-ctrl)
   - [Playing the game](#playing-the-game)
@@ -8,12 +14,6 @@
   - [Back-end](#back-end)
   - [How to install and run the project locally](#how-to-install-and-run-the-project-locally)
   - [How to run tests](#how-to-run-tests)
-
-[![Build Status](https://travis-ci.com/tommyrharper/mission-ctrl.svg?branch=master)](https://travis-ci.com/tommyrharper/mission-ctrl)
-
-[Deployed here.](http://mission-ctrl.surge.sh)
-
-This is our final project at Makers Academy. The focus of the project was to take on a completely new tech stack and showcase our ability to follow AGILE processes and T.D.D when faced with such challenges.
 
 ## What is Mission-Ctrl?
 
