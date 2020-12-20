@@ -3,6 +3,7 @@ import Game from "./game";
 import Scoreboard from "./scoreboard";
 import macShortcuts from "../shortcuts/mac";
 import macShortcutsEasy from "../shortcuts/macEasy";
+import macShortcutsHard from "../shortcuts/macHard";
 import windowsShortcuts from "../shortcuts/windows";
 import windowsShortcutsEasy from "../shortcuts/windowsEasy";
 import ShortcutPreview from "./shortcutPreview";
@@ -11,7 +12,7 @@ const SHORTCUTS = {
   mac: {
     easy: macShortcutsEasy,
     medium: macShortcuts,
-    hard: macShortcuts
+    hard: macShortcutsHard
   },
   windows: {
     easy: windowsShortcutsEasy,
