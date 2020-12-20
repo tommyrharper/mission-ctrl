@@ -50,7 +50,7 @@ export class Question extends Component {
           questionComplete(score, incorrectAttempts);
           this.reset()
         } else {
-          this.handleIncorrect();
+          // this.handleIncorrect();
         }
       }
     }
@@ -63,10 +63,24 @@ export class Question extends Component {
 
     // Decrement number of keys down by 1
     // Do not allows number of keys down to be less than 1
-    if (numOfKeysDown > 0) newNumOfKeysDown = numOfKeysDown - 1;
+    if (numOfKeysDown > 0) {
+      console.log('num of keys updated', e.key);
+      // newNumOfKeysDown = numOfKeysDown - 1;
+      newNumOfKeysDown -= 1;
+    }
+
+    if (this.state.currentKeys.includes("Meta") && this.state.currentKeys.length > 1) {
+      console.log('inside extra condition');
+      newNumOfKeysDown -= 1;
+    }
+
+    console.log('newNumOfKeysDown, e.key, this.state.currentKeys', newNumOfKeysDown, e.key, this.state.currentKeys)
 
     // Handle incorrect if there are no keys down, and we have not just completed a question
-    if (!justCompletedQuestion && newNumOfKeysDown === 0) this.handleIncorrect();
+    if (!justCompletedQuestion && newNumOfKeysDown === 0) {
+      console.log('---- INCORRECT!!!!! ----', justCompletedQuestion, newNumOfKeysDown)
+      this.handleIncorrect();
+    }
 
     this.setState({
       currentKeys: [],
@@ -111,7 +125,7 @@ export class Question extends Component {
     arr2.sort();
 
     for (let i = 0; i < arr1.length; i++) {
-      if (arr1[i].toLowerCase() !== arr2[i].toLowerCase()) return false;
+      if (arr1[i] !== arr2[i]) return false;
     }
     return true;
   }
